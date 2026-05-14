@@ -91,15 +91,36 @@
     <div class="step-card">
       <h3><span class="step-num">3</span> 把书签拖到浏览器书签栏</h3>
       <p class="muted" style="margin: 0 0 8px 0">
-        显示书签栏：<code>Ctrl/Cmd + Shift + B</code>。然后把下面这个橙色按钮**拖**到书签栏。
+        显示书签栏：<code>Ctrl/Cmd + Shift + B</code>。把下面按钮**拖**到书签栏。
       </p>
       <div class="bookmark-area">
-        <a id="autoBookmark" class="bookmarklet-big disabled" href="#">⚡ 一键更新报表</a>
+        <a id="autoBookmark" class="bookmarklet-big disabled" href="#">⚡ 一键更新报表（本周）</a>
       </div>
       <p class="muted" style="margin-top: 10px;">
-        提示：先在第 2 步填好 Token，按钮才会变色可拖动。<br>
-        如果以后采集逻辑升级（比如新增七鱼/企微），<strong>不需要重新拖书签</strong>，会自动加载最新逻辑。<br>
+        每周五早上点这个书签即可自动抓"上周五-本周四"的数据。<br>
+        如果以后采集逻辑升级，<strong>不需要重新拖书签</strong>，会自动加载最新代码。<br>
         但如果换了 Token，需要重新拖一次。
+      </p>
+    </div>
+
+    <!-- ===== 补抓历史 ===== -->
+    <div class="step-card">
+      <h3>📜 补抓历史数据（一次性）</h3>
+      <p class="muted" style="margin: 0 0 12px 0">
+        想把过去几周的数据一次性抓回来？设定下面的周数，然后拖动或直接点按钮。
+      </p>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px">
+        <label style="font-size:13px">补抓最近</label>
+        <input id="backfillCount" type="number" min="1" max="52" value="4" style="width:70px;padding:6px 10px;border:1px solid var(--color-border);border-radius:6px;background:var(--color-card);color:var(--color-text);font-size:14px;text-align:center" />
+        <label style="font-size:13px">周（含本期）</label>
+      </div>
+      <div class="bookmark-area" style="background:rgba(250,140,22,0.08)">
+        <a id="backfillBookmark" class="bookmarklet-big disabled" style="background:#fa8c16;box-shadow:0 2px 8px rgba(250,140,22,0.3)" href="#">📜 补抓历史</a>
+      </div>
+      <p class="muted" style="margin-top: 10px;">
+        提示：每周需 8 次 Jira 查询（4 指标 × 本期/同期），4 周大约 30 秒，10 周大约 1 分多钟。<br>
+        本书签是<strong>一次性</strong>用的，用完不必拖到书签栏；想再次补抓改下数字直接点这个按钮即可。<br>
+        已存在的周数据会被合并（保留旧字段，覆盖新抓的字段）。
       </p>
     </div>
 
@@ -141,34 +162,53 @@
   <script>
     const patInput = document.getElementById('patInput');
     const bookmark = document.getElementById('autoBookmark');
+    const backfillBookmark = document.getElementById('backfillBookmark');
+    const backfillInput = document.getElementById('backfillCount');
     const status = document.getElementById('patStatus');
 
     patInput.value = localStorage.getItem('dr_pat') || '';
+    backfillInput.value = localStorage.getItem('dr_backfill') || '4';
     update();
 
     patInput.addEventListener('input', () => {
       localStorage.setItem('dr_pat', patInput.value.trim());
       update();
     });
+    backfillInput.addEventListener('input', () => {
+      localStorage.setItem('dr_backfill', backfillInput.value);
+      update();
+    });
+
+    function buildBookmarklet(pat, weeks) {
+      // 注意：嵌入 PAT 和补抓周数到书签 URL 中
+      return "javascript:(function(){window.__DR_PAT='" + pat + "';" +
+             (weeks > 1 ? "window.__DR_BACKFILL=" + weeks + ";" : "") +
+             "var s=document.createElement('script');s.src='https://yywu-rich.github.io/data-report-v2/assets/collector.js?t='+Date.now();document.body.appendChild(s);})();";
+    }
 
     function update() {
       const pat = patInput.value.trim();
+      const weeks = Math.max(1, Math.min(52, parseInt(backfillInput.value) || 4));
+
       if (!pat) {
-        bookmark.classList.add('disabled');
-        bookmark.removeAttribute('href');
+        [bookmark, backfillBookmark].forEach((b) => { b.classList.add('disabled'); b.removeAttribute('href'); });
         status.textContent = '';
         return;
       }
       if (!/^(ghp_|github_pat_)[A-Za-z0-9_]+$/.test(pat)) {
-        bookmark.classList.add('disabled');
-        bookmark.removeAttribute('href');
+        [bookmark, backfillBookmark].forEach((b) => { b.classList.add('disabled'); b.removeAttribute('href'); });
         status.innerHTML = '<span style="color:#cf1322">⚠ Token 格式不正确，应以 ghp_ 或 github_pat_ 开头</span>';
         return;
       }
-      const code = "javascript:(function(){window.__DR_PAT='" + pat + "';var s=document.createElement('script');s.src='https://yywu-rich.github.io/data-report-v2/assets/collector.js?t='+Date.now();document.body.appendChild(s);})();";
-      bookmark.href = code;
+
+      bookmark.href = buildBookmarklet(pat, 1);
       bookmark.classList.remove('disabled');
-      status.innerHTML = '<span style="color:#389e0d">✓ Token 已保存到本地。可以拖动下方书签了。</span>';
+
+      backfillBookmark.href = buildBookmarklet(pat, weeks);
+      backfillBookmark.textContent = `📜 补抓最近 ${weeks} 周`;
+      backfillBookmark.classList.remove('disabled');
+
+      status.innerHTML = '<span style="color:#389e0d">✓ Token 已保存到本地。两个书签都可以用了。</span>';
     }
   </script>
 </body>
