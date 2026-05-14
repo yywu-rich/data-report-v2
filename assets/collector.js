@@ -73,17 +73,7 @@
 
 
   // ============== 七鱼：呼叫中心团队报表 ==============
-  function qiyuSetDate(startStr, endStr) {
-    const inputs = document.querySelectorAll('input.fishd-input');
-    if (inputs.length < 2) throw new Error('找不到日期输入框（fishd-input），请确认在团队报表页面');
-    const nativeSet = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
-    nativeSet.call(inputs[0], startStr);
-    inputs[0].dispatchEvent(new Event('input', { bubbles: true }));
-    inputs[0].dispatchEvent(new Event('change', { bubbles: true }));
-    nativeSet.call(inputs[1], endStr);
-    inputs[1].dispatchEvent(new Event('input', { bubbles: true }));
-    inputs[1].dispatchEvent(new Event('change', { bubbles: true }));
-  }
+  // qiyuSetDate 已移除：改为读取页面当前日期，不再自动设日期
 
   function qiyuCheckGroup() {
     const rendered = document.querySelectorAll('.fishd-treeselect-selection__rendered');
@@ -135,39 +125,99 @@
     throw new Error('无法解析企微会话量。请确认在"在线客服→总览"页面，且能看到"客户来源"区域。');
   }
 
-  async function runQiyuCollection(panel) {
-    const path = location.pathname;
-    const isCallCenter = path.indexOf('callcenter') >= 0 || path.indexOf('call') >= 0 ||
-      document.body.innerText.indexOf('团队报表') >= 0 && document.body.innerText.indexOf('呼入量') >= 0;
-    const isOnlineOverview = document.body.innerText.indexOf('总会话量') >= 0 && document.body.innerText.indexOf('客户来源') >= 0;
+  // 从页面输入框读取当前日期
+  function qiyuReadDate() {
+    const inputs = document.querySelectorAll('input.fishd-input');
+    if (inputs.length < 2) throw new Error('找不到日期输入框');
+    return { start: inputs[0].value, end: inputs[1].value };
+  }
 
-    const baseWin = getCurrentWindow();
-    const cur = shiftWindow(baseWin, 0);
-    const startStr = fmtIsoDate(cur.start);
-    const endStr = fmtIsoDate(cur.end);
-    const weekId = `${cur.end.getFullYear()}-w${pad(isoWeek(cur.end))}`;
-    const label = fmtPeriod(cur.start, cur.end);
+  // 读取当前客服组名称
+  function qiyuReadGroup() {
+    const rendered = document.querySelectorAll('.fishd-treeselect-selection__rendered');
+    for (const el of rendered) {
+      const txt = el.innerText.trim();
+      if (txt && txt !== '请选择') return txt;
+    }
+    // 备用：ant-select
+    const items = document.querySelectorAll('.ant-select-selection-item');
+    for (const el of items) {
+      if (el.innerText.indexOf('客服组') >= 0) continue;
+      const txt = el.innerText.trim();
+      if (txt) return txt;
+    }
+    return '未知';
+  }
+
+  // 等待用户确认的 Promise
+  function waitForConfirm(panel, message) {
+    return new Promise((resolve) => {
+      panel.appendDetail(`<div style="margin:12px 0;padding:12px;background:#fffbe6;border:1px solid #ffe58f;border-radius:6px;">
+        <div style="font-size:13px;margin-bottom:10px;white-space:pre-wrap">${message}</div>
+        <button id="dr-confirm-btn" style="padding:8px 20px;background:#1890ff;color:#fff;border:none;border-radius:4px;font-size:13px;cursor:pointer;margin-right:8px">✓ 确认抓取</button>
+        <button id="dr-cancel-btn" style="padding:8px 20px;background:#f5f5f5;color:#666;border:1px solid #d9d9d9;border-radius:4px;font-size:13px;cursor:pointer">✗ 取消</button>
+      </div>`);
+      // 找到 shadow DOM 里的按钮
+      const host = document.getElementById('dr-collector-host');
+      const shadow = host.shadowRoot || host;
+      const confirmBtn = shadow.getElementById('dr-confirm-btn');
+      const cancelBtn = shadow.getElementById('dr-cancel-btn');
+      if (confirmBtn) confirmBtn.onclick = () => resolve(true);
+      if (cancelBtn) cancelBtn.onclick = () => resolve(false);
+    });
+  }
+
+  async function runQiyuCollection(panel) {
+    const bodyText = document.body.innerText;
+    const isCallCenter = (bodyText.indexOf('团队报表') >= 0 && bodyText.indexOf('呼入量') >= 0);
+    const isOnlineOverview = (bodyText.indexOf('总会话量') >= 0 && bodyText.indexOf('客户来源') >= 0);
+
+    if (!isCallCenter && !isOnlineOverview) {
+      panel.setStatus('无法识别当前七鱼页面。请在以下页面点击书签：\n1. 呼叫中心→团队报表（抓呼入量/接通率）\n2. 在线客服→总览（抓企微会话量）', 'error');
+      return;
+    }
+
+    // 读取页面上当前的日期和客服组
+    const dates = qiyuReadDate();
+    const group = isCallCenter ? qiyuReadGroup() : '—';
+    const startStr = dates.start;
+    const endStr = dates.end;
+
+    if (!startStr || !endStr) {
+      panel.setStatus('⚠️ 无法读取页面上的日期，请确认页面已加载完成。', 'error');
+      return;
+    }
+
+    // 计算周期 ID 和 label（基于页面实际日期）
+    const startDate = new Date(startStr + 'T00:00:00');
+    const endDate = new Date(endStr + 'T23:59:59');
+    const weekId = `${endDate.getFullYear()}-w${pad(isoWeek(endDate))}`;
+    const label = fmtPeriod(startDate, endDate);
+    const pageType = isCallCenter ? '呼叫中心 · 团队报表' : '在线客服 · 总览';
+
+    // 弹出确认
+    panel.setMeta(`七鱼 · ${pageType}`);
+    const confirmMsg = `请确认以下信息：\n\n📅 日期范围：${startStr} 至 ${endStr}\n👥 客服组：${group}\n📊 页面类型：${pageType}\n🏷️ 将写入周期：${label}\n\n确认无误后点击"确认抓取"`;
+    panel.setStatus('等待确认...', 'info');
+    const confirmed = await waitForConfirm(panel, confirmMsg);
+
+    if (!confirmed) {
+      panel.setStatus('已取消。请调整日期/客服组后重新点击书签。', 'info');
+      return;
+    }
 
     if (isCallCenter) {
-      panel.setMeta(`七鱼 · 呼叫中心 · 团队报表\n周期：${startStr} 至 ${endStr}`);
-
       // 检查客服组
       if (!qiyuCheckGroup()) {
-        panel.setStatus('⚠️ 当前客服组不是"售后服务"！请先手动选择"售后服务"，然后再点书签。', 'error');
+        panel.setStatus('⚠️ 当前客服组不是"售后服务"！请先手动选择后重新点击书签。', 'error');
         return;
       }
 
-      // 自动设日期
-      panel.setStatus('正在设置日期范围...', 'info');
-      qiyuSetDate(startStr, endStr);
-      panel.setStatus('已设置日期，等待页面刷新数据（3 秒）...', 'info');
-      await sleep(3000);
-
-      // 抓数
+      // 直接抓取当前页面数据（不改日期）
       panel.setStatus('正在解析页面数据...', 'info');
       const data = qiyuParseCallData();
       panel.appendDetail(`<div class="week-block">
-        <div class="week-title">${label} · 售后服务</div>
+        <div class="week-title">${label} · ${group}</div>
         <div class="row"><span class="name">呼入量</span><span class="value">${data.phoneCalls}</span></div>
         <div class="row"><span class="name">接通率</span><span class="value">${(data.phoneConnectRate * 100).toFixed(1)}%</span></div>
       </div>`);
@@ -184,15 +234,7 @@
       panel.appendDetail(`<a class="btn" href="${PAGES_URL}" target="_blank">查看报表</a>`);
 
     } else if (isOnlineOverview) {
-      panel.setMeta(`七鱼 · 在线客服 · 总览\n周期：${startStr} 至 ${endStr}`);
-
-      // 自动设日期
-      panel.setStatus('正在设置日期范围...', 'info');
-      qiyuSetDate(startStr, endStr);
-      panel.setStatus('已设置日期，等待页面刷新数据（3 秒）...', 'info');
-      await sleep(3000);
-
-      // 抓企微会话量
+      // 直接抓取当前页面数据（不改日期）
       panel.setStatus('正在解析企微会话量...', 'info');
       const wechatSessions = qiyuParseWechatSessions();
       panel.appendDetail(`<div class="week-block">
@@ -210,9 +252,6 @@
       await writeDataJson(json, sha, `chore: qiyu wechat sessions ${label}`);
       panel.setStatus('✅ 企微会话量已写入 GitHub！', 'success');
       panel.appendDetail(`<a class="btn" href="${PAGES_URL}" target="_blank">查看报表</a>`);
-
-    } else {
-      panel.setStatus('无法识别当前七鱼页面。请在以下页面点击书签：\n1. 呼叫中心→团队报表（抓呼入量/接通率）\n2. 在线客服→总览（抓企微会话量）', 'error');
     }
   }
 
