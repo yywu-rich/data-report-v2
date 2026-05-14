@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>数据抓取工具</title>
+  <link rel="stylesheet" href="./assets/style.css" />
+  <style>
+    .tool-card { background: var(--color-card); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; box-shadow: var(--shadow); }
+    .tool-card h3 { margin: 0 0 12px 0; font-size: 16px; }
+    .step { margin: 8px 0; padding-left: 24px; position: relative; }
+    .step::before { content: counter(step); counter-increment: step; position: absolute; left: 0; top: 0; width: 18px; height: 18px; background: var(--color-primary); color: #fff; border-radius: 50%; font-size: 11px; text-align: center; line-height: 18px; }
+    .steps { counter-reset: step; }
+    .bookmarklet { display: inline-block; padding: 10px 18px; background: var(--color-primary); color: #fff !important; border-radius: 20px; font-size: 13px; font-weight: 600; text-decoration: none !important; cursor: grab; margin: 8px 8px 8px 0; }
+    .bookmarklet.green { background: #52c41a; }
+    .bookmarklet.purple { background: #722ed1; }
+    .bookmarklet.orange { background: #fa8c16; }
+    .hint { background: rgba(250, 173, 20, 0.1); border-left: 3px solid var(--color-warn); padding: 12px 16px; border-radius: 6px; font-size: 13px; margin: 12px 0; }
+    code { background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px; font-family: Consolas, Monaco, monospace; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>数据抓取工具</h1>
+      <nav class="nav"><a href="./index.html">返回报表</a></nav>
+    </header>
+
+    <div class="hint">
+      <strong>使用方式：</strong>显示书签栏（<code>Ctrl/Cmd + Shift + B</code>），把下方按钮拖到书签栏，
+      之后在对应后台页面点击书签即可抓取数据。抓到的数据会自动复制到剪贴板。
+    </div>
+
+    <div class="tool-card">
+      <h3>1. 企微会话数据</h3>
+      <div class="steps">
+        <div class="step">登录企微后台，进入会话统计页面</div>
+        <div class="step">点击下方"抓取企微数据"书签</div>
+        <div class="step">数据复制到剪贴板，粘贴发给 AI</div>
+      </div>
+      <a class="bookmarklet purple" href="javascript:(function(){var NL=String.fromCharCode(10);var t=document.querySelectorAll('table');var s=0,o=0,p=0;t.forEach(function(tb){tb.querySelectorAll('tr').forEach(function(r){var c=r.querySelectorAll('td,th');if(c.length>=2){var k=c[0].innerText.trim(),v=c[c.length-1].innerText.trim();if(k.indexOf('会话量')>-1)s=parseInt(v)||0;if(k.indexOf('派单')>-1)o=parseInt(v)||0;if(k.indexOf('P4')>-1)p=parseInt(v)||0;}});});var r='企微数据：'+NL+'会话量：'+s+NL+'派单工：'+o+NL+'P4工：'+p;navigator.clipboard.writeText(r).then(function(){alert('已复制：'+NL+NL+r);}).catch(function(){prompt('请手动复制：',r);});})();">抓取企微数据</a>
+    </div>
+
+    <div class="tool-card">
+      <h3>2. 七鱼电话数据</h3>
+      <div class="steps">
+        <div class="step">登录七鱼后台，进入"团队报表"页面</div>
+        <div class="step">点击"设置日期"书签快速设为本周（周五-周四）</div>
+        <div class="step">点击"抓取电话数据"书签</div>
+      </div>
+      <a class="bookmarklet purple" href="javascript:(function(){var d=new Date();var day=d.getDay();var offset=day<=4?4-day:11-day;var thu=new Date(d);thu.setDate(d.getDate()+offset);var fri=new Date(thu);fri.setDate(thu.getDate()-6);function fmt(x){return x.toISOString().slice(0,10);}var start=fmt(fri),end=fmt(thu);var inputs=document.querySelectorAll('input[type=date],.ivu-input');inputs.forEach(function(el,i){if(i===0)el.value=start;if(i===1)el.value=end;el.dispatchEvent(new Event('change',{bubbles:true}));});alert('已尝试设置日期：'+start+' 至 '+end);})();">设置日期</a>
+      <a class="bookmarklet green" href="javascript:(function(){var NL=String.fromCharCode(10);var text=document.body.innerText.split(NL);var calls=0,rate='—';for(var i=0;i<text.length;i++){var l=text[i].trim();if(l==='呼入量'||l==='接入量'){var m=(text[i+1]||'').match(/^(\d+)/);if(m)calls=parseInt(m[1]);}if(l==='接通率'||l==='队列接通率'){var m2=(text[i+1]||'').match(/([\d.]+%)/);if(m2)rate=m2[1];}}var r='电话数据：'+NL+'呼入量：'+calls+NL+'接通率：'+rate;navigator.clipboard.writeText(r).then(function(){alert('已复制：'+NL+NL+r);}).catch(function(){prompt('请手动复制：',r);});})();">抓取电话数据</a>
+    </div>
+
+    <div class="tool-card">
+      <h3>3. 二线解决率</h3>
+      <div class="steps">
+        <div class="step">打开二线解决率统计页面</div>
+        <div class="step">点击"抓取解决率"书签</div>
+      </div>
+      <a class="bookmarklet orange" href="javascript:(function(){var NL=String.fromCharCode(10);var t=document.querySelectorAll('table');var list=[];t.forEach(function(tb){tb.querySelectorAll('tr').forEach(function(r,idx){if(idx===0)return;var c=r.querySelectorAll('td');if(c.length>=4){var p=c[0].innerText.trim(),wr=c[2].innerText.trim(),oc=c[3].innerText.trim();if(p)list.push(p+' | 周解决率:'+wr+' | 工单量:'+oc);}});});var r='二线解决率：'+NL+list.join(NL);navigator.clipboard.writeText(r).then(function(){alert('已复制：'+NL+NL+r);}).catch(function(){prompt('请手动复制：',r);});})();">抓取解决率</a>
+    </div>
+
+    <div class="tool-card">
+      <h3>数据格式（粘贴给 AI）</h3>
+<pre style="background:#0f1115;color:#9eff9e;padding:14px;border-radius:8px;font-size:12px;overflow:auto">周期：26年(05.01-05.07)
+电话数据：
+  呼入量：548
+  接通率：92.00%
+企微数据：
+  会话量：2150
+  派单工：575
+  P4工：321
+二线解决率：
+  04.25~05.01 | 周解决率:71.50% | 工单量:450</pre>
+      <div class="hint">
+        AI 拿到这段文字会自动写入 <code>data.json</code>，30 秒后页面就更新。
+      </div>
+    </div>
+
+    <footer class="footer">
+      <a href="./index.html">返回报表首页</a>
+    </footer>
+  </div>
+</body>
+</html>

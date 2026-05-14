@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>售后运营数据周报</title>
+  <link rel="stylesheet" href="./assets/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div>
+        <h1>售后运营数据周报</h1>
+        <small id="lastUpdated" class="muted">加载中...</small>
+      </div>
+      <nav class="nav">
+        <a href="./tools.html">抓取工具</a>
+      </nav>
+    </header>
+
+    <section class="controls">
+      <div class="control">
+        <label for="weekSelect">周期：</label>
+        <select id="weekSelect"><option>加载中...</option></select>
+      </div>
+      <div class="control">
+        <label for="searchInput">搜索：</label>
+        <input id="searchInput" type="search" placeholder="按周期标签过滤，如 26年04 或 春节" />
+      </div>
+    </section>
+
+    <section id="summary" class="summary"></section>
+
+    <section class="section">
+      <h2>核心指标（本期 vs 同比上年同期）</h2>
+      <div id="kpiGrid" class="kpi-grid"></div>
+    </section>
+
+    <section class="section">
+      <h2>趋势图（最近 12 周）</h2>
+      <div class="chart-grid">
+        <div class="chart-card"><canvas id="chartCalls"></canvas></div>
+        <div class="chart-card"><canvas id="chartConnect"></canvas></div>
+        <div class="chart-card"><canvas id="chartFirstLine"></canvas></div>
+        <div class="chart-card"><canvas id="chartP1"></canvas></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>历史明细</h2>
+      <div class="table-wrap">
+        <table id="historyTable">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p class="muted">
+        数据源：<code>data.json</code> · 周期定义：周五至下周四 ·
+        本页由 <a href="https://github.com/yywu-rich/data-report-v2">data-report-v2</a> 渲染
+      </p>
+    </footer>
+  </div>
+
+  <script src="./assets/app.js"></script>
+</body>
+</html>

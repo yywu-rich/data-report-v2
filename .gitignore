@@ -1,0 +1,25 @@
+# macOS / Windows
+.DS_Store
+Thumbs.db
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+
+# 大文件 / 二进制（不要污染仓库）
+*.zip
+*.pptx
+*.xlsx
+*.docx
+*.pdf
+
+# 临时文件
+*.log
+node_modules/
+dist/
+.tmp/
+
+# 抓取临时缓存
+.cache/
+fetched/

@@ -1,0 +1,30 @@
+# 占位：未来如果你拿到了七鱼/企微的开放 API key，
+# 把文件改名为 auto-fetch.yml 启用这个工作流。
+# 它会每周四 22:00（北京时间）自动抓数据并 commit 到仓库。
+
+name: Auto-fetch weekly data (TEMPLATE - DISABLED)
+
+on:
+  schedule:
+    - cron: "0 14 * * 4"
+  workflow_dispatch: {}
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - name: Fetch data from APIs
+        env:
+          QIYU_API_KEY: ${{ secrets.QIYU_API_KEY }}
+          WECHAT_API_KEY: ${{ secrets.WECHAT_API_KEY }}
+        run: node scripts/fetch-weekly.mjs
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data.json
+          git diff --staged --quiet || git commit -m "chore: auto-update weekly data"
+          git push
