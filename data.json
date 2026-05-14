@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "售后运营数据周报",
-    "lastUpdated": "2026-05-14T09:00:00+08:00",
+    "lastUpdated": "2026-05-14T08:11:33.423Z",
     "weekDefinition": "周五至下周四",
     "fields": {
       "phoneCalls": "呼入量",
@@ -32,12 +32,12 @@
         "firstLineResolveRate": 0.4798,
         "secondLineOrders": null,
         "secondLineResolveRate": null,
-        "p1Orders": 7,
-        "securityIssues": 139,
+        "p1Orders": 4,
+        "securityIssues": 44,
         "accumulatedP1": 52,
         "wechatSessions": 2150,
-        "wechatOrders": 575,
-        "wechatP4Orders": 321
+        "wechatOrders": 201,
+        "wechatP4Orders": 123
       },
       "yoy": {
         "label": "25年(05.02-05.08)",
@@ -47,12 +47,12 @@
         "firstLineResolveRate": 0.3633,
         "secondLineOrders": 982,
         "secondLineResolveRate": 0.6822,
-        "p1Orders": 5,
-        "securityIssues": 146,
+        "p1Orders": 3,
+        "securityIssues": 59,
         "accumulatedP1": 62,
         "wechatSessions": null,
-        "wechatOrders": null,
-        "wechatP4Orders": null
+        "wechatOrders": 268,
+        "wechatP4Orders": 152
       }
     },
     {
@@ -60,7 +60,9 @@
       "label": "26年(04.24-04.30)",
       "startDate": "2026-04-24",
       "endDate": "2026-04-30",
-      "tags": ["五一前"],
+      "tags": [
+        "五一前"
+      ],
       "current": {
         "phoneCalls": 520,
         "phoneConnectRate": 0.915,
