@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "售后运营数据周报",
-    "lastUpdated": "2026-05-14T08:31:26.291Z",
+    "lastUpdated": "2026-05-14T08:32:02.543Z",
     "weekDefinition": "周五至下周四",
     "fields": {
       "phoneCalls": "呼入量",
@@ -60,9 +60,7 @@
       "label": "26年(04.24-04.30)",
       "startDate": "2026-04-24",
       "endDate": "2026-04-30",
-      "tags": [
-        "五一前"
-      ],
+      "tags": [],
       "current": {
         "phoneCalls": 520,
         "phoneConnectRate": 0.915,
@@ -70,12 +68,12 @@
         "firstLineResolveRate": 0.471,
         "secondLineOrders": 450,
         "secondLineResolveRate": 0.715,
-        "p1Orders": 4,
-        "securityIssues": 110,
+        "p1Orders": 3,
+        "securityIssues": 97,
         "accumulatedP1": 45,
         "wechatSessions": 1525,
-        "wechatOrders": 391,
-        "wechatP4Orders": 216
+        "wechatOrders": 373,
+        "wechatP4Orders": 198
       },
       "yoy": {
         "label": "25年(04.25-05.01)",
@@ -85,12 +83,52 @@
         "firstLineResolveRate": 0.36,
         "secondLineOrders": 900,
         "secondLineResolveRate": 0.68,
-        "p1Orders": 5,
-        "securityIssues": 130,
+        "p1Orders": 3,
+        "securityIssues": 89,
         "accumulatedP1": 55,
         "wechatSessions": null,
-        "wechatOrders": null,
-        "wechatP4Orders": null
+        "wechatOrders": 345,
+        "wechatP4Orders": 173
+      }
+    },
+    {
+      "id": "2026-w17",
+      "label": "26年(04.17-04.23)",
+      "startDate": "2026-04-17",
+      "endDate": "2026-04-23",
+      "tags": [],
+      "current": {
+        "p1Orders": 4,
+        "securityIssues": 93,
+        "wechatOrders": 389,
+        "wechatP4Orders": 212
+      },
+      "yoy": {
+        "label": "25年(04.18-04.24)",
+        "p1Orders": 6,
+        "securityIssues": 111,
+        "wechatOrders": 430,
+        "wechatP4Orders": 258
+      }
+    },
+    {
+      "id": "2026-w16",
+      "label": "26年(04.10-04.16)",
+      "startDate": "2026-04-10",
+      "endDate": "2026-04-16",
+      "tags": [],
+      "current": {
+        "p1Orders": 2,
+        "securityIssues": 109,
+        "wechatOrders": 468,
+        "wechatP4Orders": 280
+      },
+      "yoy": {
+        "label": "25年(04.11-04.17)",
+        "p1Orders": 3,
+        "securityIssues": 112,
+        "wechatOrders": 411,
+        "wechatP4Orders": 265
       }
     }
   ]
