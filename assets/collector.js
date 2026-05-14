@@ -149,21 +149,28 @@
     return '未知';
   }
 
-  // 等待用户确认的 Promise
+  // 等待用户确认的 Promise（用 DOM 直接创建按钮，避免 shadow DOM 查找问题）
   function waitForConfirm(panel, message) {
     return new Promise((resolve) => {
-      panel.appendDetail(`<div style="margin:12px 0;padding:12px;background:#fffbe6;border:1px solid #ffe58f;border-radius:6px;">
-        <div style="font-size:13px;margin-bottom:10px;white-space:pre-wrap">${message}</div>
-        <button id="dr-confirm-btn" style="padding:8px 20px;background:#1890ff;color:#fff;border:none;border-radius:4px;font-size:13px;cursor:pointer;margin-right:8px">✓ 确认抓取</button>
-        <button id="dr-cancel-btn" style="padding:8px 20px;background:#f5f5f5;color:#666;border:1px solid #d9d9d9;border-radius:4px;font-size:13px;cursor:pointer">✗ 取消</button>
-      </div>`);
-      // 找到 shadow DOM 里的按钮
+      const wrapper = document.createElement('div');
+      wrapper.style.cssText = 'margin:12px 0;padding:12px;background:#fffbe6;border:1px solid #ffe58f;border-radius:6px;';
+      const msgDiv = document.createElement('div');
+      msgDiv.style.cssText = 'font-size:13px;margin-bottom:10px;white-space:pre-wrap;';
+      msgDiv.textContent = message;
+      const confirmBtn = document.createElement('button');
+      confirmBtn.textContent = '✓ 确认抓取';
+      confirmBtn.style.cssText = 'padding:8px 20px;background:#1890ff;color:#fff;border:none;border-radius:4px;font-size:13px;cursor:pointer;margin-right:8px;';
+      const cancelBtn = document.createElement('button');
+      cancelBtn.textContent = '✗ 取消';
+      cancelBtn.style.cssText = 'padding:8px 20px;background:#f5f5f5;color:#666;border:1px solid #d9d9d9;border-radius:4px;font-size:13px;cursor:pointer;';
+      confirmBtn.onclick = () => { wrapper.remove(); resolve(true); };
+      cancelBtn.onclick = () => { wrapper.remove(); resolve(false); };
+      wrapper.appendChild(msgDiv);
+      wrapper.appendChild(confirmBtn);
+      wrapper.appendChild(cancelBtn);
+      // 直接插入到页面主 DOM（不在 shadow DOM 里）
       const host = document.getElementById('dr-collector-host');
-      const shadow = host.shadowRoot || host;
-      const confirmBtn = shadow.getElementById('dr-confirm-btn');
-      const cancelBtn = shadow.getElementById('dr-cancel-btn');
-      if (confirmBtn) confirmBtn.onclick = () => resolve(true);
-      if (cancelBtn) cancelBtn.onclick = () => resolve(false);
+      host.appendChild(wrapper);
     });
   }
 
