@@ -20,17 +20,6 @@
   },
   "weeks": [
     {
-      "id": "NaN-wNaN",
-      "label": "aN年(NaN.NaN-NaN.NaN)",
-      "startDate": "2026-05-08 00:00",
-      "endDate": "2026-05-14 23:59",
-      "tags": [],
-      "current": {
-        "wechatSessions": 1819
-      },
-      "yoy": {}
-    },
-    {
       "id": "2026-w20",
       "label": "26年(05.08-05.14)",
       "startDate": "2026-05-08",
