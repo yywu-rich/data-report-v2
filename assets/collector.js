@@ -125,11 +125,11 @@
     throw new Error('无法解析企微会话量。请确认在"在线客服→总览"页面，且能看到"客户来源"区域。');
   }
 
-  // 从页面输入框读取当前日期
+  // 从页面输入框读取当前日期（兼容 "2026-05-08" 和 "2026-05-08 00:00" 两种格式）
   function qiyuReadDate() {
     const inputs = document.querySelectorAll('input.fishd-input');
     if (inputs.length < 2) throw new Error('找不到日期输入框');
-    return { start: inputs[0].value, end: inputs[1].value };
+    return { start: inputs[0].value.substring(0, 10), end: inputs[1].value.substring(0, 10) };
   }
 
   // 读取当前客服组名称
