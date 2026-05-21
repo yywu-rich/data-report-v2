@@ -355,6 +355,100 @@
     panel.appendDetail(`<a class="btn" href="${PAGES_URL}" target="_blank">查看报表</a>`);
   }
 
+  // ============== Polaris（内网数据平台）==============
+  function polarisReadDate() {
+    // 日期格式: "2026-05-08 / 2026-05-15" 在一个 input 里
+    const inputs = document.querySelectorAll('input');
+    for (const el of inputs) {
+      if (el.value && el.value.indexOf(' / ') >= 0) {
+        const parts = el.value.split(' / ');
+        if (parts.length === 2 && parts[0].length === 10) {
+          return { start: parts[0].trim(), end: parts[1].trim() };
+        }
+      }
+    }
+    throw new Error('找不到日期输入框（格式应为 YYYY-MM-DD / YYYY-MM-DD）');
+  }
+
+  function polarisParseData() {
+    const text = document.body.innerText;
+    const lines = text.split('\n');
+    // 找"合计"行，它后面的数字依次是：提单量、自行解决量、自行解决率、...
+    for (let i = 0; i < lines.length; i++) {
+      if (lines[i].trim() === '合计') {
+        // 合计后面的几行是 tab 分隔或换行分隔的数字
+        // 从后续行中提取数字
+        const nums = [];
+        for (let j = i + 1; j < Math.min(i + 20, lines.length); j++) {
+          const val = lines[j].trim();
+          if (val === '') continue;
+          if (/^\d+$/.test(val) || /^[\d.]+$/.test(val)) {
+            nums.push(val);
+          } else if (val.match(/^[\d\s\t.]+$/)) {
+            // 可能一行里有多个数字用 tab 分隔
+            val.split(/\s+/).forEach(v => { if (v) nums.push(v); });
+          } else {
+            break; // 遇到非数字行停止
+          }
+          if (nums.length >= 8) break;
+        }
+        // nums[0]=提单量, nums[1]=自行解决量, nums[2]=自行解决率, ...
+        if (nums.length >= 3) {
+          const firstLineOrders = parseInt(nums[0]) || 0;
+          const firstLineResolveRate = parseFloat(nums[2]) || 0;
+          return { firstLineOrders, firstLineResolveRate };
+        }
+      }
+    }
+    throw new Error('无法解析一线提单量/自行解决率。请确认在"JIRA工单解决率 → CS工单量及解决量"页面，且能看到"合计"行。');
+  }
+
+  async function runPolarisCollection(panel) {
+    panel.setMeta('Polaris · JIRA工单解决率');
+
+    // 读取日期（结束日期不包含当天，实际范围 = start ~ end-1天）
+    const dates = polarisReadDate();
+    const startStr = dates.start;
+    const endRaw = dates.end;
+    // 实际数据结束日 = endRaw 前一天
+    const endDate = new Date(endRaw + 'T00:00:00');
+    endDate.setDate(endDate.getDate() - 1);
+    const endStr = fmtIsoDate(endDate);
+
+    const startDate = new Date(startStr + 'T00:00:00');
+    const weekId = `${endDate.getFullYear()}-w${pad(isoWeek(endDate))}`;
+    const label = fmtPeriod(startDate, endDate);
+
+    // 确认
+    const confirmMsg = `请确认以下信息：\n\n📅 页面日期：${dates.start} / ${dates.end}\n📅 实际数据范围：${startStr} 至 ${endStr}（结束日不含当天）\n📊 页面：JIRA工单解决率 · CS工单量\n🏷️ 将写入周期：${label}\n\n确认无误后点击"确认抓取"`;
+    panel.setStatus('等待确认...', 'info');
+    const confirmed = await waitForConfirm(panel, confirmMsg);
+
+    if (!confirmed) {
+      panel.setStatus('已取消。', 'info');
+      return;
+    }
+
+    panel.setStatus('正在解析页面数据...', 'info');
+    const data = polarisParseData();
+    panel.appendDetail(`<div class="week-block">
+      <div class="week-title">${label} · CS工单</div>
+      <div class="row"><span class="name">一线提单量</span><span class="value">${data.firstLineOrders}</span></div>
+      <div class="row"><span class="name">一线自行处理率</span><span class="value">${(data.firstLineResolveRate * 100).toFixed(2)}%</span></div>
+    </div>`);
+
+    // 写入 GitHub
+    panel.setStatus('正在写入 GitHub...', 'info');
+    const { data: json, sha } = await readDataJson();
+    const weekEntry = { id: weekId, label, startDate: startStr, endDate: endStr, tags: [], current: data, yoy: {} };
+    mergeWeekEntry(json, weekEntry);
+    json.weeks.sort((a, b) => (b.startDate || '').localeCompare(a.startDate || ''));
+    json.meta.lastUpdated = new Date().toISOString();
+    await writeDataJson(json, sha, `chore: polaris firstLine data ${label}`);
+    panel.setStatus('✅ 一线提单量 + 自行处理率已写入 GitHub！', 'success');
+    panel.appendDetail(`<a class="btn" href="${PAGES_URL}" target="_blank">查看报表</a>`);
+  }
+
   // ============== 主入口 ==============
   async function main() {
     const panel = createPanel();
@@ -364,7 +458,8 @@
     try {
       if (host.indexOf('jira') >= 0) { await runJiraCollection(panel); }
       else if (host.indexOf('qiyukf') >= 0 || host.indexOf('163yun') >= 0) { await runQiyuCollection(panel); }
-      else { panel.setStatus('暂未支持当前域名（' + host + '）。\n支持：jira.mailtech.cn / coremail.qiyukf.com', 'info'); }
+      else if (host.indexOf('polaris') >= 0 || host.indexOf('icoremail') >= 0) { await runPolarisCollection(panel); }
+      else { panel.setStatus('暂未支持当前域名（' + host + '）。\n支持：jira.mailtech.cn / coremail.qiyukf.com / polaris.icoremail.net', 'info'); }
     } catch (err) { panel.setStatus('❌ ' + err.message, 'error'); }
   }
 
