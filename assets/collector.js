@@ -149,28 +149,32 @@
     return '未知';
   }
 
-  // 等待用户确认的 Promise（用 DOM 直接创建按钮，避免 shadow DOM 查找问题）
+  // 等待用户确认的 Promise
+  // 使用独立的浮动 div（不在 shadow DOM 内），确保按钮可点击
   function waitForConfirm(panel, message) {
     return new Promise((resolve) => {
       const wrapper = document.createElement('div');
-      wrapper.style.cssText = 'margin:12px 0;padding:12px;background:#fffbe6;border:1px solid #ffe58f;border-radius:6px;';
+      wrapper.id = 'dr-confirm-wrapper';
+      wrapper.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2147483647;background:#fff;border:2px solid #1890ff;border-radius:12px;padding:24px;box-shadow:0 8px 32px rgba(0,0,0,0.25);font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;font-size:14px;color:#333;max-width:420px;width:90%;';
       const msgDiv = document.createElement('div');
-      msgDiv.style.cssText = 'font-size:13px;margin-bottom:10px;white-space:pre-wrap;';
+      msgDiv.style.cssText = 'margin-bottom:16px;white-space:pre-wrap;line-height:1.8;';
       msgDiv.textContent = message;
+      const btnRow = document.createElement('div');
+      btnRow.style.cssText = 'display:flex;gap:12px;justify-content:center;';
       const confirmBtn = document.createElement('button');
       confirmBtn.textContent = '✓ 确认抓取';
-      confirmBtn.style.cssText = 'padding:8px 20px;background:#1890ff;color:#fff;border:none;border-radius:4px;font-size:13px;cursor:pointer;margin-right:8px;';
+      confirmBtn.style.cssText = 'padding:10px 28px;background:#1890ff;color:#fff;border:none;border-radius:6px;font-size:14px;cursor:pointer;font-weight:600;';
       const cancelBtn = document.createElement('button');
       cancelBtn.textContent = '✗ 取消';
-      cancelBtn.style.cssText = 'padding:8px 20px;background:#f5f5f5;color:#666;border:1px solid #d9d9d9;border-radius:4px;font-size:13px;cursor:pointer;';
+      cancelBtn.style.cssText = 'padding:10px 28px;background:#f5f5f5;color:#666;border:1px solid #d9d9d9;border-radius:6px;font-size:14px;cursor:pointer;';
       confirmBtn.onclick = () => { wrapper.remove(); resolve(true); };
       cancelBtn.onclick = () => { wrapper.remove(); resolve(false); };
+      btnRow.appendChild(confirmBtn);
+      btnRow.appendChild(cancelBtn);
       wrapper.appendChild(msgDiv);
-      wrapper.appendChild(confirmBtn);
-      wrapper.appendChild(cancelBtn);
-      // 直接插入到页面主 DOM（不在 shadow DOM 里）
-      const host = document.getElementById('dr-collector-host');
-      host.appendChild(wrapper);
+      wrapper.appendChild(btnRow);
+      // 直接插入 body（完全独立于 shadow DOM 和 host 元素）
+      document.body.appendChild(wrapper);
     });
   }
 
