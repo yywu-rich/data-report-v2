@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "售后运营数据周报",
-    "lastUpdated": "2026-05-21T07:40:14.426Z",
+    "lastUpdated": "2026-05-21T07:41:41.333Z",
     "weekDefinition": "周五至下周四",
     "fields": {
       "phoneCalls": "呼入量",
@@ -19,6 +19,17 @@
     }
   },
   "weeks": [
+    {
+      "id": "NaN-wNaN",
+      "label": "aN年(NaN.NaN-NaN.NaN)",
+      "startDate": "2026-05-08 00:00",
+      "endDate": "2026-05-14 23:59",
+      "tags": [],
+      "current": {
+        "wechatSessions": 1819
+      },
+      "yoy": {}
+    },
     {
       "id": "2026-w20",
       "label": "26年(05.08-05.14)",
