@@ -243,6 +243,7 @@
       await writeDataJson(json, sha, `chore: qiyu call data ${label}`);
       panel.setStatus('✅ 呼入量 + 接通率已写入 GitHub！', 'success');
       panel.appendDetail(`<a class="btn" href="${PAGES_URL}" target="_blank">查看报表</a>`);
+      showNextWeekHint(panel, startDate, endDate, 'qiyu-call');
 
     } else if (isOnlineOverview) {
       // 直接抓取当前页面数据（不改日期）
@@ -263,7 +264,61 @@
       await writeDataJson(json, sha, `chore: qiyu wechat sessions ${label}`);
       panel.setStatus('✅ 企微会话量已写入 GitHub！', 'success');
       panel.appendDetail(`<a class="btn" href="${PAGES_URL}" target="_blank">查看报表</a>`);
+      showNextWeekHint(panel, startDate, endDate, 'qiyu-online');
     }
+  }
+
+
+  // 显示"下一周"提示，方便补抓历史数据
+  function showNextWeekHint(panel, curStart, curEnd, mode) {
+    // 上一周 = 当前周往前推 7 天
+    const prevStart = new Date(curStart); prevStart.setDate(prevStart.getDate() - 7);
+    const prevEnd = new Date(curEnd); prevEnd.setDate(prevEnd.getDate() - 7);
+    const prevStartStr = fmtIsoDate(prevStart);
+    const prevEndStr = fmtIsoDate(prevEnd);
+    const prevLabel = fmtPeriod(prevStart, prevEnd);
+
+    let hintText, copyText;
+    if (mode === 'polaris') {
+      // Polaris 结束日期不含当天，需要 +1 天
+      const polarisEnd = new Date(prevEnd); polarisEnd.setDate(polarisEnd.getDate() + 1);
+      copyText = `${prevStartStr} / ${fmtIsoDate(polarisEnd)}`;
+      hintText = `📋 下一周（${prevLabel}）请选：\n${copyText}\n\n选好后等页面刷新，再点书签`;
+    } else {
+      copyText = `${prevStartStr} 至 ${prevEndStr}`;
+      hintText = `📋 下一周（${prevLabel}）请选：\n开始：${prevStartStr}\n结束：${prevEndStr}\n\n选好后等页面刷新，再点书签`;
+    }
+
+    const wrapper = document.createElement('div');
+    wrapper.id = 'dr-next-hint';
+    wrapper.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2147483647;background:#e6f7ff;border:2px solid #1890ff;border-radius:12px;padding:24px;box-shadow:0 8px 32px rgba(0,0,0,0.25);font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;font-size:14px;color:#333;max-width:480px;width:90%;';
+    const titleDiv = document.createElement('div');
+    titleDiv.style.cssText = 'font-size:15px;font-weight:600;margin-bottom:12px;color:#0050b3;';
+    titleDiv.textContent = `✅ 已写入 ${fmtPeriod(curStart, curEnd)}`;
+    const msgDiv = document.createElement('div');
+    msgDiv.style.cssText = 'margin-bottom:14px;white-space:pre-wrap;line-height:1.8;background:#fff;padding:12px;border-radius:6px;border:1px dashed #91d5ff;';
+    msgDiv.textContent = hintText;
+    const copyBtn = document.createElement('button');
+    copyBtn.textContent = '📋 复制日期';
+    copyBtn.style.cssText = 'padding:10px 24px;background:#1890ff;color:#fff;border:none;border-radius:6px;font-size:14px;cursor:pointer;font-weight:600;margin-right:8px;';
+    copyBtn.onclick = () => {
+      navigator.clipboard.writeText(copyText).then(() => {
+        copyBtn.textContent = '✓ 已复制';
+        setTimeout(() => { copyBtn.textContent = '📋 复制日期'; }, 1500);
+      });
+    };
+    const closeBtn = document.createElement('button');
+    closeBtn.textContent = '✗ 关闭';
+    closeBtn.style.cssText = 'padding:10px 24px;background:#f5f5f5;color:#666;border:1px solid #d9d9d9;border-radius:6px;font-size:14px;cursor:pointer;';
+    closeBtn.onclick = () => wrapper.remove();
+    const btnRow = document.createElement('div');
+    btnRow.style.cssText = 'text-align:center;';
+    btnRow.appendChild(copyBtn);
+    btnRow.appendChild(closeBtn);
+    wrapper.appendChild(titleDiv);
+    wrapper.appendChild(msgDiv);
+    wrapper.appendChild(btnRow);
+    document.body.appendChild(wrapper);
   }
 
 
@@ -447,6 +502,7 @@
     await writeDataJson(json, sha, `chore: polaris firstLine data ${label}`);
     panel.setStatus('✅ 一线提单量 + 自行处理率已写入 GitHub！', 'success');
     panel.appendDetail(`<a class="btn" href="${PAGES_URL}" target="_blank">查看报表</a>`);
+    showNextWeekHint(panel, startDate, endDate, 'polaris');
   }
 
   // ============== 主入口 ==============
