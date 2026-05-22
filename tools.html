@@ -107,7 +107,7 @@
     <div class="step-card">
       <h3>📜 补抓历史数据（点击时输入周数）</h3>
       <p class="muted" style="margin: 0 0 12px 0">
-        想把过去几周的数据一次性抓回来？拖动下方书签到书签栏，每次点击会弹窗问你要补几周（1-52）。
+        想把过去几周的数据一次性抓回来？拖动下方书签到书签栏，每次点击会弹窗问你要补几周（1-104）。
       </p>
       <div class="bookmark-area" style="background:rgba(250,140,22,0.08)">
         <a id="backfillBookmark" class="bookmarklet-big disabled" style="background:#fa8c16;box-shadow:0 2px 8px rgba(250,140,22,0.3)" href="#">📜 补抓历史</a>
@@ -178,7 +178,7 @@
 
     function buildBackfillBookmarklet(pat) {
       // 点击时弹 prompt 问周数，避免改数字后还需要重新拖书签
-      return "javascript:(function(){var w=prompt('补抓最近几周的数据？(1-52)','4');if(!w)return;w=parseInt(w);if(!w||w<1||w>52){alert('请输入 1-52 之间的数字');return;}window.__DR_PAT='" + pat + "';window.__DR_BACKFILL=w;var s=document.createElement('script');s.src='https://yywu-rich.github.io/data-report-v2/assets/collector.js?t='+Date.now();document.body.appendChild(s);})();";
+      return "javascript:(function(){var w=prompt('补抓最近几周的数据？(1-104)','4');if(!w)return;w=parseInt(w);if(!w||w<1||w>104){alert('请输入 1-104 之间的数字');return;}window.__DR_PAT='" + pat + "';window.__DR_BACKFILL=w;var s=document.createElement('script');s.src='https://yywu-rich.github.io/data-report-v2/assets/collector.js?t='+Date.now();document.body.appendChild(s);})();";
     }
 
     function update() {
