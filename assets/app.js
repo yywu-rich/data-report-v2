@@ -10,8 +10,8 @@ const FIELD_META = [
   { key: "securityIssues",        name: "安全事件",       percent: false, positive: false },
   { key: "accumulatedP1",         name: "P1累计",         percent: false, positive: false },
   { key: "wechatSessions",        name: "企微会话量",     percent: false, positive: false },
-  { key: "wechatOrders",          name: "企微派单工",     percent: false, positive: false },
-  { key: "wechatP4Orders",        name: "企微P4工",       percent: false, positive: false }
+  { key: "wechatOrders",          name: "企微来源工单",   percent: false, positive: false },
+  { key: "wechatP4Orders",        name: "P4工单-企微",    percent: false, positive: false }
 ];
 
 let DATA = null;
