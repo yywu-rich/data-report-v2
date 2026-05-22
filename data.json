@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "售后运营数据周报",
-    "lastUpdated": "2026-05-22T07:35:15.231Z",
+    "lastUpdated": "2026-05-22T07:35:27.303Z",
     "weekDefinition": "周五至下周四",
     "fields": {
       "phoneCalls": "呼入量",
@@ -674,7 +674,9 @@
         "p1Orders": 1,
         "securityIssues": 95,
         "wechatOrders": 451,
-        "wechatP4Orders": 271
+        "wechatP4Orders": 271,
+        "phoneCalls": 314,
+        "phoneConnectRate": 0.98
       },
       "yoy": {
         "label": "24年(10.18-10.24)",
