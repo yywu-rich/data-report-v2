@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "售后运营数据周报",
-    "lastUpdated": "2026-05-22T09:53:33.976Z",
+    "lastUpdated": "2026-05-22T10:08:46.158Z",
     "weekDefinition": "周五至下周四",
     "fields": {
       "phoneCalls": "呼入量",
@@ -32,7 +32,8 @@
         "phoneConnectRate": 0.84,
         "firstLineOrders": 1023,
         "firstLineResolveRate": 0.35,
-        "wechatSessions": 2030
+        "wechatSessions": 2030,
+        "accumulatedP1": 57
       },
       "yoy": {
         "label": "25年(05.16-05.22)",
@@ -57,7 +58,8 @@
         "phoneConnectRate": 0.93,
         "wechatSessions": 1819,
         "firstLineOrders": 1137,
-        "firstLineResolveRate": 0.4406
+        "firstLineResolveRate": 0.4406,
+        "accumulatedP1": 54
       },
       "yoy": {
         "label": "25年(05.09-05.15)",
@@ -112,7 +114,7 @@
         "firstLineResolveRate": 0.4994,
         "p1Orders": 3,
         "securityIssues": 97,
-        "accumulatedP1": 45,
+        "accumulatedP1": 48,
         "wechatSessions": 1481,
         "wechatOrders": 373,
         "wechatP4Orders": 199
@@ -146,7 +148,8 @@
         "phoneConnectRate": 0.94,
         "firstLineOrders": 932,
         "firstLineResolveRate": 0.4345,
-        "wechatSessions": 1525
+        "wechatSessions": 1525,
+        "accumulatedP1": 45
       },
       "yoy": {
         "label": "25年(04.18-04.24)",
@@ -171,7 +174,8 @@
         "phoneConnectRate": 0.9,
         "firstLineOrders": 996,
         "firstLineResolveRate": 0.5231,
-        "wechatSessions": 1535
+        "wechatSessions": 1535,
+        "accumulatedP1": 41
       },
       "yoy": {
         "label": "25年(04.11-04.17)",
@@ -196,7 +200,8 @@
         "phoneConnectRate": 0.95,
         "firstLineOrders": 744,
         "firstLineResolveRate": 0.4772,
-        "wechatSessions": 1087
+        "wechatSessions": 1087,
+        "accumulatedP1": 39
       },
       "yoy": {
         "label": "25年(04.04-04.10)",
@@ -220,7 +225,8 @@
         "phoneCalls": 345,
         "phoneConnectRate": 0.94,
         "firstLineOrders": 912,
-        "firstLineResolveRate": 0.455
+        "firstLineResolveRate": 0.455,
+        "accumulatedP1": 36
       },
       "yoy": {
         "label": "25年(03.28-04.03)",
@@ -245,7 +251,8 @@
         "phoneConnectRate": 0.84,
         "firstLineOrders": 779,
         "firstLineResolveRate": 0.4801,
-        "wechatSessions": 1401
+        "wechatSessions": 1401,
+        "accumulatedP1": 32
       },
       "yoy": {
         "label": "25年(03.21-03.27)",
@@ -270,7 +277,8 @@
         "phoneConnectRate": 0.88,
         "firstLineOrders": 934,
         "firstLineResolveRate": 0.4443,
-        "wechatSessions": 1493
+        "wechatSessions": 1493,
+        "accumulatedP1": 29
       },
       "yoy": {
         "label": "25年(03.14-03.20)",
@@ -295,7 +303,8 @@
         "phoneConnectRate": 0.89,
         "firstLineOrders": 794,
         "firstLineResolveRate": 0.4824,
-        "wechatSessions": 1341
+        "wechatSessions": 1341,
+        "accumulatedP1": 24
       },
       "yoy": {
         "label": "25年(03.07-03.13)",
@@ -320,7 +329,8 @@
         "phoneConnectRate": 0.92,
         "firstLineOrders": 910,
         "firstLineResolveRate": 0.4582,
-        "wechatSessions": 1452
+        "wechatSessions": 1452,
+        "accumulatedP1": 20
       },
       "yoy": {
         "label": "25年(02.28-03.06)",
@@ -345,7 +355,8 @@
         "phoneConnectRate": 0.94,
         "firstLineOrders": 404,
         "firstLineResolveRate": 0.4183,
-        "wechatSessions": 631
+        "wechatSessions": 631,
+        "accumulatedP1": 20
       },
       "yoy": {
         "label": "25年(02.21-02.27)",
@@ -370,7 +381,8 @@
         "phoneConnectRate": 1,
         "firstLineOrders": 100,
         "firstLineResolveRate": 0.54,
-        "wechatSessions": 184
+        "wechatSessions": 184,
+        "accumulatedP1": 20
       },
       "yoy": {
         "label": "25年(02.14-02.20)",
@@ -395,7 +407,8 @@
         "phoneConnectRate": 0.99,
         "firstLineOrders": 712,
         "firstLineResolveRate": 0.4775,
-        "wechatSessions": 1213
+        "wechatSessions": 1213,
+        "accumulatedP1": 20
       },
       "yoy": {
         "label": "25年(02.07-02.13)",
@@ -420,7 +433,8 @@
         "phoneConnectRate": 0.92,
         "firstLineOrders": 956,
         "firstLineResolveRate": 0.4498,
-        "wechatSessions": 1382
+        "wechatSessions": 1382,
+        "accumulatedP1": 16
       },
       "yoy": {
         "label": "25年(01.31-02.06)",
@@ -445,7 +459,8 @@
         "phoneConnectRate": 0.94,
         "firstLineOrders": 824,
         "firstLineResolveRate": 0.4114,
-        "wechatSessions": 1473
+        "wechatSessions": 1473,
+        "accumulatedP1": 14
       },
       "yoy": {
         "label": "25年(01.24-01.30)",
@@ -470,7 +485,8 @@
         "phoneConnectRate": 0.94,
         "firstLineOrders": 790,
         "firstLineResolveRate": 0.3937,
-        "wechatSessions": 1588
+        "wechatSessions": 1588,
+        "accumulatedP1": 9
       },
       "yoy": {
         "label": "25年(01.17-01.23)",
@@ -494,7 +510,8 @@
         "phoneCalls": 351,
         "phoneConnectRate": 0.95,
         "firstLineOrders": 850,
-        "firstLineResolveRate": 0.3835
+        "firstLineResolveRate": 0.3835,
+        "accumulatedP1": 6
       },
       "yoy": {
         "label": "25年(01.10-01.16)",
@@ -518,7 +535,8 @@
         "phoneCalls": 304,
         "phoneConnectRate": 0.93,
         "firstLineOrders": 810,
-        "firstLineResolveRate": 0.3815
+        "firstLineResolveRate": 0.3815,
+        "accumulatedP1": 4
       },
       "yoy": {
         "label": "25年(01.03-01.09)",

@@ -399,13 +399,6 @@
       const label = fmtPeriod(cur.start, cur.end), yoyLabel = fmtPeriod(yoy.start, yoy.end);
       panel.setStatus(`[${i+1}/${tasks.length}] 抓取 ${label}...`, 'info');
       const curData = await fetchJiraWindow(cur); done++; panel.setProgress((done/totalSteps)*100);
-      // 计算 P1 累计（从当年1月1日到当周周四的 P1 总数）
-      if (cur.end.getFullYear() >= 2026) {
-        const yearStart = `${cur.end.getFullYear()}-01-01 00:00`;
-        const weekEnd = fmtJqlDate(new Date(cur.end.getFullYear(), cur.end.getMonth(), cur.end.getDate() + 1));
-        const accJql = `project = CS AND issuetype = "客户服务请求" AND "故障等级" = "P1-严重" AND created >= "${yearStart}" AND created < "${weekEnd}"`;
-        curData.accumulatedP1 = await jiraCount(accJql);
-      }
       panel.setStatus(`[${i+1}/${tasks.length}] 抓取同期 ${yoyLabel}...`, 'info');
       const yoyData = await fetchJiraWindow(yoy); done++; panel.setProgress((done/totalSteps)*100);
       const rows = JIRA_QUERIES.map(q => { const c=curData[q.key],y=yoyData[q.key]; let d=''; if(c!=null&&y!=null&&y!==0){const s=c>y?'↑':c<y?'↓':'→';const cls=c>y?'up':c<y?'down':'flat';d=`<span class="delta-${cls}">${s}${Math.abs((c-y)/y*100).toFixed(1)}%</span>`;} return `<div class="row"><span class="name">${q.name}</span><span class="value">${c} <span style="color:#999;font-size:11px">(${y})</span>${d}</span></div>`; }).join('');
