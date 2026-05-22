@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "售后运营数据周报",
-    "lastUpdated": "2026-05-21T10:13:18.273Z",
+    "lastUpdated": "2026-05-22T01:07:54.764Z",
     "weekDefinition": "周五至下周四",
     "fields": {
       "phoneCalls": "呼入量",
@@ -20,6 +20,26 @@
   },
   "weeks": [
     {
+      "id": "2026-w21",
+      "label": "26年(05.15-05.21)",
+      "startDate": "2026-05-15",
+      "endDate": "2026-05-21",
+      "tags": [],
+      "current": {
+        "p1Orders": 3,
+        "securityIssues": 106,
+        "wechatOrders": 532,
+        "wechatP4Orders": 406
+      },
+      "yoy": {
+        "label": "25年(05.16-05.22)",
+        "p1Orders": 3,
+        "securityIssues": 140,
+        "wechatOrders": 348,
+        "wechatP4Orders": 208
+      }
+    },
+    {
       "id": "2026-w20",
       "label": "26年(05.08-05.14)",
       "startDate": "2026-05-08",
@@ -27,9 +47,9 @@
       "tags": [],
       "current": {
         "p1Orders": 2,
-        "securityIssues": 105,
+        "securityIssues": 119,
         "wechatOrders": 523,
-        "wechatP4Orders": 224,
+        "wechatP4Orders": 221,
         "phoneCalls": 357,
         "phoneConnectRate": 0.93,
         "wechatSessions": 1819,
@@ -58,7 +78,7 @@
         "secondLineOrders": null,
         "secondLineResolveRate": null,
         "p1Orders": 4,
-        "securityIssues": 44,
+        "securityIssues": 43,
         "accumulatedP1": 52,
         "wechatSessions": 2150,
         "wechatOrders": 201,
@@ -98,7 +118,7 @@
         "accumulatedP1": 45,
         "wechatSessions": 1525,
         "wechatOrders": 373,
-        "wechatP4Orders": 198
+        "wechatP4Orders": 199
       },
       "yoy": {
         "label": "25年(04.25-05.01)",
@@ -160,6 +180,926 @@
         "securityIssues": 112,
         "wechatOrders": 411,
         "wechatP4Orders": 265
+      }
+    },
+    {
+      "id": "2026-w15",
+      "label": "26年(04.03-04.09)",
+      "startDate": "2026-04-03",
+      "endDate": "2026-04-09",
+      "tags": [],
+      "current": {
+        "p1Orders": 3,
+        "securityIssues": 74,
+        "wechatOrders": 306,
+        "wechatP4Orders": 177
+      },
+      "yoy": {
+        "label": "25年(04.04-04.10)",
+        "p1Orders": 4,
+        "securityIssues": 97,
+        "wechatOrders": 344,
+        "wechatP4Orders": 231
+      }
+    },
+    {
+      "id": "2026-w14",
+      "label": "26年(03.27-04.02)",
+      "startDate": "2026-03-27",
+      "endDate": "2026-04-02",
+      "tags": [],
+      "current": {
+        "p1Orders": 4,
+        "securityIssues": 77,
+        "wechatOrders": 388,
+        "wechatP4Orders": 209
+      },
+      "yoy": {
+        "label": "25年(03.28-04.03)",
+        "p1Orders": 6,
+        "securityIssues": 114,
+        "wechatOrders": 374,
+        "wechatP4Orders": 231
+      }
+    },
+    {
+      "id": "2026-w13",
+      "label": "26年(03.20-03.26)",
+      "startDate": "2026-03-20",
+      "endDate": "2026-03-26",
+      "tags": [],
+      "current": {
+        "p1Orders": 3,
+        "securityIssues": 81,
+        "wechatOrders": 379,
+        "wechatP4Orders": 229
+      },
+      "yoy": {
+        "label": "25年(03.21-03.27)",
+        "p1Orders": 2,
+        "securityIssues": 112,
+        "wechatOrders": 402,
+        "wechatP4Orders": 244
+      }
+    },
+    {
+      "id": "2026-w12",
+      "label": "26年(03.13-03.19)",
+      "startDate": "2026-03-13",
+      "endDate": "2026-03-19",
+      "tags": [],
+      "current": {
+        "p1Orders": 5,
+        "securityIssues": 113,
+        "wechatOrders": 430,
+        "wechatP4Orders": 220
+      },
+      "yoy": {
+        "label": "25年(03.14-03.20)",
+        "p1Orders": 1,
+        "securityIssues": 123,
+        "wechatOrders": 387,
+        "wechatP4Orders": 257
+      }
+    },
+    {
+      "id": "2026-w11",
+      "label": "26年(03.06-03.12)",
+      "startDate": "2026-03-06",
+      "endDate": "2026-03-12",
+      "tags": [],
+      "current": {
+        "p1Orders": 4,
+        "securityIssues": 83,
+        "wechatOrders": 347,
+        "wechatP4Orders": 176
+      },
+      "yoy": {
+        "label": "25年(03.07-03.13)",
+        "p1Orders": 2,
+        "securityIssues": 103,
+        "wechatOrders": 419,
+        "wechatP4Orders": 283
+      }
+    },
+    {
+      "id": "2026-w10",
+      "label": "26年(02.27-03.05)",
+      "startDate": "2026-02-27",
+      "endDate": "2026-03-05",
+      "tags": [],
+      "current": {
+        "p1Orders": 0,
+        "securityIssues": 78,
+        "wechatOrders": 429,
+        "wechatP4Orders": 280
+      },
+      "yoy": {
+        "label": "25年(02.28-03.06)",
+        "p1Orders": 3,
+        "securityIssues": 109,
+        "wechatOrders": 529,
+        "wechatP4Orders": 367
+      }
+    },
+    {
+      "id": "2026-w09",
+      "label": "26年(02.20-02.26)",
+      "startDate": "2026-02-20",
+      "endDate": "2026-02-26",
+      "tags": [],
+      "current": {
+        "p1Orders": 0,
+        "securityIssues": 37,
+        "wechatOrders": 199,
+        "wechatP4Orders": 121
+      },
+      "yoy": {
+        "label": "25年(02.21-02.27)",
+        "p1Orders": 2,
+        "securityIssues": 113,
+        "wechatOrders": 517,
+        "wechatP4Orders": 352
+      }
+    },
+    {
+      "id": "2026-w08",
+      "label": "26年(02.13-02.19)",
+      "startDate": "2026-02-13",
+      "endDate": "2026-02-19",
+      "tags": [],
+      "current": {
+        "p1Orders": 0,
+        "securityIssues": 5,
+        "wechatOrders": 46,
+        "wechatP4Orders": 29
+      },
+      "yoy": {
+        "label": "25年(02.14-02.20)",
+        "p1Orders": 5,
+        "securityIssues": 89,
+        "wechatOrders": 406,
+        "wechatP4Orders": 267
+      }
+    },
+    {
+      "id": "2026-w07",
+      "label": "26年(02.06-02.12)",
+      "startDate": "2026-02-06",
+      "endDate": "2026-02-12",
+      "tags": [],
+      "current": {
+        "p1Orders": 4,
+        "securityIssues": 71,
+        "wechatOrders": 313,
+        "wechatP4Orders": 208
+      },
+      "yoy": {
+        "label": "25年(02.07-02.13)",
+        "p1Orders": 2,
+        "securityIssues": 103,
+        "wechatOrders": 428,
+        "wechatP4Orders": 287
+      }
+    },
+    {
+      "id": "2026-w06",
+      "label": "26年(01.30-02.05)",
+      "startDate": "2026-01-30",
+      "endDate": "2026-02-05",
+      "tags": [],
+      "current": {
+        "p1Orders": 2,
+        "securityIssues": 92,
+        "wechatOrders": 417,
+        "wechatP4Orders": 236
+      },
+      "yoy": {
+        "label": "25年(01.31-02.06)",
+        "p1Orders": 0,
+        "securityIssues": 31,
+        "wechatOrders": 128,
+        "wechatP4Orders": 93
+      }
+    },
+    {
+      "id": "2026-w05",
+      "label": "26年(01.23-01.29)",
+      "startDate": "2026-01-23",
+      "endDate": "2026-01-29",
+      "tags": [],
+      "current": {
+        "p1Orders": 5,
+        "securityIssues": 94,
+        "wechatOrders": 371,
+        "wechatP4Orders": 209
+      },
+      "yoy": {
+        "label": "25年(01.24-01.30)",
+        "p1Orders": 2,
+        "securityIssues": 21,
+        "wechatOrders": 76,
+        "wechatP4Orders": 53
+      }
+    },
+    {
+      "id": "2026-w04",
+      "label": "26年(01.16-01.22)",
+      "startDate": "2026-01-16",
+      "endDate": "2026-01-22",
+      "tags": [],
+      "current": {
+        "p1Orders": 3,
+        "securityIssues": 68,
+        "wechatOrders": 340,
+        "wechatP4Orders": 184
+      },
+      "yoy": {
+        "label": "25年(01.17-01.23)",
+        "p1Orders": 2,
+        "securityIssues": 94,
+        "wechatOrders": 342,
+        "wechatP4Orders": 252
+      }
+    },
+    {
+      "id": "2026-w03",
+      "label": "26年(01.09-01.15)",
+      "startDate": "2026-01-09",
+      "endDate": "2026-01-15",
+      "tags": [],
+      "current": {
+        "p1Orders": 2,
+        "securityIssues": 76,
+        "wechatOrders": 367,
+        "wechatP4Orders": 186
+      },
+      "yoy": {
+        "label": "25年(01.10-01.16)",
+        "p1Orders": 5,
+        "securityIssues": 81,
+        "wechatOrders": 400,
+        "wechatP4Orders": 286
+      }
+    },
+    {
+      "id": "2026-w02",
+      "label": "26年(01.02-01.08)",
+      "startDate": "2026-01-02",
+      "endDate": "2026-01-08",
+      "tags": [],
+      "current": {
+        "p1Orders": 4,
+        "securityIssues": 72,
+        "wechatOrders": 333,
+        "wechatP4Orders": 144
+      },
+      "yoy": {
+        "label": "25年(01.03-01.09)",
+        "p1Orders": 6,
+        "securityIssues": 74,
+        "wechatOrders": 437,
+        "wechatP4Orders": 308
+      }
+    },
+    {
+      "id": "2026-w01",
+      "label": "25年(12.26-01.01)",
+      "startDate": "2025-12-26",
+      "endDate": "2026-01-01",
+      "tags": [],
+      "current": {
+        "p1Orders": 3,
+        "securityIssues": 46,
+        "wechatOrders": 291,
+        "wechatP4Orders": 138
+      },
+      "yoy": {
+        "label": "24年(12.27-01.02)",
+        "p1Orders": 5,
+        "securityIssues": 76,
+        "wechatOrders": 336,
+        "wechatP4Orders": 240
+      }
+    },
+    {
+      "id": "2025-w52",
+      "label": "25年(12.19-12.25)",
+      "startDate": "2025-12-19",
+      "endDate": "2025-12-25",
+      "tags": [],
+      "current": {
+        "p1Orders": 5,
+        "securityIssues": 71,
+        "wechatOrders": 345,
+        "wechatP4Orders": 200
+      },
+      "yoy": {
+        "label": "24年(12.20-12.26)",
+        "p1Orders": 5,
+        "securityIssues": 89,
+        "wechatOrders": 371,
+        "wechatP4Orders": 223
+      }
+    },
+    {
+      "id": "2025-w51",
+      "label": "25年(12.12-12.18)",
+      "startDate": "2025-12-12",
+      "endDate": "2025-12-18",
+      "tags": [],
+      "current": {
+        "p1Orders": 4,
+        "securityIssues": 85,
+        "wechatOrders": 384,
+        "wechatP4Orders": 183
+      },
+      "yoy": {
+        "label": "24年(12.13-12.19)",
+        "p1Orders": 3,
+        "securityIssues": 85,
+        "wechatOrders": 398,
+        "wechatP4Orders": 260
+      }
+    },
+    {
+      "id": "2025-w50",
+      "label": "25年(12.05-12.11)",
+      "startDate": "2025-12-05",
+      "endDate": "2025-12-11",
+      "tags": [],
+      "current": {
+        "p1Orders": 4,
+        "securityIssues": 92,
+        "wechatOrders": 362,
+        "wechatP4Orders": 185
+      },
+      "yoy": {
+        "label": "24年(12.06-12.12)",
+        "p1Orders": 4,
+        "securityIssues": 92,
+        "wechatOrders": 303,
+        "wechatP4Orders": 186
+      }
+    },
+    {
+      "id": "2025-w49",
+      "label": "25年(11.28-12.04)",
+      "startDate": "2025-11-28",
+      "endDate": "2025-12-04",
+      "tags": [],
+      "current": {
+        "p1Orders": 3,
+        "securityIssues": 98,
+        "wechatOrders": 420,
+        "wechatP4Orders": 227
+      },
+      "yoy": {
+        "label": "24年(11.29-12.05)",
+        "p1Orders": 6,
+        "securityIssues": 122,
+        "wechatOrders": 316,
+        "wechatP4Orders": 193
+      }
+    },
+    {
+      "id": "2025-w48",
+      "label": "25年(11.21-11.27)",
+      "startDate": "2025-11-21",
+      "endDate": "2025-11-27",
+      "tags": [],
+      "current": {
+        "p1Orders": 1,
+        "securityIssues": 99,
+        "wechatOrders": 372,
+        "wechatP4Orders": 229
+      },
+      "yoy": {
+        "label": "24年(11.22-11.28)",
+        "p1Orders": 5,
+        "securityIssues": 132,
+        "wechatOrders": 302,
+        "wechatP4Orders": 187
+      }
+    },
+    {
+      "id": "2025-w47",
+      "label": "25年(11.14-11.20)",
+      "startDate": "2025-11-14",
+      "endDate": "2025-11-20",
+      "tags": [],
+      "current": {
+        "p1Orders": 5,
+        "securityIssues": 120,
+        "wechatOrders": 373,
+        "wechatP4Orders": 199
+      },
+      "yoy": {
+        "label": "24年(11.15-11.21)",
+        "p1Orders": 1,
+        "securityIssues": 115,
+        "wechatOrders": 286,
+        "wechatP4Orders": 192
+      }
+    },
+    {
+      "id": "2025-w46",
+      "label": "25年(11.07-11.13)",
+      "startDate": "2025-11-07",
+      "endDate": "2025-11-13",
+      "tags": [],
+      "current": {
+        "p1Orders": 2,
+        "securityIssues": 118,
+        "wechatOrders": 399,
+        "wechatP4Orders": 217
+      },
+      "yoy": {
+        "label": "24年(11.08-11.14)",
+        "p1Orders": 4,
+        "securityIssues": 93,
+        "wechatOrders": 304,
+        "wechatP4Orders": 200
+      }
+    },
+    {
+      "id": "2025-w45",
+      "label": "25年(10.31-11.06)",
+      "startDate": "2025-10-31",
+      "endDate": "2025-11-06",
+      "tags": [],
+      "current": {
+        "p1Orders": 6,
+        "securityIssues": 124,
+        "wechatOrders": 399,
+        "wechatP4Orders": 217
+      },
+      "yoy": {
+        "label": "24年(11.01-11.07)",
+        "p1Orders": 6,
+        "securityIssues": 135,
+        "wechatOrders": 333,
+        "wechatP4Orders": 218
+      }
+    },
+    {
+      "id": "2025-w44",
+      "label": "25年(10.24-10.30)",
+      "startDate": "2025-10-24",
+      "endDate": "2025-10-30",
+      "tags": [],
+      "current": {
+        "p1Orders": 6,
+        "securityIssues": 97,
+        "wechatOrders": 396,
+        "wechatP4Orders": 214
+      },
+      "yoy": {
+        "label": "24年(10.25-10.31)",
+        "p1Orders": 3,
+        "securityIssues": 122,
+        "wechatOrders": 258,
+        "wechatP4Orders": 167
+      }
+    },
+    {
+      "id": "2025-w43",
+      "label": "25年(10.17-10.23)",
+      "startDate": "2025-10-17",
+      "endDate": "2025-10-23",
+      "tags": [],
+      "current": {
+        "p1Orders": 1,
+        "securityIssues": 95,
+        "wechatOrders": 451,
+        "wechatP4Orders": 271
+      },
+      "yoy": {
+        "label": "24年(10.18-10.24)",
+        "p1Orders": 9,
+        "securityIssues": 129,
+        "wechatOrders": 263,
+        "wechatP4Orders": 151
+      }
+    },
+    {
+      "id": "2025-w42",
+      "label": "25年(10.10-10.16)",
+      "startDate": "2025-10-10",
+      "endDate": "2025-10-16",
+      "tags": [],
+      "current": {
+        "p1Orders": 6,
+        "securityIssues": 119,
+        "wechatOrders": 493,
+        "wechatP4Orders": 319
+      },
+      "yoy": {
+        "label": "24年(10.11-10.17)",
+        "p1Orders": 4,
+        "securityIssues": 120,
+        "wechatOrders": 268,
+        "wechatP4Orders": 162
+      }
+    },
+    {
+      "id": "2025-w41",
+      "label": "25年(10.03-10.09)",
+      "startDate": "2025-10-03",
+      "endDate": "2025-10-09",
+      "tags": [],
+      "current": {
+        "p1Orders": 0,
+        "securityIssues": 40,
+        "wechatOrders": 118,
+        "wechatP4Orders": 76
+      },
+      "yoy": {
+        "label": "24年(10.04-10.10)",
+        "p1Orders": 3,
+        "securityIssues": 76,
+        "wechatOrders": 165,
+        "wechatP4Orders": 91
+      }
+    },
+    {
+      "id": "2025-w40",
+      "label": "25年(09.26-10.02)",
+      "startDate": "2025-09-26",
+      "endDate": "2025-10-02",
+      "tags": [],
+      "current": {
+        "p1Orders": 6,
+        "securityIssues": 74,
+        "wechatOrders": 336,
+        "wechatP4Orders": 202
+      },
+      "yoy": {
+        "label": "24年(09.27-10.03)",
+        "p1Orders": 4,
+        "securityIssues": 63,
+        "wechatOrders": 122,
+        "wechatP4Orders": 77
+      }
+    },
+    {
+      "id": "2025-w39",
+      "label": "25年(09.19-09.25)",
+      "startDate": "2025-09-19",
+      "endDate": "2025-09-25",
+      "tags": [],
+      "current": {
+        "p1Orders": 2,
+        "securityIssues": 91,
+        "wechatOrders": 399,
+        "wechatP4Orders": 253
+      },
+      "yoy": {
+        "label": "24年(09.20-09.26)",
+        "p1Orders": 7,
+        "securityIssues": 73,
+        "wechatOrders": 168,
+        "wechatP4Orders": 97
+      }
+    },
+    {
+      "id": "2025-w38",
+      "label": "25年(09.12-09.18)",
+      "startDate": "2025-09-12",
+      "endDate": "2025-09-18",
+      "tags": [],
+      "current": {
+        "p1Orders": 8,
+        "securityIssues": 92,
+        "wechatOrders": 486,
+        "wechatP4Orders": 310
+      },
+      "yoy": {
+        "label": "24年(09.13-09.19)",
+        "p1Orders": 2,
+        "securityIssues": 73,
+        "wechatOrders": 155,
+        "wechatP4Orders": 98
+      }
+    },
+    {
+      "id": "2025-w37",
+      "label": "25年(09.05-09.11)",
+      "startDate": "2025-09-05",
+      "endDate": "2025-09-11",
+      "tags": [],
+      "current": {
+        "p1Orders": 8,
+        "securityIssues": 80,
+        "wechatOrders": 427,
+        "wechatP4Orders": 260
+      },
+      "yoy": {
+        "label": "24年(09.06-09.12)",
+        "p1Orders": 3,
+        "securityIssues": 88,
+        "wechatOrders": 194,
+        "wechatP4Orders": 121
+      }
+    },
+    {
+      "id": "2025-w36",
+      "label": "25年(08.29-09.04)",
+      "startDate": "2025-08-29",
+      "endDate": "2025-09-04",
+      "tags": [],
+      "current": {
+        "p1Orders": 3,
+        "securityIssues": 76,
+        "wechatOrders": 381,
+        "wechatP4Orders": 233
+      },
+      "yoy": {
+        "label": "24年(08.30-09.05)",
+        "p1Orders": 9,
+        "securityIssues": 93,
+        "wechatOrders": 165,
+        "wechatP4Orders": 110
+      }
+    },
+    {
+      "id": "2025-w35",
+      "label": "25年(08.22-08.28)",
+      "startDate": "2025-08-22",
+      "endDate": "2025-08-28",
+      "tags": [],
+      "current": {
+        "p1Orders": 2,
+        "securityIssues": 68,
+        "wechatOrders": 348,
+        "wechatP4Orders": 213
+      },
+      "yoy": {
+        "label": "24年(08.23-08.29)",
+        "p1Orders": 9,
+        "securityIssues": 120,
+        "wechatOrders": 143,
+        "wechatP4Orders": 94
+      }
+    },
+    {
+      "id": "2025-w34",
+      "label": "25年(08.15-08.21)",
+      "startDate": "2025-08-15",
+      "endDate": "2025-08-21",
+      "tags": [],
+      "current": {
+        "p1Orders": 4,
+        "securityIssues": 71,
+        "wechatOrders": 331,
+        "wechatP4Orders": 210
+      },
+      "yoy": {
+        "label": "24年(08.16-08.22)",
+        "p1Orders": 7,
+        "securityIssues": 116,
+        "wechatOrders": 140,
+        "wechatP4Orders": 87
+      }
+    },
+    {
+      "id": "2025-w33",
+      "label": "25年(08.08-08.14)",
+      "startDate": "2025-08-08",
+      "endDate": "2025-08-14",
+      "tags": [],
+      "current": {
+        "p1Orders": 5,
+        "securityIssues": 63,
+        "wechatOrders": 332,
+        "wechatP4Orders": 239
+      },
+      "yoy": {
+        "label": "24年(08.09-08.15)",
+        "p1Orders": 10,
+        "securityIssues": 150,
+        "wechatOrders": 100,
+        "wechatP4Orders": 79
+      }
+    },
+    {
+      "id": "2025-w32",
+      "label": "25年(08.01-08.07)",
+      "startDate": "2025-08-01",
+      "endDate": "2025-08-07",
+      "tags": [],
+      "current": {
+        "p1Orders": 2,
+        "securityIssues": 68,
+        "wechatOrders": 295,
+        "wechatP4Orders": 169
+      },
+      "yoy": {
+        "label": "24年(08.02-08.08)",
+        "p1Orders": 1,
+        "securityIssues": 150,
+        "wechatOrders": 59,
+        "wechatP4Orders": 43
+      }
+    },
+    {
+      "id": "2025-w31",
+      "label": "25年(07.25-07.31)",
+      "startDate": "2025-07-25",
+      "endDate": "2025-07-31",
+      "tags": [],
+      "current": {
+        "p1Orders": 6,
+        "securityIssues": 132,
+        "wechatOrders": 309,
+        "wechatP4Orders": 184
+      },
+      "yoy": {
+        "label": "24年(07.26-08.01)",
+        "p1Orders": 5,
+        "securityIssues": 132,
+        "wechatOrders": 69,
+        "wechatP4Orders": 51
+      }
+    },
+    {
+      "id": "2025-w30",
+      "label": "25年(07.18-07.24)",
+      "startDate": "2025-07-18",
+      "endDate": "2025-07-24",
+      "tags": [],
+      "current": {
+        "p1Orders": 7,
+        "securityIssues": 123,
+        "wechatOrders": 362,
+        "wechatP4Orders": 196
+      },
+      "yoy": {
+        "label": "24年(07.19-07.25)",
+        "p1Orders": 4,
+        "securityIssues": 188,
+        "wechatOrders": 33,
+        "wechatP4Orders": 21
+      }
+    },
+    {
+      "id": "2025-w29",
+      "label": "25年(07.11-07.17)",
+      "startDate": "2025-07-11",
+      "endDate": "2025-07-17",
+      "tags": [],
+      "current": {
+        "p1Orders": 7,
+        "securityIssues": 104,
+        "wechatOrders": 381,
+        "wechatP4Orders": 244
+      },
+      "yoy": {
+        "label": "24年(07.12-07.18)",
+        "p1Orders": 6,
+        "securityIssues": 122,
+        "wechatOrders": 37,
+        "wechatP4Orders": 18
+      }
+    },
+    {
+      "id": "2025-w28",
+      "label": "25年(07.04-07.10)",
+      "startDate": "2025-07-04",
+      "endDate": "2025-07-10",
+      "tags": [],
+      "current": {
+        "p1Orders": 1,
+        "securityIssues": 137,
+        "wechatOrders": 517,
+        "wechatP4Orders": 288
+      },
+      "yoy": {
+        "label": "24年(07.05-07.11)",
+        "p1Orders": 7,
+        "securityIssues": 145,
+        "wechatOrders": 11,
+        "wechatP4Orders": 4
+      }
+    },
+    {
+      "id": "2025-w27",
+      "label": "25年(06.27-07.03)",
+      "startDate": "2025-06-27",
+      "endDate": "2025-07-03",
+      "tags": [],
+      "current": {
+        "p1Orders": 9,
+        "securityIssues": 132,
+        "wechatOrders": 473,
+        "wechatP4Orders": 291
+      },
+      "yoy": {
+        "label": "24年(06.28-07.04)",
+        "p1Orders": 7,
+        "securityIssues": 117,
+        "wechatOrders": 0,
+        "wechatP4Orders": 0
+      }
+    },
+    {
+      "id": "2025-w26",
+      "label": "25年(06.20-06.26)",
+      "startDate": "2025-06-20",
+      "endDate": "2025-06-26",
+      "tags": [],
+      "current": {
+        "p1Orders": 7,
+        "securityIssues": 115,
+        "wechatOrders": 447,
+        "wechatP4Orders": 268
+      },
+      "yoy": {
+        "label": "24年(06.21-06.27)",
+        "p1Orders": 5,
+        "securityIssues": 84,
+        "wechatOrders": 0,
+        "wechatP4Orders": 0
+      }
+    },
+    {
+      "id": "2025-w25",
+      "label": "25年(06.13-06.19)",
+      "startDate": "2025-06-13",
+      "endDate": "2025-06-19",
+      "tags": [],
+      "current": {
+        "p1Orders": 10,
+        "securityIssues": 107,
+        "wechatOrders": 404,
+        "wechatP4Orders": 258
+      },
+      "yoy": {
+        "label": "24年(06.14-06.20)",
+        "p1Orders": 2,
+        "securityIssues": 107,
+        "wechatOrders": 0,
+        "wechatP4Orders": 0
+      }
+    },
+    {
+      "id": "2025-w24",
+      "label": "25年(06.06-06.12)",
+      "startDate": "2025-06-06",
+      "endDate": "2025-06-12",
+      "tags": [],
+      "current": {
+        "p1Orders": 4,
+        "securityIssues": 118,
+        "wechatOrders": 413,
+        "wechatP4Orders": 284
+      },
+      "yoy": {
+        "label": "24年(06.07-06.13)",
+        "p1Orders": 1,
+        "securityIssues": 96,
+        "wechatOrders": 0,
+        "wechatP4Orders": 0
+      }
+    },
+    {
+      "id": "2025-w23",
+      "label": "25年(05.30-06.05)",
+      "startDate": "2025-05-30",
+      "endDate": "2025-06-05",
+      "tags": [],
+      "current": {
+        "p1Orders": 7,
+        "securityIssues": 110,
+        "wechatOrders": 329,
+        "wechatP4Orders": 231
+      },
+      "yoy": {
+        "label": "24年(05.31-06.06)",
+        "p1Orders": 2,
+        "securityIssues": 111,
+        "wechatOrders": 0,
+        "wechatP4Orders": 0
+      }
+    },
+    {
+      "id": "2025-w22",
+      "label": "25年(05.23-05.29)",
+      "startDate": "2025-05-23",
+      "endDate": "2025-05-29",
+      "tags": [],
+      "current": {
+        "p1Orders": 5,
+        "securityIssues": 97,
+        "wechatOrders": 383,
+        "wechatP4Orders": 268
+      },
+      "yoy": {
+        "label": "24年(05.24-05.30)",
+        "p1Orders": 3,
+        "securityIssues": 87,
+        "wechatOrders": 0,
+        "wechatP4Orders": 0
       }
     }
   ]
