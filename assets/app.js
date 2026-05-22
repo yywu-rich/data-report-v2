@@ -4,8 +4,6 @@ const FIELD_META = [
   { key: "phoneConnectRate",      name: "接通率",         percent: true,  positive: true  },
   { key: "firstLineOrders",       name: "一线提单量",     percent: false, positive: false },
   { key: "firstLineResolveRate",  name: "一线自行处理率", percent: true,  positive: true  },
-  { key: "secondLineOrders",      name: "二线工单量",     percent: false, positive: false },
-  { key: "secondLineResolveRate", name: "二线解决率",     percent: true,  positive: true  },
   { key: "p1Orders",              name: "P1工单数",       percent: false, positive: false },
   { key: "securityIssues",        name: "安全事件",       percent: false, positive: false },
   { key: "accumulatedP1",         name: "P1累计",         percent: false, positive: false },
