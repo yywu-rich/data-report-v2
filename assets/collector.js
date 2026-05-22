@@ -206,27 +206,34 @@
     const label = fmtPeriod(startDate, endDate);
     const pageType = isCallCenter ? '呼叫中心 · 团队报表' : '在线客服 · 总览';
 
-    // 弹出确认
+    // 先读数据再确认（让用户核对数字是否正确）
     panel.setMeta(`七鱼 · ${pageType}`);
-    const confirmMsg = `请确认以下信息：\n\n📅 日期范围：${startStr} 至 ${endStr}\n👥 客服组：${group}\n📊 页面类型：${pageType}\n🏷️ 将写入周期：${label}\n\n确认无误后点击"确认抓取"`;
-    panel.setStatus('等待确认...', 'info');
-    const confirmed = await waitForConfirm(panel, confirmMsg);
+    panel.setStatus('正在读取页面数据...', 'info');
 
-    if (!confirmed) {
-      panel.setStatus('已取消。请调整日期/客服组后重新点击书签。', 'info');
-      return;
-    }
-
+    let previewData, previewMsg;
     if (isCallCenter) {
-      // 检查客服组
       if (!qiyuCheckGroup()) {
         panel.setStatus('⚠️ 当前客服组不是"售后服务"！请先手动选择后重新点击书签。', 'error');
         return;
       }
+      previewData = qiyuParseCallData();
+      previewMsg = `📅 日期范围：${startStr} 至 ${endStr}\n👥 客服组：${group}\n📊 页面类型：${pageType}\n🏷️ 将写入周期：${label}\n\n📈 读取到的数据：\n   呼入量：${previewData.phoneCalls}\n   接通率：${(previewData.phoneConnectRate * 100).toFixed(1)}%\n\n⚠️ 请核对以上数字跟页面显示一致，再点确认`;
+    } else {
+      const sessions = qiyuParseWechatSessions();
+      previewData = { wechatSessions: sessions };
+      previewMsg = `📅 日期范围：${startStr} 至 ${endStr}\n📊 页面类型：${pageType}\n🏷️ 将写入周期：${label}\n\n📈 读取到的数据：\n   企微会话量：${sessions}\n\n⚠️ 请核对以上数字跟页面显示一致，再点确认`;
+    }
 
-      // 直接抓取当前页面数据（不改日期）
-      panel.setStatus('正在解析页面数据...', 'info');
-      const data = qiyuParseCallData();
+    panel.setStatus('等待确认...', 'info');
+    const confirmed = await waitForConfirm(panel, previewMsg);
+
+    if (!confirmed) {
+      panel.setStatus('已取消。请等页面数据刷新后重新点击书签。', 'info');
+      return;
+    }
+
+    if (isCallCenter) {
+      const data = previewData;
       panel.appendDetail(`<div class="week-block">
         <div class="week-title">${label} · ${group}</div>
         <div class="row"><span class="name">呼入量</span><span class="value">${data.phoneCalls}</span></div>
@@ -246,9 +253,7 @@
       showNextWeekHint(panel, startDate, endDate, 'qiyu-call');
 
     } else if (isOnlineOverview) {
-      // 直接抓取当前页面数据（不改日期）
-      panel.setStatus('正在解析企微会话量...', 'info');
-      const wechatSessions = qiyuParseWechatSessions();
+      const wechatSessions = previewData.wechatSessions;
       panel.appendDetail(`<div class="week-block">
         <div class="week-title">${label} · 在线客服总览</div>
         <div class="row"><span class="name">企微会话量</span><span class="value">${wechatSessions}</span></div>
