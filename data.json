@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "售后运营数据周报",
-    "lastUpdated": "2026-05-22T09:25:46.722Z",
+    "lastUpdated": "2026-05-22T09:38:37.856Z",
     "weekDefinition": "周五至下周四",
     "fields": {
       "phoneCalls": "呼入量",
@@ -1292,9 +1292,19 @@
         "phoneCalls": 359,
         "phoneConnectRate": 0.99,
         "firstLineOrders": 1077,
-        "firstLineResolveRate": 0.4605
+        "firstLineResolveRate": 0.4605,
+        "p1Orders": 3,
+        "securityIssues": 140,
+        "wechatOrders": 348,
+        "wechatP4Orders": 208
       },
-      "yoy": {}
+      "yoy": {
+        "label": "24年(05.17-05.23)",
+        "p1Orders": 8,
+        "securityIssues": 97,
+        "wechatOrders": 0,
+        "wechatP4Orders": 0
+      }
     },
     {
       "id": "2025-w20",
@@ -1306,9 +1316,19 @@
         "phoneCalls": 349,
         "phoneConnectRate": 0.97,
         "firstLineOrders": 1078,
-        "firstLineResolveRate": 0.4481
+        "firstLineResolveRate": 0.4481,
+        "p1Orders": 4,
+        "securityIssues": 90,
+        "wechatOrders": 388,
+        "wechatP4Orders": 227
       },
-      "yoy": {}
+      "yoy": {
+        "label": "24年(05.10-05.16)",
+        "p1Orders": 7,
+        "securityIssues": 146,
+        "wechatOrders": 0,
+        "wechatP4Orders": 0
+      }
     },
     {
       "id": "2025-w19",
@@ -1320,9 +1340,19 @@
         "phoneCalls": 216,
         "phoneConnectRate": 0.97,
         "firstLineOrders": 757,
-        "firstLineResolveRate": 0.4584
+        "firstLineResolveRate": 0.4584,
+        "p1Orders": 3,
+        "securityIssues": 59,
+        "wechatOrders": 268,
+        "wechatP4Orders": 152
       },
-      "yoy": {}
+      "yoy": {
+        "label": "24年(05.03-05.09)",
+        "p1Orders": 2,
+        "securityIssues": 117,
+        "wechatOrders": 0,
+        "wechatP4Orders": 0
+      }
     },
     {
       "id": "2025-w18",
@@ -1334,9 +1364,19 @@
         "phoneCalls": 343,
         "phoneConnectRate": 0.96,
         "firstLineOrders": 992,
-        "firstLineResolveRate": 0.4597
+        "firstLineResolveRate": 0.4597,
+        "p1Orders": 3,
+        "securityIssues": 89,
+        "wechatOrders": 345,
+        "wechatP4Orders": 173
       },
-      "yoy": {}
+      "yoy": {
+        "label": "24年(04.26-05.02)",
+        "p1Orders": 7,
+        "securityIssues": 66,
+        "wechatOrders": 0,
+        "wechatP4Orders": 0
+      }
     },
     {
       "id": "2025-w17",
@@ -1346,9 +1386,39 @@
       "tags": [],
       "current": {
         "firstLineOrders": 1188,
-        "firstLineResolveRate": 0.4529
+        "firstLineResolveRate": 0.4529,
+        "p1Orders": 6,
+        "securityIssues": 111,
+        "wechatOrders": 430,
+        "wechatP4Orders": 258
       },
-      "yoy": {}
+      "yoy": {
+        "label": "24年(04.19-04.25)",
+        "p1Orders": 8,
+        "securityIssues": 102,
+        "wechatOrders": 0,
+        "wechatP4Orders": 0
+      }
+    },
+    {
+      "id": "2025-w16",
+      "label": "25年(04.11-04.17)",
+      "startDate": "2025-04-11",
+      "endDate": "2025-04-17",
+      "tags": [],
+      "current": {
+        "p1Orders": 3,
+        "securityIssues": 112,
+        "wechatOrders": 411,
+        "wechatP4Orders": 265
+      },
+      "yoy": {
+        "label": "24年(04.12-04.18)",
+        "p1Orders": 6,
+        "securityIssues": 132,
+        "wechatOrders": 0,
+        "wechatP4Orders": 0
+      }
     }
   ]
 }
