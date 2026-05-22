@@ -14,8 +14,8 @@
       "securityIssues": "安全事件",
       "accumulatedP1": "P1累计",
       "wechatSessions": "企微会话量",
-      "wechatOrders": "企微派单工",
-      "wechatP4Orders": "企微P4工"
+      "wechatOrders": "企微来源工单",
+      "wechatP4Orders": "P4工单-企微"
     }
   },
   "weeks": [
