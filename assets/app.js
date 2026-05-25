@@ -15,6 +15,45 @@ const FIELD_META = [
 let DATA = null;
 let CHARTS = {};
 
+// 找去年同期的那周（endDate - 364 天最接近的周）
+// 返回 { week, source }，source 标识来自显式 yoy 还是从历史 weeks 推断
+function getYoYData(week) {
+  // 1. 优先用 yoy 字段（Jira 已抓的）
+  const explicitYoy = week.yoy && Object.keys(week.yoy).length > 0
+    ? Object.entries(week.yoy).filter(([k]) => k !== 'label').length > 0 ? week.yoy : null
+    : null;
+
+  // 2. 从历史 weeks 里找去年对应的那周
+  if (!week.endDate) return { yoy: explicitYoy || {}, label: explicitYoy?.label || '上年同期' };
+
+  const target = new Date(week.endDate + 'T00:00:00');
+  target.setDate(target.getDate() - 364);
+  const targetTime = target.getTime();
+
+  let best = null;
+  let bestDiff = Infinity;
+  for (const w of DATA.weeks) {
+    if (!w.endDate) continue;
+    if (w.id === week.id) continue;
+    const t = new Date(w.endDate + 'T00:00:00').getTime();
+    const diff = Math.abs(t - targetTime);
+    // 只接受 ±5 天内的（容差），并且必须在去年
+    if (diff < bestDiff && diff <= 5 * 86400000) {
+      best = w;
+      bestDiff = diff;
+    }
+  }
+
+  if (best) {
+    // 合并：显式 yoy 优先，其次是历史 weeks 里的 current
+    const merged = { ...(best.current || {}), ...(explicitYoy || {}) };
+    delete merged.label;
+    return { yoy: merged, label: best.label };
+  }
+
+  return { yoy: explicitYoy || {}, label: explicitYoy?.label || '上年同期' };
+}
+
 init();
 
 async function init() {
@@ -71,7 +110,7 @@ function renderSummary(week) {
   const el = document.getElementById("summary");
   const tagHtml = (week.tags || []).map((t) => `<span class="tag">${t}</span>`).join("");
   const cur = week.current || {};
-  const yoy = week.yoy || {};
+  const { yoy } = getYoYData(week);
 
   const callsDelta = computeDelta(cur.phoneCalls, yoy.phoneCalls);
   const connectDelta = computeDelta(cur.phoneConnectRate, yoy.phoneConnectRate);
@@ -87,7 +126,7 @@ function renderKPI(week) {
   const grid = document.getElementById("kpiGrid");
   grid.innerHTML = "";
   const cur = week.current || {};
-  const yoy = week.yoy || {};
+  const { yoy, label: yoyLabelText } = getYoYData(week);
 
   FIELD_META.forEach((f) => {
     const v = cur[f.key];
@@ -96,7 +135,7 @@ function renderKPI(week) {
 
     const delta = computeDelta(v, y);
     const valueText = f.percent ? formatPercent(v) : formatNumber(v);
-    const yoyLabel = yoy.label || "上年同期";
+    const yoyLabel = yoyLabelText;
     const yoyText = f.percent ? formatPercent(y) : formatNumber(y);
 
     const card = document.createElement("div");
