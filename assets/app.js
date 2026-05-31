@@ -4,6 +4,8 @@ const FIELD_META = [
   { key: "phoneConnectRate",      name: "接通率",         percent: true,  positive: true  },
   { key: "firstLineOrders",       name: "一线提单量",     percent: false, positive: false },
   { key: "firstLineResolveRate",  name: "一线自行处理率", percent: true,  positive: true  },
+  { key: "secondLineOrders",      name: "二线接单量",     percent: false, positive: false },
+  { key: "secondLineResolveRate", name: "二线周解决率",   percent: true,  positive: true  },
   { key: "p1Orders",              name: "P1工单数",       percent: false, positive: false },
   { key: "accumulatedP1",         name: "P1累计",         percent: false, positive: false },
   { key: "securityIssues",        name: "安全事件",       percent: false, positive: false },
@@ -161,6 +163,8 @@ function renderCharts() {
     recent.map((w) => w.current?.phoneConnectRate != null ? +(w.current.phoneConnectRate * 100).toFixed(2) : null));
   drawLine("chartFirstLine", "一线自行处理率趋势 (%)", labels,
     recent.map((w) => w.current?.firstLineResolveRate != null ? +(w.current.firstLineResolveRate * 100).toFixed(2) : null));
+  drawLine("chartSecondLine", "二线周解决率趋势 (%)", labels,
+    recent.map((w) => w.current?.secondLineResolveRate != null ? +(w.current.secondLineResolveRate * 100).toFixed(2) : null));
   drawLine("chartP1", "P1工单数趋势", labels,
     recent.map((w) => w.current?.p1Orders ?? null));
 }

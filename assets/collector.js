@@ -47,27 +47,181 @@
   function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
   // ============== Jira ==============
+  // 简单计数指标：每个 JQL 取 total
   const JIRA_QUERIES = [
     { key: 'p1Orders', name: 'P1工单数', jql: 'project = CS AND issuetype = "客户服务请求" AND "故障等级" = "P1-严重" AND created >= "{{s}}" AND created < "{{eExc}}"' },
     { key: 'securityIssues', name: '安全问题', jql: 'project = CS AND issuetype = "客户服务请求" AND "故障等级" = "安全问题" AND created >= "{{s}}" AND created < "{{eExc}}"' },
     { key: 'wechatOrders', name: '企微来源工单', jql: 'project = CS AND issuetype = "客户服务请求" AND 来源 = "微信小助手" AND created >= "{{s}}" AND created < "{{eExc}}"' },
     { key: 'wechatP4Orders', name: 'P4工单（企微）', jql: 'project = CS AND issuetype = "客户服务请求" AND "故障等级" = "P4-咨询" AND 来源 = "微信小助手" AND created >= "{{s}}" AND created < "{{eExc}}"' }
   ];
+
+  // 一线指标（提单量 / 自行处理率）的组成 JQL
+  //   一线提单量（分母） = CS 有效单 + CMSA 全部
+  //   一线自行解决数（分子） = CS 自行处理且非无效单
+  const FIRST_LINE_JQL = {
+    csValid:  'project = CS AND issuetype = "客户服务请求" AND NOT labels = "无效单" AND created >= "{{s}}" AND created < "{{eExc}}"',
+    cmsa:     'project = CMSA AND created >= "{{s}}" AND created < "{{eExc}}"',
+    selfDone: 'project = CS AND issuetype = "客户服务请求" AND labels = "自行处理" AND NOT labels = "无效单" AND created >= "{{s}}" AND created < "{{eExc}}"'
+  };
+
+  // 二线指标
+  //   二线接单量 = 在窗口期内被分配给「技术服务部-TS」成员、且有工时投入的工单
+  //   二线周解决率 = 上述工单中「解决时间 - 首次分配给二线时间 <= 7 天」的占比
+  const SECOND_LINE_GROUP = '技术服务部-TS';
+  const SECOND_LINE_INTAKE_JQL = 'project = CS AND issuetype = "客户服务请求" AND assignee changed to membersOf("' + SECOND_LINE_GROUP + '") DURING ("{{s}}", "{{e}}") AND timespent > 0';
+  const SECOND_LINE_SLA_MS = 7 * 24 * 60 * 60 * 1000; // 7 天
+
+  // 面板展示用：键 -> 中文名 + 是否百分比（顺序即展示顺序）
+  const JIRA_DISPLAY = [
+    ...JIRA_QUERIES.map((q) => ({ key: q.key, name: q.name, percent: false })),
+    { key: 'firstLineOrders', name: '一线提单量', percent: false },
+    { key: 'firstLineResolveRate', name: '一线自行处理率', percent: true },
+    { key: 'secondLineOrders', name: '二线接单量', percent: false },
+    { key: 'secondLineResolveRate', name: '二线周解决率', percent: true }
+  ];
+  const fmtMetric = (v, percent) => (v == null ? '-' : percent ? (v * 100).toFixed(2) + '%' : v);
+
+  // 把模板里的 {{x}} 占位符替换为实际值
+  function fillJql(tpl, params) {
+    let jql = tpl;
+    Object.entries(params).forEach(([k, v]) => { jql = jql.split('{{' + k + '}}').join(v); });
+    return jql;
+  }
+
   async function jiraCount(jql) {
     const url = '/rest/api/2/search?jql=' + encodeURIComponent(jql) + '&maxResults=0';
     const res = await fetch(url, { credentials: 'include', headers: { Accept: 'application/json' } });
     if (!res.ok) throw new Error('Jira API ' + res.status);
     return (await res.json()).total;
   }
-  async function fetchJiraWindow(win) {
-    const eExc = new Date(win.end); eExc.setHours(0,0,0,0); eExc.setDate(eExc.getDate() + 1);
-    const params = { s: fmtJqlDate(win.start), eExc: fmtJqlDate(eExc) };
-    const result = {};
-    for (const q of JIRA_QUERIES) {
-      let jql = q.jql;
-      Object.entries(params).forEach(([k, v]) => { jql = jql.split('{{'+k+'}}').join(v); });
-      result[q.key] = await jiraCount(jql);
+
+  // 分页搜索工单，并展开 changelog（用于二线解决率）
+  async function jiraSearchWithChangelog(jql) {
+    const issues = [];
+    const pageSize = 50;
+    let startAt = 0;
+    while (true) {
+      const url = '/rest/api/2/search?jql=' + encodeURIComponent(jql) +
+        '&maxResults=' + pageSize + '&startAt=' + startAt +
+        '&fields=resolutiondate&expand=changelog';
+      const res = await fetch(url, { credentials: 'include', headers: { Accept: 'application/json' } });
+      if (!res.ok) throw new Error('Jira API ' + res.status);
+      const json = await res.json();
+      const batch = json.issues || [];
+      issues.push(...batch);
+      startAt += pageSize;
+      if (batch.length === 0 || startAt >= (json.total || 0)) break;
     }
+    return issues;
+  }
+
+  // 当 search 展开的 changelog 被截断时，单独拉取该工单的完整 changelog
+  async function jiraFetchChangelog(key) {
+    const url = '/rest/api/2/issue/' + encodeURIComponent(key) + '?expand=changelog&fields=resolutiondate';
+    const res = await fetch(url, { credentials: 'include', headers: { Accept: 'application/json' } });
+    if (!res.ok) throw new Error('Jira API ' + res.status);
+    const json = await res.json();
+    return (json.changelog && json.changelog.histories) || [];
+  }
+
+  // 读取「技术服务部-TS」组成员（用户名/Key/displayName 全部收集，便于和 changelog 比对）
+  // 结果缓存到模块级变量，避免每个窗口重复请求
+  let _tsMembersCache = null;
+  async function getSecondLineMembers() {
+    if (_tsMembersCache) return _tsMembersCache;
+    const names = new Set();
+    let startAt = 0;
+    const pageSize = 50;
+    try {
+      while (true) {
+        const url = '/rest/api/2/group/member?groupname=' + encodeURIComponent(SECOND_LINE_GROUP) +
+          '&includeInactiveUsers=true&maxResults=' + pageSize + '&startAt=' + startAt;
+        const res = await fetch(url, { credentials: 'include', headers: { Accept: 'application/json' } });
+        if (!res.ok) break; // 无权限/接口不可用时降级：tsMembers 为空 -> 用「首次任意分配」兜底
+        const json = await res.json();
+        const values = json.values || [];
+        values.forEach((u) => {
+          if (u.name) names.add(u.name);
+          if (u.key) names.add(u.key);
+          if (u.accountId) names.add(u.accountId);
+          if (u.displayName) names.add(u.displayName);
+        });
+        startAt += pageSize;
+        if (json.isLast || values.length === 0) break;
+        if (startAt > 5000) break; // 安全上限
+      }
+    } catch (e) { /* 降级 */ }
+    _tsMembersCache = names;
+    return names;
+  }
+
+  // 从 changelog 找到「首次分配给二线」的时间
+  //   tsMembers 非空：取第一条 assignee 变更且新负责人属于 TS 组的时间
+  //   tsMembers 为空（拿不到组成员）：兜底取第一条「分配给某人」的时间
+  function findFirstSecondLineAssignTime(histories, tsMembers) {
+    const sorted = (histories || []).slice().sort((a, b) => new Date(a.created) - new Date(b.created));
+    for (const h of sorted) {
+      for (const item of (h.items || [])) {
+        if (item.field !== 'assignee') continue;
+        const toKey = item.to;
+        const toName = item.toString;
+        if (!toKey && !toName) continue; // 取消分配，跳过
+        if (tsMembers && tsMembers.size > 0) {
+          if (tsMembers.has(toKey) || tsMembers.has(toName)) return new Date(h.created);
+        } else {
+          return new Date(h.created); // 降级：首次任意分配
+        }
+      }
+    }
+    return null;
+  }
+
+  // 二线接单量 + 周解决率（逐个工单查 changelog）
+  async function computeSecondLine(intakeJql, tsMembers) {
+    const issues = await jiraSearchWithChangelog(intakeJql);
+    const total = issues.length;
+    if (total === 0) return { orders: 0, rate: null };
+    let resolvedWithinWeek = 0;
+    for (const issue of issues) {
+      let histories = (issue.changelog && issue.changelog.histories) || [];
+      // changelog 被截断时，补拉完整版
+      if (issue.changelog && issue.changelog.total > histories.length) {
+        try { histories = await jiraFetchChangelog(issue.key); } catch (e) { /* 用已有的 */ }
+      }
+      const firstAssign = findFirstSecondLineAssignTime(histories, tsMembers);
+      const resoStr = issue.fields && issue.fields.resolutiondate;
+      if (!firstAssign || !resoStr) continue; // 未分配二线或未解决 -> 不计入分子
+      const diff = new Date(resoStr) - firstAssign;
+      if (diff >= 0 && diff <= SECOND_LINE_SLA_MS) resolvedWithinWeek++;
+    }
+    return { orders: total, rate: +(resolvedWithinWeek / total).toFixed(4) };
+  }
+
+  async function fetchJiraWindow(win) {
+    const eExc = new Date(win.end); eExc.setHours(0, 0, 0, 0); eExc.setDate(eExc.getDate() + 1);
+    const params = { s: fmtJqlDate(win.start), e: fmtJqlDate(win.end), eExc: fmtJqlDate(eExc) };
+    const result = {};
+
+    // 1) 简单计数指标
+    for (const q of JIRA_QUERIES) {
+      result[q.key] = await jiraCount(fillJql(q.jql, params));
+    }
+
+    // 2) 一线提单量 = CS 有效单 + CMSA ；自行解决数 = CS 自行处理
+    const csValid = await jiraCount(fillJql(FIRST_LINE_JQL.csValid, params));
+    const cmsa = await jiraCount(fillJql(FIRST_LINE_JQL.cmsa, params));
+    const selfDone = await jiraCount(fillJql(FIRST_LINE_JQL.selfDone, params));
+    const firstLineOrders = csValid + cmsa;
+    result.firstLineOrders = firstLineOrders;
+    // 3) 一线自行处理率 = 自行解决数 ÷ 一线提单量
+    result.firstLineResolveRate = firstLineOrders > 0 ? +(selfDone / firstLineOrders).toFixed(4) : null;
+
+    // 4) 二线接单量 + 5) 二线周解决率
+    const tsMembers = await getSecondLineMembers();
+    const secondLine = await computeSecondLine(fillJql(SECOND_LINE_INTAKE_JQL, params), tsMembers);
+    result.secondLineOrders = secondLine.orders;
+    result.secondLineResolveRate = secondLine.rate;
+
     return result;
   }
 
@@ -401,7 +555,13 @@
       const curData = await fetchJiraWindow(cur); done++; panel.setProgress((done/totalSteps)*100);
       panel.setStatus(`[${i+1}/${tasks.length}] 抓取同期 ${yoyLabel}...`, 'info');
       const yoyData = await fetchJiraWindow(yoy); done++; panel.setProgress((done/totalSteps)*100);
-      const rows = JIRA_QUERIES.map(q => { const c=curData[q.key],y=yoyData[q.key]; let d=''; if(c!=null&&y!=null&&y!==0){const s=c>y?'↑':c<y?'↓':'→';const cls=c>y?'up':c<y?'down':'flat';d=`<span class="delta-${cls}">${s}${Math.abs((c-y)/y*100).toFixed(1)}%</span>`;} return `<div class="row"><span class="name">${q.name}</span><span class="value">${c} <span style="color:#999;font-size:11px">(${y})</span>${d}</span></div>`; }).join('');
+      const rows = JIRA_DISPLAY.map(m => {
+        const c = curData[m.key], y = yoyData[m.key];
+        const cTxt = fmtMetric(c, m.percent), yTxt = fmtMetric(y, m.percent);
+        let d = '';
+        if (c != null && y != null && y !== 0) { const s = c > y ? '↑' : c < y ? '↓' : '→'; const cls = c > y ? 'up' : c < y ? 'down' : 'flat'; d = `<span class="delta-${cls}">${s}${Math.abs((c - y) / y * 100).toFixed(1)}%</span>`; }
+        return `<div class="row"><span class="name">${m.name}</span><span class="value">${cTxt} <span style="color:#999;font-size:11px">(${yTxt})</span>${d}</span></div>`;
+      }).join('');
       panel.appendDetail(`<div class="week-block"><div class="week-title">${label} vs ${yoyLabel}</div>${rows}</div>`);
       weekEntries.push({ id: `${cur.end.getFullYear()}-w${pad(isoWeek(cur.end))}`, label, startDate: fmtIsoDate(cur.start), endDate: fmtIsoDate(cur.end), tags: [], current: curData, yoy: { label: yoyLabel, ...yoyData } });
     }
