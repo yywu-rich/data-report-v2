@@ -8,6 +8,8 @@
       "phoneConnectRate": "接通率",
       "firstLineOrders": "一线提单量",
       "firstLineResolveRate": "一线自行处理率",
+      "secondLineOrders": "二线接单量",
+      "secondLineResolveRate": "二线周解决率",
       "p1Orders": "P1工单数",
       "securityIssues": "安全事件",
       "accumulatedP1": "P1累计",
