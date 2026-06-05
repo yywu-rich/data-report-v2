@@ -30,10 +30,6 @@
         "securityIssues": 86,
         "wechatOrders": 551,
         "wechatP4Orders": 436,
-        "firstLineOrders": 847,
-        "firstLineResolveRate": 0.4793,
-        "secondLineOrders": 432,
-        "secondLineResolveRate": 0.6597,
         "wechatSessions": 2102,
         "phoneCalls": 322,
         "phoneConnectRate": 0.95
