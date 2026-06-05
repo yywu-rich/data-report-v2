@@ -64,6 +64,11 @@
     selfDone: 'project = CS AND issuetype = "客户服务请求" AND labels = "自行处理" AND NOT labels = "无效单" AND created >= "{{s}}" AND created < "{{eExc}}"'
   };
 
+  // P1 累计（年初至本周，按 created 计）
+  //   口径：按「周起始日所在自然年」累计，等价于当年每周 p1Orders 之和
+  //   分母锚点 = 当年第一周（周起始日落入该年的第一个周五）的起始日 -> {{ys}}
+  const ACCUMULATED_P1_JQL = 'project = CS AND issuetype = "客户服务请求" AND "故障等级" = "P1-严重" AND created >= "{{ys}}" AND created < "{{eExc}}"';
+
   // 二线指标
   //   二线接单量 = 在窗口期内被分配给「技术服务部-TS」成员、且有工时投入的工单
   //   二线周解决率 = 上述工单中「解决时间 - 首次分配给二线时间 <= 7 天」的占比
@@ -74,6 +79,7 @@
   // 面板展示用：键 -> 中文名 + 是否百分比（顺序即展示顺序）
   const JIRA_DISPLAY = [
     ...JIRA_QUERIES.map((q) => ({ key: q.key, name: q.name, percent: false })),
+    { key: 'accumulatedP1', name: 'P1累计', percent: false },
     { key: 'firstLineOrders', name: '一线提单量', percent: false },
     { key: 'firstLineResolveRate', name: '一线自行处理率', percent: true },
     { key: 'secondLineOrders', name: '二线接单量', percent: false },
@@ -86,6 +92,20 @@
     let jql = tpl;
     Object.entries(params).forEach(([k, v]) => { jql = jql.split('{{' + k + '}}').join(v); });
     return jql;
+  }
+
+  // 计算「当年第一周」的起始日：从本周起始日（周五）按周回退，
+  // 直到上一周的起始日跨到上一年为止，即得到当年累计 P1 的起算点
+  function firstWeekStartOfYear(winStart) {
+    const y = winStart.getFullYear();
+    let s = new Date(winStart);
+    while (true) {
+      const prev = new Date(s); prev.setDate(prev.getDate() - 7);
+      if (prev.getFullYear() !== y) break;
+      s = prev;
+    }
+    s.setHours(0, 0, 0, 0);
+    return s;
   }
 
   async function jiraCount(jql) {
@@ -206,6 +226,10 @@
     for (const q of JIRA_QUERIES) {
       result[q.key] = await jiraCount(fillJql(q.jql, params));
     }
+
+    // 1b) P1 累计（年初至本周）
+    const ys = firstWeekStartOfYear(win.start);
+    result.accumulatedP1 = await jiraCount(fillJql(ACCUMULATED_P1_JQL, { ys: fmtJqlDate(ys), eExc: params.eExc }));
 
     // 2) 一线提单量 = CS 有效单 + CMSA ；自行解决数 = CS 自行处理
     const csValid = await jiraCount(fillJql(FIRST_LINE_JQL.csValid, params));
