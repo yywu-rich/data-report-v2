@@ -3,6 +3,34 @@
 本文档记录如何回退「一线提单量 / 一线自行处理率 / 二线接单量 / 二线周解决率」这套 Jira 采集逻辑。
 **所有操作都可以在 github.com 网页上自助完成，不依赖 Kiro。**
 
+## 当前状态：四项 Jira 指标已临时暂停取数
+
+当前 `assets/collector.js` 顶部设置了：
+
+```js
+const PAUSE_JIRA_LINE_METRICS = true;
+```
+
+因此一键更新报表书签在 Jira 页面只抓取 P1 工单数、安全问题、企微来源工单、P4 工单（企微）。
+以下 4 个字段会明确写入 `null`，避免旧周数据被合并逻辑保留下来、误看成新抓到的数字：
+
+| 字段 | 中文 |
+|---|---|
+| `firstLineOrders` | 一线提单量 |
+| `firstLineResolveRate` | 一线自行处理率 |
+| `secondLineOrders` | 二线接单量 |
+| `secondLineResolveRate` | 二线周解决率 |
+
+### 恢复取数
+
+如需恢复这 4 项取数，只改一行：
+
+```js
+const PAUSE_JIRA_LINE_METRICS = false;
+```
+
+提交并等待 GitHub Pages 部署完成后，原有书签会自动加载恢复后的 `collector.js`，不需要重新拖书签。
+
 ## 这次改了什么
 
 - 文件：`assets/collector.js`、`assets/app.js`、`index.html`、`data.json`

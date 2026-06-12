@@ -94,10 +94,10 @@
         显示书签栏：<code>Ctrl/Cmd + Shift + B</code>。把下面按钮**拖**到书签栏。
       </p>
       <div class="bookmark-area">
-        <a id="autoBookmark" class="bookmarklet-big disabled" href="#">⚡ 一键更新报表（本周）</a>
+        <a id="autoBookmark" class="bookmarklet-big disabled" href="#">⚡ 一键更新报表（可选日期）</a>
       </div>
       <p class="muted" style="margin-top: 10px;">
-        每周五早上点这个书签即可自动抓"上周五-本周四"的数据。<br>
+        每周五早上点这个书签，默认抓"上周五-本周四"的数据；也可以在弹窗里修改日期。<br>
         如果以后采集逻辑升级，<strong>不需要重新拖书签</strong>，会自动加载最新代码。<br>
         但如果换了 Token，需要重新拖一次。
       </p>
@@ -126,7 +126,7 @@
       <ol>
         <li>登录 <a href="http://jira.mailtech.cn" target="_blank">jira.mailtech.cn</a>（任意页面都行，必须是登录状态）</li>
         <li>点击书签栏的 <strong>⚡ 一键更新报表</strong></li>
-        <li>右上角弹出面板，等几秒看到 <strong>"✅ 已成功写入 GitHub"</strong></li>
+        <li>确认取数日期（默认本期，可修改），然后等待写入 GitHub</li>
         <li>30 秒后访问报表页查看新数据：<a href="./index.html">报表首页</a></li>
       </ol>
 

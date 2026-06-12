@@ -13,6 +13,14 @@
   const REPO_OWNER = 'yywu-rich';
   const REPO_NAME = 'data-report-v2';
   const PAGES_URL = 'https://yywu-rich.github.io/data-report-v2/';
+  // 临时暂停 Jira 里的这 4 个指标取数；回退时改为 false 即可恢复原取数逻辑。
+  const PAUSE_JIRA_LINE_METRICS = true;
+  const PAUSED_JIRA_LINE_METRIC_KEYS = [
+    'firstLineOrders',
+    'firstLineResolveRate',
+    'secondLineOrders',
+    'secondLineResolveRate'
+  ];
 
   // ============== 时间工具 ==============
   function getCurrentWindow() {
@@ -38,6 +46,12 @@
   const fmtJqlDate = (d) => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
   const fmtIsoDate = (d) => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
   const fmtPeriod = (d1, d2) => `${String(d1.getFullYear()).slice(-2)}年(${pad(d1.getMonth()+1)}.${pad(d1.getDate())}-${pad(d2.getMonth()+1)}.${pad(d2.getDate())})`;
+  function parseIsoDate(value, endOfDay) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(value || '')) return null;
+    const d = new Date(value + (endOfDay ? 'T23:59:59' : 'T00:00:00'));
+    if (Number.isNaN(d.getTime())) return null;
+    return d;
+  }
   function isoWeek(d) {
     const x = new Date(d); x.setHours(0,0,0,0);
     x.setDate(x.getDate() + 3 - (x.getDay() + 6) % 7);
@@ -80,6 +94,10 @@
     { key: 'secondLineResolveRate', name: '二线周解决率', percent: true }
   ];
   const fmtMetric = (v, percent) => (v == null ? '-' : percent ? (v * 100).toFixed(2) + '%' : v);
+
+  function markPausedJiraLineMetrics(result) {
+    PAUSED_JIRA_LINE_METRIC_KEYS.forEach((key) => { result[key] = null; });
+  }
 
   // 把模板里的 {{x}} 占位符替换为实际值
   function fillJql(tpl, params) {
@@ -207,6 +225,11 @@
       result[q.key] = await jiraCount(fillJql(q.jql, params));
     }
 
+    if (PAUSE_JIRA_LINE_METRICS) {
+      markPausedJiraLineMetrics(result);
+      return result;
+    }
+
     // 2) 一线提单量 = CS 有效单 + CMSA ；自行解决数 = CS 自行处理
     const csValid = await jiraCount(fillJql(FIRST_LINE_JQL.csValid, params));
     const cmsa = await jiraCount(fillJql(FIRST_LINE_JQL.cmsa, params));
@@ -329,6 +352,49 @@
       wrapper.appendChild(btnRow);
       // 直接插入 body（完全独立于 shadow DOM 和 host 元素）
       document.body.appendChild(wrapper);
+    });
+  }
+
+  function waitForDateRange(defaultWin) {
+    return new Promise((resolve) => {
+      const wrapper = document.createElement('div');
+      wrapper.id = 'dr-date-wrapper';
+      wrapper.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2147483647;background:#fff;border:2px solid #1890ff;border-radius:12px;padding:24px;box-shadow:0 8px 32px rgba(0,0,0,0.25);font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;font-size:14px;color:#333;max-width:440px;width:90%;';
+      wrapper.innerHTML = `
+        <div style="font-weight:600;font-size:16px;margin-bottom:12px;color:#0050b3;">选择 Jira 取数日期</div>
+        <div style="line-height:1.7;margin-bottom:14px;color:#555;">默认是本期；如需补别的日期，直接修改后确认。</div>
+        <label style="display:block;margin-bottom:10px;color:#333;">开始日期
+          <input id="drStartDate" type="date" value="${fmtIsoDate(defaultWin.start)}" style="display:block;width:100%;box-sizing:border-box;margin-top:6px;padding:9px 10px;border:1px solid #d9d9d9;border-radius:6px;font-size:14px;">
+        </label>
+        <label style="display:block;margin-bottom:14px;color:#333;">结束日期
+          <input id="drEndDate" type="date" value="${fmtIsoDate(defaultWin.end)}" style="display:block;width:100%;box-sizing:border-box;margin-top:6px;padding:9px 10px;border:1px solid #d9d9d9;border-radius:6px;font-size:14px;">
+        </label>
+        <div id="drDateError" style="display:none;margin-bottom:12px;color:#cf1322;"></div>
+        <div style="display:flex;gap:12px;justify-content:center;">
+          <button id="drDateConfirm" style="padding:10px 28px;background:#1890ff;color:#fff;border:none;border-radius:6px;font-size:14px;cursor:pointer;font-weight:600;">确认抓取</button>
+          <button id="drDateCancel" style="padding:10px 28px;background:#f5f5f5;color:#666;border:1px solid #d9d9d9;border-radius:6px;font-size:14px;cursor:pointer;">取消</button>
+        </div>`;
+      document.body.appendChild(wrapper);
+      const startInput = wrapper.querySelector('#drStartDate');
+      const endInput = wrapper.querySelector('#drEndDate');
+      const errorEl = wrapper.querySelector('#drDateError');
+      wrapper.querySelector('#drDateConfirm').onclick = () => {
+        const start = parseIsoDate(startInput.value, false);
+        const end = parseIsoDate(endInput.value, true);
+        if (!start || !end) {
+          errorEl.textContent = '请输入有效日期。';
+          errorEl.style.display = 'block';
+          return;
+        }
+        if (start > end) {
+          errorEl.textContent = '开始日期不能晚于结束日期。';
+          errorEl.style.display = 'block';
+          return;
+        }
+        wrapper.remove();
+        resolve({ start, end });
+      };
+      wrapper.querySelector('#drDateCancel').onclick = () => { wrapper.remove(); resolve(null); };
     });
   }
 
@@ -543,10 +609,20 @@
 
   // ============== Jira 批量 ==============
   async function runJiraCollection(panel) {
-    const baseWin = getCurrentWindow();
+    let baseWin = getCurrentWindow();
+    if (BACKFILL <= 1) {
+      panel.setMeta('Jira · 选择取数日期');
+      panel.setStatus('等待确认取数日期...', 'info');
+      const selectedWin = await waitForDateRange(baseWin);
+      if (!selectedWin) {
+        panel.setStatus('已取消。', 'info');
+        return;
+      }
+      baseWin = selectedWin;
+    }
     const tasks = [];
     for (let i = 0; i < BACKFILL; i++) { tasks.push({ cur: shiftWindow(baseWin, i), yoy: getYoYWindow(shiftWindow(baseWin, i)) }); }
-    panel.setMeta(`Jira · 将抓取 ${BACKFILL} 周`);
+    panel.setMeta(BACKFILL > 1 ? `Jira · 将抓取 ${BACKFILL} 周` : `Jira · ${fmtIsoDate(baseWin.start)} 至 ${fmtIsoDate(baseWin.end)}`);
     const totalSteps = tasks.length * 2; let done = 0; const weekEntries = [];
     for (let i = 0; i < tasks.length; i++) {
       const { cur, yoy } = tasks[i];
