@@ -571,6 +571,29 @@
       data.weeks[idx] = { ...ex, ...weekEntry, current: { ...(ex.current || {}), ...weekEntry.current }, yoy: { ...(ex.yoy || {}), ...weekEntry.yoy } };
     } else { data.weeks.push(weekEntry); }
   }
+  function recomputeAccumulatedP1(data, targetYears) {
+    const years = targetYears ? new Set(targetYears) : null;
+    const byYear = {};
+    (data.weeks || []).forEach((w) => {
+      const startYear = (w.startDate || '').slice(0, 4);
+      if (!/^\d{4}$/.test(startYear)) return;
+      if (years && !years.has(startYear)) return;
+      if (!byYear[startYear]) byYear[startYear] = [];
+      byYear[startYear].push(w);
+    });
+    Object.values(byYear).forEach((weeks) => {
+      let total = 0;
+      weeks
+        .slice()
+        .sort((a, b) => (a.startDate || '').localeCompare(b.startDate || ''))
+        .forEach((w) => {
+          const cur = w.current || {};
+          if (typeof cur.p1Orders !== 'number') return;
+          total += cur.p1Orders;
+          w.current = { ...cur, accumulatedP1: total };
+        });
+    });
+  }
 
   // ============== 浮动面板 ==============
   function createPanel() {
@@ -644,6 +667,7 @@
     panel.setStatus('写入 GitHub...', 'info');
     const { data, sha } = await readDataJson();
     weekEntries.forEach(e => mergeWeekEntry(data, e));
+    recomputeAccumulatedP1(data, weekEntries.map((e) => (e.startDate || '').slice(0, 4)));
     data.weeks.sort((a, b) => (b.startDate||'').localeCompare(a.startDate||''));
     data.meta.lastUpdated = new Date().toISOString();
     await writeDataJson(data, sha, `chore: jira ${weekEntries.length} weeks`);
