@@ -13,10 +13,9 @@
   const REPO_OWNER = 'yywu-rich';
   const REPO_NAME = 'data-report-v2';
   const PAGES_URL = 'https://yywu-rich.github.io/data-report-v2/';
-  // 临时暂停 Jira 里的这 4 个指标取数；回退时改为 false 即可恢复原取数逻辑。
+  // 临时暂停未确认的 Jira 一线/二线指标；一线提单量已按新口径恢复自动取数。
   const PAUSE_JIRA_LINE_METRICS = true;
   const PAUSED_JIRA_LINE_METRIC_KEYS = [
-    'firstLineOrders',
     'firstLineResolveRate',
     'secondLineOrders',
     'secondLineResolveRate'
@@ -69,13 +68,12 @@
     { key: 'wechatP4Orders', name: 'P4工单（企微）', jql: 'project = CS AND issuetype = "客户服务请求" AND "故障等级" = "P4-咨询" AND 来源 = "微信小助手" AND created >= "{{s}}" AND created < "{{eExc}}"' }
   ];
 
-  // 一线指标（提单量 / 自行处理率）的组成 JQL
-  //   一线提单量（分母） = CS 有效单 + CMSA 全部
-  //   一线自行解决数（分子） = CS 自行处理且非无效单
+  // 一线提单量 = CS 请求单总量 - CS 无效单 + SA/CMSA 单
+  // 日期口径使用业务确认的 created >= 开始日期 AND created <= 结束日期次日。
   const FIRST_LINE_JQL = {
-    csValid:  'project = CS AND issuetype = "客户服务请求" AND NOT labels = "无效单" AND created >= "{{s}}" AND created < "{{eExc}}"',
-    cmsa:     'project = CMSA AND created >= "{{s}}" AND created < "{{eExc}}"',
-    selfDone: 'project = CS AND issuetype = "客户服务请求" AND labels = "自行处理" AND NOT labels = "无效单" AND created >= "{{s}}" AND created < "{{eExc}}"'
+    csTotal:   'project = CS AND issuetype = "客户服务请求" AND created >= "{{sDate}}" AND created <= "{{eBoundaryDate}}" AND reporter in (membersOf("jira-售后服务部"), support)',
+    csInvalid: 'project = CS AND issuetype = "客户服务请求" AND labels = "无效单" AND created >= "{{sDate}}" AND created <= "{{eBoundaryDate}}" AND reporter in (membersOf("jira-售后服务部"), support)',
+    cmsa:      'project = CMSA AND created >= "{{sDate}}" AND created <= "{{eBoundaryDate}}" AND reporter in (membersOf("jira-售后服务部"), support)'
   };
 
   // 二线指标
@@ -111,6 +109,17 @@
     const res = await fetch(url, { credentials: 'include', headers: { Accept: 'application/json' } });
     if (!res.ok) throw new Error('Jira API ' + res.status);
     return (await res.json()).total;
+  }
+
+  async function computeFirstLineOrders(params) {
+    const csTotal = await jiraCount(fillJql(FIRST_LINE_JQL.csTotal, params));
+    const csInvalid = await jiraCount(fillJql(FIRST_LINE_JQL.csInvalid, params));
+    const cmsa = await jiraCount(fillJql(FIRST_LINE_JQL.cmsa, params));
+    const firstLineOrders = csTotal - csInvalid + cmsa;
+    return {
+      firstLineOrders,
+      firstLineBreakdown: { csTotal, csInvalid, cmsa }
+    };
   }
 
   // 分页搜索工单，并展开 changelog（用于二线解决率）
@@ -217,7 +226,13 @@
 
   async function fetchJiraWindow(win) {
     const eExc = new Date(win.end); eExc.setHours(0, 0, 0, 0); eExc.setDate(eExc.getDate() + 1);
-    const params = { s: fmtJqlDate(win.start), e: fmtJqlDate(win.end), eExc: fmtJqlDate(eExc) };
+    const params = {
+      s: fmtJqlDate(win.start),
+      e: fmtJqlDate(win.end),
+      eExc: fmtJqlDate(eExc),
+      sDate: fmtIsoDate(win.start),
+      eBoundaryDate: fmtIsoDate(eExc)
+    };
     const result = {};
 
     // 1) 简单计数指标
@@ -225,19 +240,17 @@
       result[q.key] = await jiraCount(fillJql(q.jql, params));
     }
 
+    const firstLine = await computeFirstLineOrders(params);
+    result.firstLineOrders = firstLine.firstLineOrders;
+    result.firstLineBreakdown = firstLine.firstLineBreakdown;
+
     if (PAUSE_JIRA_LINE_METRICS) {
       markPausedJiraLineMetrics(result);
       return result;
     }
 
-    // 2) 一线提单量 = CS 有效单 + CMSA ；自行解决数 = CS 自行处理
-    const csValid = await jiraCount(fillJql(FIRST_LINE_JQL.csValid, params));
-    const cmsa = await jiraCount(fillJql(FIRST_LINE_JQL.cmsa, params));
-    const selfDone = await jiraCount(fillJql(FIRST_LINE_JQL.selfDone, params));
-    const firstLineOrders = csValid + cmsa;
-    result.firstLineOrders = firstLineOrders;
-    // 3) 一线自行处理率 = 自行解决数 ÷ 一线提单量
-    result.firstLineResolveRate = firstLineOrders > 0 ? +(selfDone / firstLineOrders).toFixed(4) : null;
+    // 3) 一线自行处理率暂未接入新口径，待确认后恢复。
+    result.firstLineResolveRate = null;
 
     // 4) 二线接单量 + 5) 二线周解决率
     const tsMembers = await getSecondLineMembers();
