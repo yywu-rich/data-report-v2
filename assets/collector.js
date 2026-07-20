@@ -13,10 +13,9 @@
   const REPO_OWNER = 'yywu-rich';
   const REPO_NAME = 'data-report-v2';
   const PAGES_URL = 'https://yywu-rich.github.io/data-report-v2/';
-  // 临时暂停未确认的 Jira 一线/二线指标；一线提单量已按新口径恢复自动取数。
+  // 临时暂停未确认的 Jira 二线指标；一线提单量/自行处理率已按新口径恢复自动取数。
   const PAUSE_JIRA_LINE_METRICS = true;
   const PAUSED_JIRA_LINE_METRIC_KEYS = [
-    'firstLineResolveRate',
     'secondLineOrders',
     'secondLineResolveRate'
   ];
@@ -69,11 +68,13 @@
   ];
 
   // 一线提单量 = CS 请求单总量 - CS 无效单 + SA/CMSA 单
+  // 一线自行处理率 = CS 自行处理量 / 一线提单量
   // 日期口径使用业务确认的 created >= 开始日期 AND created <= 结束日期次日。
   const FIRST_LINE_JQL = {
     csTotal:   'project = CS AND issuetype = "客户服务请求" AND created >= "{{sDate}}" AND created <= "{{eBoundaryDate}}" AND reporter in (membersOf("jira-售后服务部"), support)',
     csInvalid: 'project = CS AND issuetype = "客户服务请求" AND labels = "无效单" AND created >= "{{sDate}}" AND created <= "{{eBoundaryDate}}" AND reporter in (membersOf("jira-售后服务部"), support)',
-    cmsa:      'project = CMSA AND created >= "{{sDate}}" AND created <= "{{eBoundaryDate}}" AND reporter in (membersOf("jira-售后服务部"), support)'
+    cmsa:      'project = CMSA AND created >= "{{sDate}}" AND created <= "{{eBoundaryDate}}" AND reporter in (membersOf("jira-售后服务部"), support)',
+    selfDone:  'project = CS AND issuetype = "客户服务请求" AND labels = "自行处理" AND created >= "{{sDate}}" AND created <= "{{eBoundaryDate}}" AND reporter in (membersOf("jira-售后服务部"), support)'
   };
 
   // 二线指标
@@ -111,14 +112,16 @@
     return (await res.json()).total;
   }
 
-  async function computeFirstLineOrders(params) {
+  async function computeFirstLineMetrics(params) {
     const csTotal = await jiraCount(fillJql(FIRST_LINE_JQL.csTotal, params));
     const csInvalid = await jiraCount(fillJql(FIRST_LINE_JQL.csInvalid, params));
     const cmsa = await jiraCount(fillJql(FIRST_LINE_JQL.cmsa, params));
+    const selfResolved = await jiraCount(fillJql(FIRST_LINE_JQL.selfDone, params));
     const firstLineOrders = csTotal - csInvalid + cmsa;
     return {
       firstLineOrders,
-      firstLineBreakdown: { csTotal, csInvalid, cmsa }
+      firstLineResolveRate: firstLineOrders > 0 ? +(selfResolved / firstLineOrders).toFixed(4) : null,
+      firstLineBreakdown: { csTotal, csInvalid, cmsa, selfResolved }
     };
   }
 
@@ -240,17 +243,15 @@
       result[q.key] = await jiraCount(fillJql(q.jql, params));
     }
 
-    const firstLine = await computeFirstLineOrders(params);
+    const firstLine = await computeFirstLineMetrics(params);
     result.firstLineOrders = firstLine.firstLineOrders;
+    result.firstLineResolveRate = firstLine.firstLineResolveRate;
     result.firstLineBreakdown = firstLine.firstLineBreakdown;
 
     if (PAUSE_JIRA_LINE_METRICS) {
       markPausedJiraLineMetrics(result);
       return result;
     }
-
-    // 3) 一线自行处理率暂未接入新口径，待确认后恢复。
-    result.firstLineResolveRate = null;
 
     // 4) 二线接单量 + 5) 二线周解决率
     const tsMembers = await getSecondLineMembers();
