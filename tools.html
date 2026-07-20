@@ -169,16 +169,21 @@
       update();
     });
 
+    function collectorLoader() {
+      // jsDelivr follows main directly; GitHub Pages remains available as a fallback.
+      return "var u=['https://cdn.jsdelivr.net/gh/yywu-rich/data-report-v2@main/assets/collector.js','https://yywu-rich.github.io/data-report-v2/assets/collector.js'],i=0,l=function(){if(i>=u.length){alert('采集脚本加载失败，请检查网络后重试');return;}var s=document.createElement('script');s.src=u[i++]+'?t='+Date.now();s.onerror=l;document.body.appendChild(s);};l();";
+    }
+
     function buildBookmarklet(pat, weeks) {
       // 注意：嵌入 PAT 和补抓周数到书签 URL 中
       return "javascript:(function(){window.__DR_PAT='" + pat + "';" +
              (weeks > 1 ? "window.__DR_BACKFILL=" + weeks + ";" : "") +
-             "var s=document.createElement('script');s.src='https://yywu-rich.github.io/data-report-v2/assets/collector.js?t='+Date.now();document.body.appendChild(s);})();";
+             collectorLoader() + "})();";
     }
 
     function buildBackfillBookmarklet(pat) {
       // 点击时弹 prompt 问周数，避免改数字后还需要重新拖书签
-      return "javascript:(function(){var w=prompt('补抓最近几周的数据？(1-104)','4');if(!w)return;w=parseInt(w);if(!w||w<1||w>104){alert('请输入 1-104 之间的数字');return;}window.__DR_PAT='" + pat + "';window.__DR_BACKFILL=w;var s=document.createElement('script');s.src='https://yywu-rich.github.io/data-report-v2/assets/collector.js?t='+Date.now();document.body.appendChild(s);})();";
+      return "javascript:(function(){var w=prompt('补抓最近几周的数据？(1-104)','4');if(!w)return;w=parseInt(w);if(!w||w<1||w>104){alert('请输入 1-104 之间的数字');return;}window.__DR_PAT='" + pat + "';window.__DR_BACKFILL=w;" + collectorLoader() + "})();";
     }
 
     function update() {
