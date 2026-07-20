@@ -105,4 +105,4 @@ GitHub Actions 也会在每次 push 自动校验。
 - [ ] CSV/Excel 导出
 - [ ] 月度/季度聚合视图
 
-<!-- Pages deployment retry: 2026-07-03 -->
+<!-- Pages deployment retry: 2026-07-20 line-metrics -->
