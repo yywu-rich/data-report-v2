@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "售后运营数据周报",
-    "lastUpdated": "2026-07-20T03:37:33.616Z",
+    "lastUpdated": "2026-07-20T03:54:08.380Z",
     "weekDefinition": "周五至下周四",
     "fields": {
       "phoneCalls": "呼入量",
@@ -37,7 +37,7 @@
         "firstLineResolveRate": 0.3834,
         "secondLineOrders": null,
         "secondLineResolveRate": null,
-        "accumulatedP1": 82,
+        "accumulatedP1": 80,
         "firstLineBreakdown": {
           "csTotal": 789,
           "csInvalid": 7,
@@ -71,17 +71,23 @@
       "tags": [],
       "current": {
         "p1Orders": 3,
-        "securityIssues": 86,
-        "wechatOrders": 560,
-        "wechatP4Orders": 419,
-        "firstLineOrders": null,
-        "firstLineResolveRate": null,
+        "securityIssues": 96,
+        "wechatOrders": 557,
+        "wechatP4Orders": 407,
+        "firstLineOrders": 867,
+        "firstLineResolveRate": 0.4441,
         "secondLineOrders": null,
         "secondLineResolveRate": null,
-        "accumulatedP1": 79,
+        "accumulatedP1": 77,
         "wechatSessions": 2211,
         "phoneCalls": 335,
-        "phoneConnectRate": 0.95
+        "phoneConnectRate": 0.95,
+        "firstLineBreakdown": {
+          "csTotal": 807,
+          "csInvalid": 9,
+          "cmsa": 69,
+          "selfResolved": 385
+        }
       },
       "yoy": {
         "label": "25年(07.04-07.10)",
@@ -89,10 +95,16 @@
         "securityIssues": 137,
         "wechatOrders": 517,
         "wechatP4Orders": 288,
-        "firstLineOrders": null,
-        "firstLineResolveRate": null,
+        "firstLineOrders": 1044,
+        "firstLineResolveRate": 0.4885,
         "secondLineOrders": null,
-        "secondLineResolveRate": null
+        "secondLineResolveRate": null,
+        "firstLineBreakdown": {
+          "csTotal": 982,
+          "csInvalid": 9,
+          "cmsa": 71,
+          "selfResolved": 510
+        }
       }
     },
     {
@@ -103,17 +115,23 @@
       "tags": [],
       "current": {
         "p1Orders": 2,
-        "securityIssues": 84,
-        "wechatOrders": 554,
-        "wechatP4Orders": 412,
-        "firstLineOrders": null,
-        "firstLineResolveRate": null,
+        "securityIssues": 90,
+        "wechatOrders": 549,
+        "wechatP4Orders": 405,
+        "firstLineOrders": 889,
+        "firstLineResolveRate": 0.4646,
         "secondLineOrders": null,
         "secondLineResolveRate": null,
-        "accumulatedP1": 76,
+        "accumulatedP1": 74,
         "wechatSessions": 2117,
         "phoneCalls": 349,
-        "phoneConnectRate": 0.98
+        "phoneConnectRate": 0.98,
+        "firstLineBreakdown": {
+          "csTotal": 844,
+          "csInvalid": 8,
+          "cmsa": 53,
+          "selfResolved": 413
+        }
       },
       "yoy": {
         "label": "25年(06.27-07.03)",
@@ -121,10 +139,16 @@
         "securityIssues": 132,
         "wechatOrders": 473,
         "wechatP4Orders": 291,
-        "firstLineOrders": null,
-        "firstLineResolveRate": null,
+        "firstLineOrders": 996,
+        "firstLineResolveRate": 0.4819,
         "secondLineOrders": null,
-        "secondLineResolveRate": null
+        "secondLineResolveRate": null,
+        "firstLineBreakdown": {
+          "csTotal": 950,
+          "csInvalid": 6,
+          "cmsa": 52,
+          "selfResolved": 480
+        }
       }
     },
     {
@@ -135,17 +159,23 @@
       "tags": [],
       "current": {
         "p1Orders": 3,
-        "securityIssues": 63,
-        "wechatOrders": 460,
-        "wechatP4Orders": 353,
-        "firstLineOrders": null,
-        "firstLineResolveRate": null,
+        "securityIssues": 74,
+        "wechatOrders": 457,
+        "wechatP4Orders": 343,
+        "firstLineOrders": 752,
+        "firstLineResolveRate": 0.5,
         "secondLineOrders": null,
         "secondLineResolveRate": null,
-        "accumulatedP1": 74,
+        "accumulatedP1": 72,
         "wechatSessions": 1780,
         "phoneCalls": 294,
-        "phoneConnectRate": 0.95
+        "phoneConnectRate": 0.95,
+        "firstLineBreakdown": {
+          "csTotal": 702,
+          "csInvalid": 3,
+          "cmsa": 53,
+          "selfResolved": 376
+        }
       },
       "yoy": {
         "label": "25年(06.20-06.26)",
@@ -153,10 +183,16 @@
         "securityIssues": 115,
         "wechatOrders": 447,
         "wechatP4Orders": 268,
-        "firstLineOrders": null,
-        "firstLineResolveRate": null,
+        "firstLineOrders": 962,
+        "firstLineResolveRate": 0.4938,
         "secondLineOrders": null,
-        "secondLineResolveRate": null
+        "secondLineResolveRate": null,
+        "firstLineBreakdown": {
+          "csTotal": 895,
+          "csInvalid": 4,
+          "cmsa": 71,
+          "selfResolved": 475
+        }
       }
     },
     {
@@ -168,16 +204,22 @@
       "current": {
         "p1Orders": 6,
         "securityIssues": 112,
-        "wechatOrders": 579,
-        "wechatP4Orders": 405,
-        "firstLineOrders": null,
-        "firstLineResolveRate": null,
+        "wechatOrders": 577,
+        "wechatP4Orders": 403,
+        "firstLineOrders": 874,
+        "firstLineResolveRate": 0.4828,
         "secondLineOrders": null,
         "secondLineResolveRate": null,
-        "accumulatedP1": 71,
+        "accumulatedP1": 69,
         "wechatSessions": 2306,
         "phoneCalls": 304,
-        "phoneConnectRate": 0.86
+        "phoneConnectRate": 0.86,
+        "firstLineBreakdown": {
+          "csTotal": 829,
+          "csInvalid": 6,
+          "cmsa": 51,
+          "selfResolved": 422
+        }
       },
       "yoy": {
         "label": "25年(06.13-06.19)",
@@ -185,10 +227,16 @@
         "securityIssues": 107,
         "wechatOrders": 404,
         "wechatP4Orders": 258,
-        "firstLineOrders": null,
-        "firstLineResolveRate": null,
+        "firstLineOrders": 1000,
+        "firstLineResolveRate": 0.501,
         "secondLineOrders": null,
-        "secondLineResolveRate": null
+        "secondLineResolveRate": null,
+        "firstLineBreakdown": {
+          "csTotal": 937,
+          "csInvalid": 7,
+          "cmsa": 70,
+          "selfResolved": 501
+        }
       }
     },
     {
@@ -199,17 +247,23 @@
       "tags": [],
       "current": {
         "p1Orders": 1,
-        "securityIssues": 99,
+        "securityIssues": 104,
         "wechatOrders": 620,
-        "wechatP4Orders": 487,
-        "firstLineOrders": 1040,
-        "firstLineResolveRate": 0.3788,
+        "wechatP4Orders": 483,
+        "firstLineOrders": 932,
+        "firstLineResolveRate": 0.4807,
         "secondLineOrders": null,
         "secondLineResolveRate": null,
-        "accumulatedP1": 65,
+        "accumulatedP1": 63,
         "wechatSessions": 2215,
         "phoneCalls": 338,
-        "phoneConnectRate": 0.98
+        "phoneConnectRate": 0.98,
+        "firstLineBreakdown": {
+          "csTotal": 875,
+          "csInvalid": 8,
+          "cmsa": 65,
+          "selfResolved": 448
+        }
       },
       "yoy": {
         "label": "25年(06.06-06.12)",
@@ -217,10 +271,16 @@
         "securityIssues": 118,
         "wechatOrders": 413,
         "wechatP4Orders": 284,
-        "firstLineOrders": null,
-        "firstLineResolveRate": null,
+        "firstLineOrders": 991,
+        "firstLineResolveRate": 0.5076,
         "secondLineOrders": null,
-        "secondLineResolveRate": null
+        "secondLineResolveRate": null,
+        "firstLineBreakdown": {
+          "csTotal": 921,
+          "csInvalid": 5,
+          "cmsa": 75,
+          "selfResolved": 503
+        }
       }
     },
     {
@@ -231,17 +291,23 @@
       "tags": [],
       "current": {
         "p1Orders": 3,
-        "securityIssues": 91,
-        "wechatOrders": 550,
-        "wechatP4Orders": 434,
+        "securityIssues": 94,
+        "wechatOrders": 549,
+        "wechatP4Orders": 428,
         "wechatSessions": 2102,
         "phoneCalls": 322,
         "phoneConnectRate": 0.95,
-        "firstLineOrders": 967,
-        "firstLineResolveRate": 0.4881,
-        "secondLineOrders": 512,
-        "secondLineResolveRate": 0.625,
-        "accumulatedP1": 64
+        "firstLineOrders": 882,
+        "firstLineResolveRate": 0.4478,
+        "secondLineOrders": null,
+        "secondLineResolveRate": null,
+        "accumulatedP1": 62,
+        "firstLineBreakdown": {
+          "csTotal": 823,
+          "csInvalid": 10,
+          "cmsa": 69,
+          "selfResolved": 395
+        }
       },
       "yoy": {
         "label": "25年(05.30-06.05)",
@@ -249,10 +315,16 @@
         "securityIssues": 110,
         "wechatOrders": 329,
         "wechatP4Orders": 231,
-        "firstLineOrders": 899,
-        "firstLineResolveRate": 0.5495,
-        "secondLineOrders": 348,
-        "secondLineResolveRate": 0.6063
+        "firstLineOrders": 812,
+        "firstLineResolveRate": 0.484,
+        "secondLineOrders": null,
+        "secondLineResolveRate": null,
+        "firstLineBreakdown": {
+          "csTotal": 748,
+          "csInvalid": 3,
+          "cmsa": 67,
+          "selfResolved": 393
+        }
       }
     },
     {
@@ -262,18 +334,24 @@
       "endDate": "2026-05-28",
       "tags": [],
       "current": {
-        "p1Orders": 4,
-        "securityIssues": 108,
+        "p1Orders": 2,
+        "securityIssues": 107,
         "wechatOrders": 578,
-        "wechatP4Orders": 409,
+        "wechatP4Orders": 404,
         "wechatSessions": 1908,
         "phoneCalls": 310,
         "phoneConnectRate": 0.95,
-        "firstLineOrders": 853,
-        "firstLineResolveRate": 0.5463,
-        "secondLineOrders": 441,
-        "secondLineResolveRate": 0.6621,
-        "accumulatedP1": 61
+        "firstLineOrders": 907,
+        "firstLineResolveRate": 0.5061,
+        "secondLineOrders": null,
+        "secondLineResolveRate": null,
+        "accumulatedP1": 59,
+        "firstLineBreakdown": {
+          "csTotal": 856,
+          "csInvalid": 14,
+          "cmsa": 65,
+          "selfResolved": 459
+        }
       },
       "yoy": {
         "label": "25年(05.23-05.29)",
@@ -281,10 +359,16 @@
         "securityIssues": 97,
         "wechatOrders": 383,
         "wechatP4Orders": 268,
-        "firstLineOrders": 909,
-        "firstLineResolveRate": 0.5204,
-        "secondLineOrders": 417,
-        "secondLineResolveRate": 0.5348
+        "firstLineOrders": 903,
+        "firstLineResolveRate": 0.4396,
+        "secondLineOrders": null,
+        "secondLineResolveRate": null,
+        "firstLineBreakdown": {
+          "csTotal": 854,
+          "csInvalid": 4,
+          "cmsa": 53,
+          "selfResolved": 397
+        }
       }
     },
     {
@@ -295,22 +379,40 @@
       "tags": [],
       "current": {
         "p1Orders": 3,
-        "securityIssues": 108,
-        "wechatOrders": 531,
-        "wechatP4Orders": 403,
+        "securityIssues": 111,
+        "wechatOrders": 528,
+        "wechatP4Orders": 400,
         "phoneCalls": 382,
         "phoneConnectRate": 0.84,
-        "firstLineOrders": 1023,
-        "firstLineResolveRate": 0.35,
+        "firstLineOrders": 921,
+        "firstLineResolveRate": 0.4745,
         "wechatSessions": 2030,
-        "accumulatedP1": 57
+        "accumulatedP1": 57,
+        "firstLineBreakdown": {
+          "csTotal": 854,
+          "csInvalid": 13,
+          "cmsa": 80,
+          "selfResolved": 437
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "25年(05.16-05.22)",
         "p1Orders": 3,
         "securityIssues": 140,
         "wechatOrders": 348,
-        "wechatP4Orders": 208
+        "wechatP4Orders": 208,
+        "firstLineOrders": 924,
+        "firstLineResolveRate": 0.447,
+        "firstLineBreakdown": {
+          "csTotal": 878,
+          "csInvalid": 10,
+          "cmsa": 56,
+          "selfResolved": 413
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -321,22 +423,40 @@
       "tags": [],
       "current": {
         "p1Orders": 2,
-        "securityIssues": 119,
+        "securityIssues": 122,
         "wechatOrders": 523,
-        "wechatP4Orders": 221,
+        "wechatP4Orders": 222,
         "phoneCalls": 357,
         "phoneConnectRate": 0.93,
         "wechatSessions": 1819,
-        "firstLineOrders": 1137,
-        "firstLineResolveRate": 0.4406,
-        "accumulatedP1": 54
+        "firstLineOrders": 972,
+        "firstLineResolveRate": 0.4455,
+        "accumulatedP1": 54,
+        "firstLineBreakdown": {
+          "csTotal": 918,
+          "csInvalid": 16,
+          "cmsa": 70,
+          "selfResolved": 433
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "25年(05.09-05.15)",
         "p1Orders": 4,
         "securityIssues": 90,
         "wechatOrders": 388,
-        "wechatP4Orders": 227
+        "wechatP4Orders": 227,
+        "firstLineOrders": 976,
+        "firstLineResolveRate": 0.4334,
+        "firstLineBreakdown": {
+          "csTotal": 900,
+          "csInvalid": 6,
+          "cmsa": 82,
+          "selfResolved": 423
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -348,27 +468,43 @@
       "current": {
         "phoneCalls": 194,
         "phoneConnectRate": 0.93,
-        "firstLineOrders": 463,
-        "firstLineResolveRate": 0.4514,
+        "firstLineOrders": 447,
+        "firstLineResolveRate": 0.4251,
         "p1Orders": 4,
-        "securityIssues": 43,
+        "securityIssues": 45,
         "accumulatedP1": 52,
         "wechatSessions": 2150,
         "wechatOrders": 201,
-        "wechatP4Orders": 123
+        "wechatP4Orders": 123,
+        "firstLineBreakdown": {
+          "csTotal": 393,
+          "csInvalid": 2,
+          "cmsa": 56,
+          "selfResolved": 190
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "25年(05.02-05.08)",
         "phoneCalls": 559,
         "phoneConnectRate": 0.966,
-        "firstLineOrders": 1759,
-        "firstLineResolveRate": 0.3633,
+        "firstLineOrders": 685,
+        "firstLineResolveRate": 0.4526,
         "p1Orders": 3,
         "securityIssues": 59,
         "accumulatedP1": 62,
         "wechatSessions": null,
         "wechatOrders": 268,
-        "wechatP4Orders": 152
+        "wechatP4Orders": 152,
+        "firstLineBreakdown": {
+          "csTotal": 640,
+          "csInvalid": 4,
+          "cmsa": 49,
+          "selfResolved": 310
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -380,27 +516,43 @@
       "current": {
         "phoneCalls": 354,
         "phoneConnectRate": 0.91,
-        "firstLineOrders": 853,
-        "firstLineResolveRate": 0.4994,
+        "firstLineOrders": 752,
+        "firstLineResolveRate": 0.4707,
         "p1Orders": 3,
         "securityIssues": 97,
         "accumulatedP1": 48,
         "wechatSessions": 1481,
         "wechatOrders": 373,
-        "wechatP4Orders": 199
+        "wechatP4Orders": 200,
+        "firstLineBreakdown": {
+          "csTotal": 686,
+          "csInvalid": 4,
+          "cmsa": 70,
+          "selfResolved": 354
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "25年(04.25-05.01)",
         "phoneCalls": 540,
         "phoneConnectRate": 0.96,
-        "firstLineOrders": 1700,
-        "firstLineResolveRate": 0.36,
+        "firstLineOrders": 867,
+        "firstLineResolveRate": 0.451,
         "p1Orders": 3,
         "securityIssues": 89,
         "accumulatedP1": 55,
         "wechatSessions": null,
         "wechatOrders": 345,
-        "wechatP4Orders": 173
+        "wechatP4Orders": 173,
+        "firstLineBreakdown": {
+          "csTotal": 810,
+          "csInvalid": 6,
+          "cmsa": 63,
+          "selfResolved": 391
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -411,22 +563,40 @@
       "tags": [],
       "current": {
         "p1Orders": 4,
-        "securityIssues": 93,
+        "securityIssues": 92,
         "wechatOrders": 389,
-        "wechatP4Orders": 212,
+        "wechatP4Orders": 213,
         "phoneCalls": 327,
         "phoneConnectRate": 0.94,
-        "firstLineOrders": 932,
-        "firstLineResolveRate": 0.4345,
+        "firstLineOrders": 825,
+        "firstLineResolveRate": 0.4158,
         "wechatSessions": 1525,
-        "accumulatedP1": 45
+        "accumulatedP1": 45,
+        "firstLineBreakdown": {
+          "csTotal": 749,
+          "csInvalid": 10,
+          "cmsa": 86,
+          "selfResolved": 343
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "25年(04.18-04.24)",
         "p1Orders": 6,
         "securityIssues": 111,
         "wechatOrders": 430,
-        "wechatP4Orders": 258
+        "wechatP4Orders": 258,
+        "firstLineOrders": 1031,
+        "firstLineResolveRate": 0.45,
+        "firstLineBreakdown": {
+          "csTotal": 960,
+          "csInvalid": 5,
+          "cmsa": 76,
+          "selfResolved": 464
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -442,17 +612,35 @@
         "wechatP4Orders": 280,
         "phoneCalls": 448,
         "phoneConnectRate": 0.9,
-        "firstLineOrders": 996,
-        "firstLineResolveRate": 0.5231,
+        "firstLineOrders": 871,
+        "firstLineResolveRate": 0.4799,
         "wechatSessions": 1535,
-        "accumulatedP1": 41
+        "accumulatedP1": 41,
+        "firstLineBreakdown": {
+          "csTotal": 795,
+          "csInvalid": 11,
+          "cmsa": 87,
+          "selfResolved": 418
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "25年(04.11-04.17)",
         "p1Orders": 3,
         "securityIssues": 112,
         "wechatOrders": 411,
-        "wechatP4Orders": 265
+        "wechatP4Orders": 265,
+        "firstLineOrders": 990,
+        "firstLineResolveRate": 0.4162,
+        "firstLineBreakdown": {
+          "csTotal": 914,
+          "csInvalid": 14,
+          "cmsa": 90,
+          "selfResolved": 412
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -468,17 +656,35 @@
         "wechatP4Orders": 177,
         "phoneCalls": 309,
         "phoneConnectRate": 0.95,
-        "firstLineOrders": 744,
-        "firstLineResolveRate": 0.4772,
+        "firstLineOrders": 608,
+        "firstLineResolveRate": 0.4507,
         "wechatSessions": 1087,
-        "accumulatedP1": 39
+        "accumulatedP1": 39,
+        "firstLineBreakdown": {
+          "csTotal": 556,
+          "csInvalid": 4,
+          "cmsa": 56,
+          "selfResolved": 274
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "25年(04.04-04.10)",
         "p1Orders": 4,
         "securityIssues": 97,
         "wechatOrders": 344,
-        "wechatP4Orders": 231
+        "wechatP4Orders": 231,
+        "firstLineOrders": 870,
+        "firstLineResolveRate": 0.4391,
+        "firstLineBreakdown": {
+          "csTotal": 826,
+          "csInvalid": 6,
+          "cmsa": 50,
+          "selfResolved": 382
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -494,17 +700,35 @@
         "wechatP4Orders": 209,
         "phoneCalls": 345,
         "phoneConnectRate": 0.94,
-        "firstLineOrders": 912,
-        "firstLineResolveRate": 0.455,
+        "firstLineOrders": 809,
+        "firstLineResolveRate": 0.4339,
         "accumulatedP1": 36,
-        "wechatSessions": 1488
+        "wechatSessions": 1488,
+        "firstLineBreakdown": {
+          "csTotal": 756,
+          "csInvalid": 1,
+          "cmsa": 54,
+          "selfResolved": 351
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "25年(03.28-04.03)",
         "p1Orders": 6,
         "securityIssues": 114,
         "wechatOrders": 374,
-        "wechatP4Orders": 231
+        "wechatP4Orders": 231,
+        "firstLineOrders": 1015,
+        "firstLineResolveRate": 0.4768,
+        "firstLineBreakdown": {
+          "csTotal": 965,
+          "csInvalid": 11,
+          "cmsa": 61,
+          "selfResolved": 484
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -520,17 +744,35 @@
         "wechatP4Orders": 229,
         "phoneCalls": 295,
         "phoneConnectRate": 0.84,
-        "firstLineOrders": 779,
-        "firstLineResolveRate": 0.4801,
+        "firstLineOrders": 666,
+        "firstLineResolveRate": 0.4505,
         "wechatSessions": 1401,
-        "accumulatedP1": 32
+        "accumulatedP1": 32,
+        "firstLineBreakdown": {
+          "csTotal": 612,
+          "csInvalid": 10,
+          "cmsa": 64,
+          "selfResolved": 300
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "25年(03.21-03.27)",
         "p1Orders": 2,
         "securityIssues": 112,
         "wechatOrders": 402,
-        "wechatP4Orders": 244
+        "wechatP4Orders": 244,
+        "firstLineOrders": 956,
+        "firstLineResolveRate": 0.4885,
+        "firstLineBreakdown": {
+          "csTotal": 893,
+          "csInvalid": 5,
+          "cmsa": 68,
+          "selfResolved": 467
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -546,17 +788,35 @@
         "wechatP4Orders": 220,
         "phoneCalls": 361,
         "phoneConnectRate": 0.88,
-        "firstLineOrders": 934,
+        "firstLineOrders": 799,
         "firstLineResolveRate": 0.4443,
         "wechatSessions": 1493,
-        "accumulatedP1": 29
+        "accumulatedP1": 29,
+        "firstLineBreakdown": {
+          "csTotal": 758,
+          "csInvalid": 9,
+          "cmsa": 50,
+          "selfResolved": 355
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "25年(03.14-03.20)",
         "p1Orders": 1,
         "securityIssues": 123,
         "wechatOrders": 387,
-        "wechatP4Orders": 257
+        "wechatP4Orders": 257,
+        "firstLineOrders": 1026,
+        "firstLineResolveRate": 0.4893,
+        "firstLineBreakdown": {
+          "csTotal": 973,
+          "csInvalid": 7,
+          "cmsa": 60,
+          "selfResolved": 502
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -572,17 +832,35 @@
         "wechatP4Orders": 176,
         "phoneCalls": 321,
         "phoneConnectRate": 0.89,
-        "firstLineOrders": 794,
-        "firstLineResolveRate": 0.4824,
+        "firstLineOrders": 686,
+        "firstLineResolveRate": 0.4504,
         "wechatSessions": 1341,
-        "accumulatedP1": 24
+        "accumulatedP1": 24,
+        "firstLineBreakdown": {
+          "csTotal": 632,
+          "csInvalid": 3,
+          "cmsa": 57,
+          "selfResolved": 309
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "25年(03.07-03.13)",
         "p1Orders": 2,
         "securityIssues": 103,
         "wechatOrders": 419,
-        "wechatP4Orders": 283
+        "wechatP4Orders": 283,
+        "firstLineOrders": 1100,
+        "firstLineResolveRate": 0.53,
+        "firstLineBreakdown": {
+          "csTotal": 1025,
+          "csInvalid": 5,
+          "cmsa": 80,
+          "selfResolved": 583
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -598,17 +876,35 @@
         "wechatP4Orders": 280,
         "phoneCalls": 280,
         "phoneConnectRate": 0.92,
-        "firstLineOrders": 910,
-        "firstLineResolveRate": 0.4582,
+        "firstLineOrders": 785,
+        "firstLineResolveRate": 0.4331,
         "wechatSessions": 1452,
-        "accumulatedP1": 20
+        "accumulatedP1": 20,
+        "firstLineBreakdown": {
+          "csTotal": 722,
+          "csInvalid": 5,
+          "cmsa": 68,
+          "selfResolved": 340
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "25年(02.28-03.06)",
         "p1Orders": 3,
         "securityIssues": 109,
         "wechatOrders": 529,
-        "wechatP4Orders": 367
+        "wechatP4Orders": 367,
+        "firstLineOrders": 1247,
+        "firstLineResolveRate": 0.579,
+        "firstLineBreakdown": {
+          "csTotal": 1199,
+          "csInvalid": 6,
+          "cmsa": 54,
+          "selfResolved": 722
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -624,17 +920,35 @@
         "wechatP4Orders": 121,
         "phoneCalls": 129,
         "phoneConnectRate": 0.94,
-        "firstLineOrders": 404,
-        "firstLineResolveRate": 0.4183,
+        "firstLineOrders": 376,
+        "firstLineResolveRate": 0.3856,
         "wechatSessions": 631,
-        "accumulatedP1": 20
+        "accumulatedP1": 20,
+        "firstLineBreakdown": {
+          "csTotal": 342,
+          "csInvalid": 3,
+          "cmsa": 37,
+          "selfResolved": 145
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "25年(02.21-02.27)",
         "p1Orders": 2,
         "securityIssues": 113,
         "wechatOrders": 517,
-        "wechatP4Orders": 352
+        "wechatP4Orders": 352,
+        "firstLineOrders": 1237,
+        "firstLineResolveRate": 0.5602,
+        "firstLineBreakdown": {
+          "csTotal": 1188,
+          "csInvalid": 8,
+          "cmsa": 57,
+          "selfResolved": 693
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -650,17 +964,35 @@
         "wechatP4Orders": 29,
         "phoneCalls": 72,
         "phoneConnectRate": 1,
-        "firstLineOrders": 100,
-        "firstLineResolveRate": 0.54,
+        "firstLineOrders": 89,
+        "firstLineResolveRate": 0.4831,
         "wechatSessions": 184,
-        "accumulatedP1": 20
+        "accumulatedP1": 20,
+        "firstLineBreakdown": {
+          "csTotal": 83,
+          "csInvalid": 1,
+          "cmsa": 7,
+          "selfResolved": 43
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "25年(02.14-02.20)",
         "p1Orders": 5,
         "securityIssues": 89,
         "wechatOrders": 406,
-        "wechatP4Orders": 267
+        "wechatP4Orders": 267,
+        "firstLineOrders": 1056,
+        "firstLineResolveRate": 0.5682,
+        "firstLineBreakdown": {
+          "csTotal": 1006,
+          "csInvalid": 4,
+          "cmsa": 54,
+          "selfResolved": 600
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -676,17 +1008,35 @@
         "wechatP4Orders": 208,
         "phoneCalls": 223,
         "phoneConnectRate": 0.99,
-        "firstLineOrders": 712,
-        "firstLineResolveRate": 0.4775,
+        "firstLineOrders": 594,
+        "firstLineResolveRate": 0.4832,
         "wechatSessions": 1213,
-        "accumulatedP1": 20
+        "accumulatedP1": 20,
+        "firstLineBreakdown": {
+          "csTotal": 565,
+          "csInvalid": 3,
+          "cmsa": 32,
+          "selfResolved": 287
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "25年(02.07-02.13)",
         "p1Orders": 2,
         "securityIssues": 103,
         "wechatOrders": 428,
-        "wechatP4Orders": 287
+        "wechatP4Orders": 287,
+        "firstLineOrders": 1117,
+        "firstLineResolveRate": 0.564,
+        "firstLineBreakdown": {
+          "csTotal": 1055,
+          "csInvalid": 11,
+          "cmsa": 73,
+          "selfResolved": 630
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -702,17 +1052,35 @@
         "wechatP4Orders": 236,
         "phoneCalls": 293,
         "phoneConnectRate": 0.92,
-        "firstLineOrders": 956,
-        "firstLineResolveRate": 0.4498,
+        "firstLineOrders": 825,
+        "firstLineResolveRate": 0.4194,
         "wechatSessions": 1382,
-        "accumulatedP1": 16
+        "accumulatedP1": 16,
+        "firstLineBreakdown": {
+          "csTotal": 781,
+          "csInvalid": 6,
+          "cmsa": 50,
+          "selfResolved": 346
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "25年(01.31-02.06)",
         "p1Orders": 0,
         "securityIssues": 31,
         "wechatOrders": 128,
-        "wechatP4Orders": 93
+        "wechatP4Orders": 93,
+        "firstLineOrders": 369,
+        "firstLineResolveRate": 0.5583,
+        "firstLineBreakdown": {
+          "csTotal": 348,
+          "csInvalid": 1,
+          "cmsa": 22,
+          "selfResolved": 206
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -728,17 +1096,35 @@
         "wechatP4Orders": 209,
         "phoneCalls": 313,
         "phoneConnectRate": 0.94,
-        "firstLineOrders": 824,
-        "firstLineResolveRate": 0.4114,
+        "firstLineOrders": 707,
+        "firstLineResolveRate": 0.4031,
         "wechatSessions": 1473,
-        "accumulatedP1": 14
+        "accumulatedP1": 14,
+        "firstLineBreakdown": {
+          "csTotal": 663,
+          "csInvalid": 5,
+          "cmsa": 49,
+          "selfResolved": 285
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "25年(01.24-01.30)",
         "p1Orders": 2,
         "securityIssues": 21,
         "wechatOrders": 76,
-        "wechatP4Orders": 53
+        "wechatP4Orders": 53,
+        "firstLineOrders": 226,
+        "firstLineResolveRate": 0.5575,
+        "firstLineBreakdown": {
+          "csTotal": 210,
+          "csInvalid": 0,
+          "cmsa": 16,
+          "selfResolved": 126
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -754,17 +1140,35 @@
         "wechatP4Orders": 184,
         "phoneCalls": 296,
         "phoneConnectRate": 0.94,
-        "firstLineOrders": 790,
-        "firstLineResolveRate": 0.3937,
+        "firstLineOrders": 663,
+        "firstLineResolveRate": 0.3891,
         "wechatSessions": 1588,
-        "accumulatedP1": 9
+        "accumulatedP1": 9,
+        "firstLineBreakdown": {
+          "csTotal": 622,
+          "csInvalid": 6,
+          "cmsa": 47,
+          "selfResolved": 258
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "25年(01.17-01.23)",
         "p1Orders": 2,
         "securityIssues": 94,
         "wechatOrders": 342,
-        "wechatP4Orders": 252
+        "wechatP4Orders": 252,
+        "firstLineOrders": 920,
+        "firstLineResolveRate": 0.5543,
+        "firstLineBreakdown": {
+          "csTotal": 893,
+          "csInvalid": 7,
+          "cmsa": 34,
+          "selfResolved": 510
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -780,17 +1184,35 @@
         "wechatP4Orders": 186,
         "phoneCalls": 351,
         "phoneConnectRate": 0.95,
-        "firstLineOrders": 850,
-        "firstLineResolveRate": 0.3835,
+        "firstLineOrders": 702,
+        "firstLineResolveRate": 0.359,
         "accumulatedP1": 6,
-        "wechatSessions": 1607
+        "wechatSessions": 1607,
+        "firstLineBreakdown": {
+          "csTotal": 647,
+          "csInvalid": 4,
+          "cmsa": 59,
+          "selfResolved": 252
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "25年(01.10-01.16)",
         "p1Orders": 5,
         "securityIssues": 81,
         "wechatOrders": 400,
-        "wechatP4Orders": 286
+        "wechatP4Orders": 286,
+        "firstLineOrders": 1083,
+        "firstLineResolveRate": 0.5512,
+        "firstLineBreakdown": {
+          "csTotal": 1015,
+          "csInvalid": 5,
+          "cmsa": 73,
+          "selfResolved": 597
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -806,17 +1228,35 @@
         "wechatP4Orders": 144,
         "phoneCalls": 304,
         "phoneConnectRate": 0.93,
-        "firstLineOrders": 810,
-        "firstLineResolveRate": 0.3815,
+        "firstLineOrders": 710,
+        "firstLineResolveRate": 0.362,
         "accumulatedP1": 4,
-        "wechatSessions": 1508
+        "wechatSessions": 1508,
+        "firstLineBreakdown": {
+          "csTotal": 656,
+          "csInvalid": 5,
+          "cmsa": 59,
+          "selfResolved": 257
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "25年(01.03-01.09)",
         "p1Orders": 6,
         "securityIssues": 74,
         "wechatOrders": 437,
-        "wechatP4Orders": 308
+        "wechatP4Orders": 308,
+        "firstLineOrders": 1152,
+        "firstLineResolveRate": 0.5764,
+        "firstLineBreakdown": {
+          "csTotal": 1091,
+          "csInvalid": 5,
+          "cmsa": 66,
+          "selfResolved": 664
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -832,17 +1272,35 @@
         "wechatP4Orders": 138,
         "phoneCalls": 286,
         "phoneConnectRate": 0.93,
-        "firstLineOrders": 694,
-        "firstLineResolveRate": 0.4352,
+        "firstLineOrders": 607,
+        "firstLineResolveRate": 0.4053,
         "wechatSessions": 1201,
-        "accumulatedP1": 175
+        "accumulatedP1": 175,
+        "firstLineBreakdown": {
+          "csTotal": 555,
+          "csInvalid": 2,
+          "cmsa": 54,
+          "selfResolved": 246
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "24年(12.27-01.02)",
         "p1Orders": 5,
         "securityIssues": 76,
         "wechatOrders": 336,
-        "wechatP4Orders": 240
+        "wechatP4Orders": 240,
+        "firstLineOrders": 881,
+        "firstLineResolveRate": 0.5392,
+        "firstLineBreakdown": {
+          "csTotal": 837,
+          "csInvalid": 3,
+          "cmsa": 47,
+          "selfResolved": 475
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -858,17 +1316,35 @@
         "wechatP4Orders": 200,
         "phoneCalls": 281,
         "phoneConnectRate": 0.93,
-        "firstLineOrders": 875,
-        "firstLineResolveRate": 0.44,
+        "firstLineOrders": 736,
+        "firstLineResolveRate": 0.4198,
         "wechatSessions": 1631,
-        "accumulatedP1": 172
+        "accumulatedP1": 172,
+        "firstLineBreakdown": {
+          "csTotal": 678,
+          "csInvalid": 8,
+          "cmsa": 66,
+          "selfResolved": 309
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "24年(12.20-12.26)",
         "p1Orders": 5,
         "securityIssues": 89,
         "wechatOrders": 371,
-        "wechatP4Orders": 223
+        "wechatP4Orders": 223,
+        "firstLineOrders": 1078,
+        "firstLineResolveRate": 0.5399,
+        "firstLineBreakdown": {
+          "csTotal": 999,
+          "csInvalid": 1,
+          "cmsa": 80,
+          "selfResolved": 582
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -884,17 +1360,35 @@
         "wechatP4Orders": 183,
         "phoneCalls": 282,
         "phoneConnectRate": 0.95,
-        "firstLineOrders": 913,
-        "firstLineResolveRate": 0.4502,
+        "firstLineOrders": 800,
+        "firstLineResolveRate": 0.4138,
         "wechatSessions": 1511,
-        "accumulatedP1": 167
+        "accumulatedP1": 167,
+        "firstLineBreakdown": {
+          "csTotal": 741,
+          "csInvalid": 14,
+          "cmsa": 73,
+          "selfResolved": 331
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "24年(12.13-12.19)",
         "p1Orders": 3,
         "securityIssues": 85,
         "wechatOrders": 398,
-        "wechatP4Orders": 260
+        "wechatP4Orders": 260,
+        "firstLineOrders": 1180,
+        "firstLineResolveRate": 0.5254,
+        "firstLineBreakdown": {
+          "csTotal": 1111,
+          "csInvalid": 13,
+          "cmsa": 82,
+          "selfResolved": 620
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -905,22 +1399,40 @@
       "tags": [],
       "current": {
         "p1Orders": 4,
-        "securityIssues": 92,
+        "securityIssues": 91,
         "wechatOrders": 362,
-        "wechatP4Orders": 185,
+        "wechatP4Orders": 186,
         "phoneCalls": 367,
         "phoneConnectRate": 0.9,
-        "firstLineOrders": 874,
-        "firstLineResolveRate": 0.4348,
+        "firstLineOrders": 741,
+        "firstLineResolveRate": 0.4089,
         "wechatSessions": 1558,
-        "accumulatedP1": 163
+        "accumulatedP1": 163,
+        "firstLineBreakdown": {
+          "csTotal": 691,
+          "csInvalid": 9,
+          "cmsa": 59,
+          "selfResolved": 303
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "24年(12.06-12.12)",
         "p1Orders": 4,
         "securityIssues": 92,
         "wechatOrders": 303,
-        "wechatP4Orders": 186
+        "wechatP4Orders": 186,
+        "firstLineOrders": 946,
+        "firstLineResolveRate": 0.5106,
+        "firstLineBreakdown": {
+          "csTotal": 897,
+          "csInvalid": 5,
+          "cmsa": 54,
+          "selfResolved": 483
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -936,17 +1448,35 @@
         "wechatP4Orders": 227,
         "phoneCalls": 441,
         "phoneConnectRate": 0.91,
-        "firstLineOrders": 939,
-        "firstLineResolveRate": 0.3994,
+        "firstLineOrders": 742,
+        "firstLineResolveRate": 0.3733,
         "wechatSessions": 1748,
-        "accumulatedP1": 159
+        "accumulatedP1": 159,
+        "firstLineBreakdown": {
+          "csTotal": 678,
+          "csInvalid": 8,
+          "cmsa": 72,
+          "selfResolved": 277
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "24年(11.29-12.05)",
         "p1Orders": 6,
         "securityIssues": 122,
         "wechatOrders": 316,
-        "wechatP4Orders": 193
+        "wechatP4Orders": 193,
+        "firstLineOrders": 1030,
+        "firstLineResolveRate": 0.4738,
+        "firstLineBreakdown": {
+          "csTotal": 976,
+          "csInvalid": 3,
+          "cmsa": 57,
+          "selfResolved": 488
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -962,17 +1492,35 @@
         "wechatP4Orders": 229,
         "phoneCalls": 359,
         "phoneConnectRate": 0.94,
-        "firstLineOrders": 942,
-        "firstLineResolveRate": 0.4268,
+        "firstLineOrders": 812,
+        "firstLineResolveRate": 0.4002,
         "wechatSessions": 1601,
-        "accumulatedP1": 156
+        "accumulatedP1": 156,
+        "firstLineBreakdown": {
+          "csTotal": 755,
+          "csInvalid": 4,
+          "cmsa": 61,
+          "selfResolved": 325
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "24年(11.22-11.28)",
         "p1Orders": 5,
         "securityIssues": 132,
         "wechatOrders": 302,
-        "wechatP4Orders": 187
+        "wechatP4Orders": 187,
+        "firstLineOrders": 1028,
+        "firstLineResolveRate": 0.4805,
+        "firstLineBreakdown": {
+          "csTotal": 979,
+          "csInvalid": 14,
+          "cmsa": 63,
+          "selfResolved": 494
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -988,17 +1536,35 @@
         "wechatP4Orders": 199,
         "phoneCalls": 353,
         "phoneConnectRate": 0.95,
-        "firstLineOrders": 958,
-        "firstLineResolveRate": 0.4635,
+        "firstLineOrders": 841,
+        "firstLineResolveRate": 0.4554,
         "wechatSessions": 1619,
-        "accumulatedP1": 155
+        "accumulatedP1": 155,
+        "firstLineBreakdown": {
+          "csTotal": 792,
+          "csInvalid": 8,
+          "cmsa": 57,
+          "selfResolved": 383
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "24年(11.15-11.21)",
         "p1Orders": 1,
         "securityIssues": 115,
         "wechatOrders": 286,
-        "wechatP4Orders": 192
+        "wechatP4Orders": 192,
+        "firstLineOrders": 957,
+        "firstLineResolveRate": 0.5099,
+        "firstLineBreakdown": {
+          "csTotal": 885,
+          "csInvalid": 7,
+          "cmsa": 79,
+          "selfResolved": 488
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -1014,17 +1580,35 @@
         "wechatP4Orders": 217,
         "phoneCalls": 316,
         "phoneConnectRate": 0.99,
-        "firstLineOrders": 958,
-        "firstLineResolveRate": 0.4217,
+        "firstLineOrders": 818,
+        "firstLineResolveRate": 0.4046,
         "wechatSessions": 1504,
-        "accumulatedP1": 150
+        "accumulatedP1": 150,
+        "firstLineBreakdown": {
+          "csTotal": 761,
+          "csInvalid": 5,
+          "cmsa": 62,
+          "selfResolved": 331
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "24年(11.08-11.14)",
         "p1Orders": 4,
         "securityIssues": 93,
         "wechatOrders": 304,
-        "wechatP4Orders": 200
+        "wechatP4Orders": 200,
+        "firstLineOrders": 981,
+        "firstLineResolveRate": 0.4903,
+        "firstLineBreakdown": {
+          "csTotal": 916,
+          "csInvalid": 5,
+          "cmsa": 70,
+          "selfResolved": 481
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -1040,17 +1624,35 @@
         "wechatP4Orders": 217,
         "phoneCalls": 415,
         "phoneConnectRate": 0.91,
-        "firstLineOrders": 918,
-        "firstLineResolveRate": 0.4248,
+        "firstLineOrders": 826,
+        "firstLineResolveRate": 0.4213,
         "wechatSessions": 1582,
-        "accumulatedP1": 148
+        "accumulatedP1": 148,
+        "firstLineBreakdown": {
+          "csTotal": 766,
+          "csInvalid": 5,
+          "cmsa": 65,
+          "selfResolved": 348
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "24年(11.01-11.07)",
         "p1Orders": 6,
         "securityIssues": 135,
         "wechatOrders": 333,
-        "wechatP4Orders": 218
+        "wechatP4Orders": 218,
+        "firstLineOrders": 1067,
+        "firstLineResolveRate": 0.5351,
+        "firstLineBreakdown": {
+          "csTotal": 1014,
+          "csInvalid": 4,
+          "cmsa": 57,
+          "selfResolved": 571
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -1066,17 +1668,35 @@
         "wechatP4Orders": 214,
         "phoneCalls": 309,
         "phoneConnectRate": 0.95,
-        "firstLineOrders": 926,
-        "firstLineResolveRate": 0.4428,
+        "firstLineOrders": 751,
+        "firstLineResolveRate": 0.4208,
         "wechatSessions": 1498,
-        "accumulatedP1": 142
+        "accumulatedP1": 142,
+        "firstLineBreakdown": {
+          "csTotal": 713,
+          "csInvalid": 7,
+          "cmsa": 45,
+          "selfResolved": 316
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "24年(10.25-10.31)",
         "p1Orders": 3,
         "securityIssues": 122,
         "wechatOrders": 258,
-        "wechatP4Orders": 167
+        "wechatP4Orders": 167,
+        "firstLineOrders": 979,
+        "firstLineResolveRate": 0.5199,
+        "firstLineBreakdown": {
+          "csTotal": 911,
+          "csInvalid": 13,
+          "cmsa": 81,
+          "selfResolved": 509
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -1092,17 +1712,35 @@
         "wechatP4Orders": 271,
         "phoneCalls": 314,
         "phoneConnectRate": 0.98,
-        "firstLineOrders": 845,
-        "firstLineResolveRate": 0.4426,
+        "firstLineOrders": 671,
+        "firstLineResolveRate": 0.4173,
         "wechatSessions": 1615,
-        "accumulatedP1": 136
+        "accumulatedP1": 136,
+        "firstLineBreakdown": {
+          "csTotal": 615,
+          "csInvalid": 6,
+          "cmsa": 62,
+          "selfResolved": 280
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "24年(10.18-10.24)",
         "p1Orders": 9,
         "securityIssues": 129,
         "wechatOrders": 263,
-        "wechatP4Orders": 151
+        "wechatP4Orders": 151,
+        "firstLineOrders": 944,
+        "firstLineResolveRate": 0.4735,
+        "firstLineBreakdown": {
+          "csTotal": 893,
+          "csInvalid": 9,
+          "cmsa": 60,
+          "selfResolved": 447
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -1118,17 +1756,35 @@
         "wechatP4Orders": 319,
         "phoneCalls": 291,
         "phoneConnectRate": 0.95,
-        "firstLineOrders": 1137,
-        "firstLineResolveRate": 0.4556,
+        "firstLineOrders": 810,
+        "firstLineResolveRate": 0.4296,
         "wechatSessions": 1657,
-        "accumulatedP1": 135
+        "accumulatedP1": 135,
+        "firstLineBreakdown": {
+          "csTotal": 736,
+          "csInvalid": 4,
+          "cmsa": 78,
+          "selfResolved": 348
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "24年(10.11-10.17)",
         "p1Orders": 4,
         "securityIssues": 120,
         "wechatOrders": 268,
-        "wechatP4Orders": 162
+        "wechatP4Orders": 162,
+        "firstLineOrders": 1021,
+        "firstLineResolveRate": 0.4838,
+        "firstLineBreakdown": {
+          "csTotal": 944,
+          "csInvalid": 3,
+          "cmsa": 80,
+          "selfResolved": 494
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -1144,17 +1800,35 @@
         "wechatP4Orders": 76,
         "phoneCalls": 129,
         "phoneConnectRate": 0.93,
-        "firstLineOrders": 270,
-        "firstLineResolveRate": 0.5259,
+        "firstLineOrders": 215,
+        "firstLineResolveRate": 0.507,
         "wechatSessions": 351,
-        "accumulatedP1": 129
+        "accumulatedP1": 129,
+        "firstLineBreakdown": {
+          "csTotal": 193,
+          "csInvalid": 1,
+          "cmsa": 23,
+          "selfResolved": 109
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "24年(10.04-10.10)",
         "p1Orders": 3,
         "securityIssues": 76,
         "wechatOrders": 165,
-        "wechatP4Orders": 91
+        "wechatP4Orders": 91,
+        "firstLineOrders": 649,
+        "firstLineResolveRate": 0.4915,
+        "firstLineBreakdown": {
+          "csTotal": 597,
+          "csInvalid": 1,
+          "cmsa": 53,
+          "selfResolved": 319
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -1170,17 +1844,35 @@
         "wechatP4Orders": 202,
         "phoneCalls": 230,
         "phoneConnectRate": 0.97,
-        "firstLineOrders": 701,
-        "firstLineResolveRate": 0.4693,
+        "firstLineOrders": 460,
+        "firstLineResolveRate": 0.4804,
         "wechatSessions": 1162,
-        "accumulatedP1": 129
+        "accumulatedP1": 129,
+        "firstLineBreakdown": {
+          "csTotal": 437,
+          "csInvalid": 3,
+          "cmsa": 26,
+          "selfResolved": 221
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "24年(09.27-10.03)",
         "p1Orders": 4,
         "securityIssues": 63,
         "wechatOrders": 122,
-        "wechatP4Orders": 77
+        "wechatP4Orders": 77,
+        "firstLineOrders": 510,
+        "firstLineResolveRate": 0.4,
+        "firstLineBreakdown": {
+          "csTotal": 478,
+          "csInvalid": 5,
+          "cmsa": 37,
+          "selfResolved": 204
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -1196,17 +1888,35 @@
         "wechatP4Orders": 253,
         "phoneCalls": 294,
         "phoneConnectRate": 0.96,
-        "firstLineOrders": 892,
-        "firstLineResolveRate": 0.4327,
+        "firstLineOrders": 602,
+        "firstLineResolveRate": 0.4203,
         "wechatSessions": 1495,
-        "accumulatedP1": 123
+        "accumulatedP1": 123,
+        "firstLineBreakdown": {
+          "csTotal": 545,
+          "csInvalid": 2,
+          "cmsa": 59,
+          "selfResolved": 253
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "24年(09.20-09.26)",
         "p1Orders": 7,
         "securityIssues": 73,
         "wechatOrders": 168,
-        "wechatP4Orders": 97
+        "wechatP4Orders": 97,
+        "firstLineOrders": 823,
+        "firstLineResolveRate": 0.503,
+        "firstLineBreakdown": {
+          "csTotal": 767,
+          "csInvalid": 15,
+          "cmsa": 71,
+          "selfResolved": 414
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -1222,17 +1932,35 @@
         "wechatP4Orders": 310,
         "phoneCalls": 300,
         "phoneConnectRate": 0.95,
-        "firstLineOrders": 983,
-        "firstLineResolveRate": 0.4212,
+        "firstLineOrders": 609,
+        "firstLineResolveRate": 0.4204,
         "wechatSessions": 1631,
-        "accumulatedP1": 121
+        "accumulatedP1": 121,
+        "firstLineBreakdown": {
+          "csTotal": 562,
+          "csInvalid": 6,
+          "cmsa": 53,
+          "selfResolved": 256
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "24年(09.13-09.19)",
         "p1Orders": 2,
         "securityIssues": 73,
         "wechatOrders": 155,
-        "wechatP4Orders": 98
+        "wechatP4Orders": 98,
+        "firstLineOrders": 669,
+        "firstLineResolveRate": 0.5217,
+        "firstLineBreakdown": {
+          "csTotal": 636,
+          "csInvalid": 6,
+          "cmsa": 39,
+          "selfResolved": 349
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -1248,17 +1976,35 @@
         "wechatP4Orders": 260,
         "phoneCalls": 301,
         "phoneConnectRate": 0.95,
-        "firstLineOrders": 868,
-        "firstLineResolveRate": 0.3986,
+        "firstLineOrders": 762,
+        "firstLineResolveRate": 0.3845,
         "wechatSessions": 1612,
-        "accumulatedP1": 113
+        "accumulatedP1": 113,
+        "firstLineBreakdown": {
+          "csTotal": 703,
+          "csInvalid": 5,
+          "cmsa": 64,
+          "selfResolved": 293
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "24年(09.06-09.12)",
         "p1Orders": 3,
         "securityIssues": 88,
         "wechatOrders": 194,
-        "wechatP4Orders": 121
+        "wechatP4Orders": 121,
+        "firstLineOrders": 911,
+        "firstLineResolveRate": 0.4984,
+        "firstLineBreakdown": {
+          "csTotal": 857,
+          "csInvalid": 6,
+          "cmsa": 60,
+          "selfResolved": 454
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -1274,17 +2020,35 @@
         "wechatP4Orders": 233,
         "phoneCalls": 314,
         "phoneConnectRate": 0.95,
-        "firstLineOrders": 863,
-        "firstLineResolveRate": 0.3893,
+        "firstLineOrders": 746,
+        "firstLineResolveRate": 0.3753,
         "wechatSessions": 1609,
-        "accumulatedP1": 105
+        "accumulatedP1": 105,
+        "firstLineBreakdown": {
+          "csTotal": 699,
+          "csInvalid": 3,
+          "cmsa": 50,
+          "selfResolved": 280
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "24年(08.30-09.05)",
         "p1Orders": 9,
         "securityIssues": 93,
         "wechatOrders": 165,
-        "wechatP4Orders": 110
+        "wechatP4Orders": 110,
+        "firstLineOrders": 998,
+        "firstLineResolveRate": 0.502,
+        "firstLineBreakdown": {
+          "csTotal": 918,
+          "csInvalid": 9,
+          "cmsa": 89,
+          "selfResolved": 501
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -1300,17 +2064,35 @@
         "wechatP4Orders": 213,
         "phoneCalls": 315,
         "phoneConnectRate": 0.97,
-        "firstLineOrders": 810,
-        "firstLineResolveRate": 0.4222,
+        "firstLineOrders": 699,
+        "firstLineResolveRate": 0.4049,
         "wechatSessions": 1449,
-        "accumulatedP1": 102
+        "accumulatedP1": 102,
+        "firstLineBreakdown": {
+          "csTotal": 637,
+          "csInvalid": 3,
+          "cmsa": 65,
+          "selfResolved": 283
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "24年(08.23-08.29)",
         "p1Orders": 9,
         "securityIssues": 120,
         "wechatOrders": 143,
-        "wechatP4Orders": 94
+        "wechatP4Orders": 94,
+        "firstLineOrders": 956,
+        "firstLineResolveRate": 0.4958,
+        "firstLineBreakdown": {
+          "csTotal": 888,
+          "csInvalid": 12,
+          "cmsa": 80,
+          "selfResolved": 474
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -1326,17 +2108,35 @@
         "wechatP4Orders": 210,
         "phoneCalls": 275,
         "phoneConnectRate": 0.97,
-        "firstLineOrders": 742,
-        "firstLineResolveRate": 0.4097,
+        "firstLineOrders": 636,
+        "firstLineResolveRate": 0.3836,
         "wechatSessions": 1432,
-        "accumulatedP1": 100
+        "accumulatedP1": 100,
+        "firstLineBreakdown": {
+          "csTotal": 590,
+          "csInvalid": 6,
+          "cmsa": 52,
+          "selfResolved": 244
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "24年(08.16-08.22)",
         "p1Orders": 7,
         "securityIssues": 116,
         "wechatOrders": 140,
-        "wechatP4Orders": 87
+        "wechatP4Orders": 87,
+        "firstLineOrders": 924,
+        "firstLineResolveRate": 0.474,
+        "firstLineBreakdown": {
+          "csTotal": 868,
+          "csInvalid": 7,
+          "cmsa": 63,
+          "selfResolved": 438
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -1352,17 +2152,35 @@
         "wechatP4Orders": 239,
         "phoneCalls": 261,
         "phoneConnectRate": 0.95,
-        "firstLineOrders": 728,
-        "firstLineResolveRate": 0.4327,
+        "firstLineOrders": 626,
+        "firstLineResolveRate": 0.4265,
         "wechatSessions": 1393,
-        "accumulatedP1": 96
+        "accumulatedP1": 96,
+        "firstLineBreakdown": {
+          "csTotal": 582,
+          "csInvalid": 2,
+          "cmsa": 46,
+          "selfResolved": 267
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "24年(08.09-08.15)",
         "p1Orders": 10,
         "securityIssues": 150,
         "wechatOrders": 100,
-        "wechatP4Orders": 79
+        "wechatP4Orders": 79,
+        "firstLineOrders": 919,
+        "firstLineResolveRate": 0.4538,
+        "firstLineBreakdown": {
+          "csTotal": 866,
+          "csInvalid": 8,
+          "cmsa": 61,
+          "selfResolved": 417
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -1378,17 +2196,35 @@
         "wechatP4Orders": 169,
         "phoneCalls": 249,
         "phoneConnectRate": 1,
-        "firstLineOrders": 805,
-        "firstLineResolveRate": 0.4,
+        "firstLineOrders": 676,
+        "firstLineResolveRate": 0.3757,
         "wechatSessions": 1425,
-        "accumulatedP1": 91
+        "accumulatedP1": 91,
+        "firstLineBreakdown": {
+          "csTotal": 642,
+          "csInvalid": 8,
+          "cmsa": 42,
+          "selfResolved": 254
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "24年(08.02-08.08)",
         "p1Orders": 1,
         "securityIssues": 150,
         "wechatOrders": 59,
-        "wechatP4Orders": 43
+        "wechatP4Orders": 43,
+        "firstLineOrders": 904,
+        "firstLineResolveRate": 0.4967,
+        "firstLineBreakdown": {
+          "csTotal": 846,
+          "csInvalid": 7,
+          "cmsa": 65,
+          "selfResolved": 449
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -1404,17 +2240,35 @@
         "wechatP4Orders": 184,
         "phoneCalls": 294,
         "phoneConnectRate": 0.95,
-        "firstLineOrders": 904,
-        "firstLineResolveRate": 0.4181,
+        "firstLineOrders": 749,
+        "firstLineResolveRate": 0.4099,
         "wechatSessions": 1405,
-        "accumulatedP1": 89
+        "accumulatedP1": 89,
+        "firstLineBreakdown": {
+          "csTotal": 704,
+          "csInvalid": 3,
+          "cmsa": 48,
+          "selfResolved": 307
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "24年(07.26-08.01)",
         "p1Orders": 5,
         "securityIssues": 132,
         "wechatOrders": 69,
-        "wechatP4Orders": 51
+        "wechatP4Orders": 51,
+        "firstLineOrders": 1006,
+        "firstLineResolveRate": 0.4871,
+        "firstLineBreakdown": {
+          "csTotal": 950,
+          "csInvalid": 10,
+          "cmsa": 66,
+          "selfResolved": 490
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
@@ -1430,17 +2284,35 @@
         "wechatP4Orders": 196,
         "phoneCalls": 347,
         "phoneConnectRate": 0.95,
-        "firstLineOrders": 903,
-        "firstLineResolveRate": 0.4352,
+        "firstLineOrders": 766,
+        "firstLineResolveRate": 0.4138,
         "wechatSessions": 1608,
-        "accumulatedP1": 83
+        "accumulatedP1": 83,
+        "firstLineBreakdown": {
+          "csTotal": 718,
+          "csInvalid": 8,
+          "cmsa": 56,
+          "selfResolved": 317
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       },
       "yoy": {
         "label": "24年(07.19-07.25)",
         "p1Orders": 4,
         "securityIssues": 188,
         "wechatOrders": 33,
-        "wechatP4Orders": 21
+        "wechatP4Orders": 21,
+        "firstLineOrders": 1023,
+        "firstLineResolveRate": 0.4976,
+        "firstLineBreakdown": {
+          "csTotal": 946,
+          "csInvalid": 8,
+          "cmsa": 85,
+          "selfResolved": 509
+        },
+        "secondLineOrders": null,
+        "secondLineResolveRate": null
       }
     },
     {
