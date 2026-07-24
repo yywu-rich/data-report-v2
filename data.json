@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "售后运营数据周报",
-    "lastUpdated": "2026-07-24T01:38:38.711Z",
+    "lastUpdated": "2026-07-24T01:38:48.950Z",
     "weekDefinition": "周五至下周四",
     "fields": {
       "phoneCalls": "呼入量",
@@ -338,8 +338,8 @@
         "phoneConnectRate": 0.95,
         "firstLineOrders": 882,
         "firstLineResolveRate": 0.4478,
-        "secondLineOrders": null,
-        "secondLineResolveRate": null,
+        "secondLineOrders": 470,
+        "secondLineResolveRate": 0.804,
         "accumulatedP1": 62,
         "firstLineBreakdown": {
           "csTotal": 823,
