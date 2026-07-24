@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "售后运营数据周报",
-    "lastUpdated": "2026-07-24T03:16:34.116Z",
+    "lastUpdated": "2026-07-24T03:17:42.001Z",
     "weekDefinition": "周五至下周四",
     "fields": {
       "phoneCalls": "呼入量",
@@ -1104,8 +1104,8 @@
           "cmsa": 50,
           "selfResolved": 346
         },
-        "secondLineOrders": null,
-        "secondLineResolveRate": null
+        "secondLineOrders": 427,
+        "secondLineResolveRate": 0.895
       },
       "yoy": {
         "label": "25年(01.31-02.06)",
