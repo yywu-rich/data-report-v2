@@ -1,6 +1,6 @@
 /* ============================================================
  * 售后周报数据采集器 (collector.js)
- * 支持平台：jira.mailtech.cn / coremail.qiyukf.com
+ * 支持平台：jira.mailtech.cn / coremail.qiyukf.com / Polaris / 售后工单数据分析平台
  * 模式：普通(1周) / 补抓(N周)
  * ============================================================ */
 (function () {
@@ -95,7 +95,8 @@
   const fmtMetric = (v, percent) => (v == null ? '-' : percent ? (v * 100).toFixed(2) + '%' : v);
 
   function markPausedJiraLineMetrics(result) {
-    PAUSED_JIRA_LINE_METRIC_KEYS.forEach((key) => { result[key] = null; });
+    // 暂停的指标不写入本次结果，避免 Jira 更新覆盖其他平台已采集的二线数据。
+    PAUSED_JIRA_LINE_METRIC_KEYS.forEach((key) => { delete result[key]; });
   }
 
   // 把模板里的 {{x}} 占位符替换为实际值
@@ -784,6 +785,82 @@
     showNextWeekHint(panel, startDate, endDate, 'polaris');
   }
 
+  // ============== 售后工单数据分析平台（TS 数据）==============
+  function tsAnalyticsReadDate() {
+    const values = Array.from(document.querySelectorAll('input'))
+      .map((el) => (el.value || '').trim())
+      .filter((value) => /^\d{4}[-/]\d{2}[-/]\d{2}$/.test(value))
+      .map((value) => value.replace(/\//g, '-'));
+    if (values.length < 2) {
+      throw new Error('找不到时间范围。请确认页面顶部已选择开始和结束日期。');
+    }
+    return { start: values[0], end: values[1] };
+  }
+
+  function tsAnalyticsParseData() {
+    const text = document.body.innerText.replace(/\r/g, '');
+    const ordersMatch = text.match(/TS\s*接单量\s*\n\s*([\d,]+)/i);
+    const rateMatch = text.match(/周解决率\s*\n\s*([\d.]+)\s*%/);
+    if (!ordersMatch || !rateMatch) {
+      throw new Error('无法解析 TS 接单量/周解决率。请打开“TS 数据”页签并等待页面刷新完成。');
+    }
+    return {
+      secondLineOrders: parseInt(ordersMatch[1].replace(/,/g, ''), 10),
+      secondLineResolveRate: +(parseFloat(rateMatch[1]) / 100).toFixed(4)
+    };
+  }
+
+  async function runTsAnalyticsCollection(panel) {
+    panel.setMeta('售后工单数据分析平台 · TS 数据');
+    const bodyText = document.body.innerText;
+    if (bodyText.indexOf('TS 接单量') < 0 || bodyText.indexOf('周解决率') < 0) {
+      panel.setStatus('请先打开“TS 数据”页签，并点击页面上的“刷新数据”。', 'error');
+      return;
+    }
+
+    const dates = tsAnalyticsReadDate();
+    const startDate = new Date(dates.start + 'T00:00:00');
+    const endDate = new Date(dates.end + 'T23:59:59');
+    if (startDate > endDate) throw new Error('开始日期不能晚于结束日期。');
+
+    const data = tsAnalyticsParseData();
+    const weekId = `${endDate.getFullYear()}-w${pad(isoWeek(endDate))}`;
+    const label = fmtPeriod(startDate, endDate);
+    const confirmMsg = `请确认以下信息：\n\n📅 页面日期：${dates.start} 至 ${dates.end}\n📊 页面：售后工单数据分析平台 · TS 数据\n🏷️ 将写入周期：${label}\n\n📈 读取到的数据：\n   二线接单量：${data.secondLineOrders}\n   二线周解决率：${(data.secondLineResolveRate * 100).toFixed(1)}%\n\n请核对与页面卡片一致后确认。`;
+
+    panel.setStatus('等待确认...', 'info');
+    const confirmed = await waitForConfirm(panel, confirmMsg);
+    if (!confirmed) {
+      panel.setStatus('已取消。', 'info');
+      return;
+    }
+
+    panel.appendDetail(`<div class="week-block">
+      <div class="week-title">${label} · TS 数据</div>
+      <div class="row"><span class="name">二线接单量</span><span class="value">${data.secondLineOrders}</span></div>
+      <div class="row"><span class="name">二线周解决率</span><span class="value">${(data.secondLineResolveRate * 100).toFixed(1)}%</span></div>
+    </div>`);
+
+    panel.setStatus('正在写入 GitHub...', 'info');
+    const { data: json, sha } = await readDataJson();
+    const weekEntry = {
+      id: weekId,
+      label,
+      startDate: dates.start,
+      endDate: dates.end,
+      tags: [],
+      current: data,
+      yoy: {}
+    };
+    mergeWeekEntry(json, weekEntry);
+    json.weeks.sort((a, b) => (b.startDate || '').localeCompare(a.startDate || ''));
+    json.meta.lastUpdated = new Date().toISOString();
+    await writeDataJson(json, sha, `chore: ts analytics data ${label}`);
+    panel.setStatus('✅ 二线接单量 + 二线周解决率已写入 GitHub！', 'success');
+    panel.appendDetail(`<a class="btn" href="${PAGES_URL}" target="_blank">查看报表</a>`);
+    showNextWeekHint(panel, startDate, endDate, 'ts-analytics');
+  }
+
   // ============== 主入口 ==============
   async function main() {
     const panel = createPanel();
@@ -794,7 +871,11 @@
       if (host.indexOf('jira') >= 0) { await runJiraCollection(panel); }
       else if (host.indexOf('qiyukf') >= 0 || host.indexOf('163yun') >= 0) { await runQiyuCollection(panel); }
       else if (host.indexOf('polaris') >= 0 || host.indexOf('icoremail') >= 0) { await runPolarisCollection(panel); }
-      else { panel.setStatus('暂未支持当前域名（' + host + '）。\n支持：jira.mailtech.cn / coremail.qiyukf.com / polaris.icoremail.net', 'info'); }
+      else if (
+        host === '192.168.212.151' ||
+        document.body.innerText.indexOf('售后工单数据分析平台') >= 0
+      ) { await runTsAnalyticsCollection(panel); }
+      else { panel.setStatus('暂未支持当前域名（' + host + '）。\n支持：Jira / 七鱼 / Polaris / 售后工单数据分析平台', 'info'); }
     } catch (err) { panel.setStatus('❌ ' + err.message, 'error'); }
   }
 
