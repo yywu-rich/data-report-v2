@@ -509,6 +509,26 @@
   }
 
 
+  async function copyTextWithFallback(value) {
+    if (navigator.clipboard && window.isSecureContext) {
+      try {
+        await navigator.clipboard.writeText(value);
+        return true;
+      } catch (e) { /* 继续使用兼容旧浏览器/HTTP 页面的方式 */ }
+    }
+    const textarea = document.createElement('textarea');
+    textarea.value = value;
+    textarea.setAttribute('readonly', '');
+    textarea.style.cssText = 'position:fixed;left:-9999px;top:0;';
+    document.body.appendChild(textarea);
+    textarea.select();
+    let copied = false;
+    try { copied = document.execCommand('copy'); } catch (e) { /* 使用 prompt 兜底 */ }
+    textarea.remove();
+    if (!copied) window.prompt('请手动复制日期：', value);
+    return copied;
+  }
+
   // 显示"下一周"提示，方便补抓历史数据
   function showNextWeekHint(panel, curStart, curEnd, mode) {
     // 上一周 = 当前周往前推 7 天
@@ -524,6 +544,9 @@
       const polarisEnd = new Date(prevEnd); polarisEnd.setDate(polarisEnd.getDate() + 1);
       copyText = `${prevStartStr} / ${fmtIsoDate(polarisEnd)}`;
       hintText = `📋 下一周（${prevLabel}）请选：\n${copyText}\n\n选好后等页面刷新，再点书签`;
+    } else if (mode === 'ts-analytics') {
+      copyText = `${prevStartStr} 至 ${prevEndStr}`;
+      hintText = `📋 下一周（${prevLabel}）请选：\n开始：${prevStartStr}\n结束：${prevEndStr}\n\n点击下方按钮可自动填入，之后点击页面“刷新数据”，再点书签`;
     } else {
       copyText = `${prevStartStr} 至 ${prevEndStr}`;
       hintText = `📋 下一周（${prevLabel}）请选：\n开始：${prevStartStr}\n结束：${prevEndStr}\n\n选好后等页面刷新，再点书签`;
@@ -539,13 +562,21 @@
     msgDiv.style.cssText = 'margin-bottom:14px;white-space:pre-wrap;line-height:1.8;background:#fff;padding:12px;border-radius:6px;border:1px dashed #91d5ff;';
     msgDiv.textContent = hintText;
     const copyBtn = document.createElement('button');
-    copyBtn.textContent = '📋 复制日期';
+    copyBtn.textContent = mode === 'ts-analytics' ? '自动填入上一周' : '📋 复制日期';
     copyBtn.style.cssText = 'padding:10px 24px;background:#1890ff;color:#fff;border:none;border-radius:6px;font-size:14px;cursor:pointer;font-weight:600;margin-right:8px;';
-    copyBtn.onclick = () => {
-      navigator.clipboard.writeText(copyText).then(() => {
+    copyBtn.onclick = async () => {
+      if (mode === 'ts-analytics') {
+        if (tsAnalyticsSetDateRange(prevStartStr, prevEndStr)) {
+          copyBtn.textContent = '✓ 已填入，请点刷新数据';
+          setTimeout(() => wrapper.remove(), 1200);
+          return;
+        }
+      }
+      const copied = await copyTextWithFallback(copyText);
+      if (copied) {
         copyBtn.textContent = '✓ 已复制';
         setTimeout(() => { copyBtn.textContent = '📋 复制日期'; }, 1500);
-      });
+      }
     };
     const closeBtn = document.createElement('button');
     closeBtn.textContent = '✗ 关闭';
@@ -786,15 +817,36 @@
   }
 
   // ============== 售后工单数据分析平台（TS 数据）==============
+  function tsAnalyticsDateInputs() {
+    return Array.from(document.querySelectorAll('input'))
+      .filter((el) => /^\d{4}[-/]\d{2}[-/]\d{2}$/.test((el.value || '').trim()));
+  }
+
   function tsAnalyticsReadDate() {
-    const values = Array.from(document.querySelectorAll('input'))
-      .map((el) => (el.value || '').trim())
-      .filter((value) => /^\d{4}[-/]\d{2}[-/]\d{2}$/.test(value))
-      .map((value) => value.replace(/\//g, '-'));
-    if (values.length < 2) {
+    const inputs = tsAnalyticsDateInputs();
+    if (inputs.length < 2) {
       throw new Error('找不到时间范围。请确认页面顶部已选择开始和结束日期。');
     }
-    return { start: values[0], end: values[1] };
+    return {
+      start: inputs[0].value.trim().replace(/\//g, '-'),
+      end: inputs[1].value.trim().replace(/\//g, '-')
+    };
+  }
+
+  function tsAnalyticsSetDateRange(start, end) {
+    const inputs = tsAnalyticsDateInputs();
+    if (inputs.length < 2) return false;
+    [start, end].forEach((isoValue, index) => {
+      const input = inputs[index];
+      const value = input.type === 'date' ? isoValue : isoValue.replace(/-/g, input.value.indexOf('/') >= 0 ? '/' : '-');
+      const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value');
+      if (setter && setter.set) setter.set.call(input, value);
+      else input.value = value;
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+      input.dispatchEvent(new Event('blur', { bubbles: true }));
+    });
+    return true;
   }
 
   function tsAnalyticsParseData() {
