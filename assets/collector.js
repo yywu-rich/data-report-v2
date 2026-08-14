@@ -816,7 +816,7 @@
     showNextWeekHint(panel, startDate, endDate, 'polaris');
   }
 
-  // ============== 售后工单数据分析平台（TS 数据）==============
+  // ============== 售后工单数据分析平台（二线数据，兼容旧名“TS 数据”）==============
   function tsAnalyticsDateInputs() {
     return Array.from(document.querySelectorAll('input'))
       .filter((el) => /^\d{4}[-/]\d{2}[-/]\d{2}$/.test((el.value || '').trim()));
@@ -851,10 +851,10 @@
 
   function tsAnalyticsParseData() {
     const text = document.body.innerText.replace(/\r/g, '');
-    const ordersMatch = text.match(/TS\s*接单量\s*\n\s*([\d,]+)/i);
+    const ordersMatch = text.match(/(?:TS|二线)\s*接单量\s*\n\s*([\d,]+)/i);
     const rateMatch = text.match(/周解决率\s*\n\s*([\d.]+)\s*%/);
     if (!ordersMatch || !rateMatch) {
-      throw new Error('无法解析 TS 接单量/周解决率。请打开“TS 数据”页签并等待页面刷新完成。');
+      throw new Error('无法解析二线接单量/周解决率。请打开“二线数据”页签并等待页面刷新完成。');
     }
     return {
       secondLineOrders: parseInt(ordersMatch[1].replace(/,/g, ''), 10),
@@ -863,10 +863,11 @@
   }
 
   async function runTsAnalyticsCollection(panel) {
-    panel.setMeta('售后工单数据分析平台 · TS 数据');
+    panel.setMeta('售后工单数据分析平台 · 二线数据');
     const bodyText = document.body.innerText;
-    if (bodyText.indexOf('TS 接单量') < 0 || bodyText.indexOf('周解决率') < 0) {
-      panel.setStatus('请先打开“TS 数据”页签，并点击页面上的“刷新数据”。', 'error');
+    const hasSecondLineOrders = bodyText.indexOf('二线接单量') >= 0 || bodyText.indexOf('TS 接单量') >= 0;
+    if (!hasSecondLineOrders || bodyText.indexOf('周解决率') < 0) {
+      panel.setStatus('请先打开“二线数据”页签，并点击页面上的“刷新数据”。', 'error');
       return;
     }
 
@@ -878,7 +879,7 @@
     const data = tsAnalyticsParseData();
     const weekId = `${endDate.getFullYear()}-w${pad(isoWeek(endDate))}`;
     const label = fmtPeriod(startDate, endDate);
-    const confirmMsg = `请确认以下信息：\n\n📅 页面日期：${dates.start} 至 ${dates.end}\n📊 页面：售后工单数据分析平台 · TS 数据\n🏷️ 将写入周期：${label}\n\n📈 读取到的数据：\n   二线接单量：${data.secondLineOrders}\n   二线周解决率：${(data.secondLineResolveRate * 100).toFixed(1)}%\n\n请核对与页面卡片一致后确认。`;
+    const confirmMsg = `请确认以下信息：\n\n📅 页面日期：${dates.start} 至 ${dates.end}\n📊 页面：售后工单数据分析平台 · 二线数据\n🏷️ 将写入周期：${label}\n\n📈 读取到的数据：\n   二线接单量：${data.secondLineOrders}\n   二线周解决率：${(data.secondLineResolveRate * 100).toFixed(1)}%\n\n请核对与页面卡片一致后确认。`;
 
     panel.setStatus('等待确认...', 'info');
     const confirmed = await waitForConfirm(panel, confirmMsg);
@@ -888,7 +889,7 @@
     }
 
     panel.appendDetail(`<div class="week-block">
-      <div class="week-title">${label} · TS 数据</div>
+      <div class="week-title">${label} · 二线数据</div>
       <div class="row"><span class="name">二线接单量</span><span class="value">${data.secondLineOrders}</span></div>
       <div class="row"><span class="name">二线周解决率</span><span class="value">${(data.secondLineResolveRate * 100).toFixed(1)}%</span></div>
     </div>`);
