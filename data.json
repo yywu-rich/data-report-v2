@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "售后运营数据周报",
-    "lastUpdated": "2026-09-11T01:15:01.363Z",
+    "lastUpdated": "2026-09-11T01:48:25.356Z",
     "weekDefinition": "周五至下周四",
     "fields": {
       "phoneCalls": "呼入量",
@@ -38,7 +38,8 @@
           "cmsa": 65,
           "selfResolved": 295
         },
-        "accumulatedP1": 101
+        "accumulatedP1": 101,
+        "wechatSessions": 2352
       },
       "yoy": {
         "label": "25年(09.05-09.11)",
