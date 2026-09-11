@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "售后运营数据周报",
-    "lastUpdated": "2026-09-04T06:19:05.985Z",
+    "lastUpdated": "2026-09-11T01:15:01.363Z",
     "weekDefinition": "周五至下周四",
     "fields": {
       "phoneCalls": "呼入量",
@@ -19,6 +19,43 @@
     }
   },
   "weeks": [
+    {
+      "id": "2026-w37",
+      "label": "26年(09.04-09.10)",
+      "startDate": "2026-09-04",
+      "endDate": "2026-09-10",
+      "tags": [],
+      "current": {
+        "p1Orders": 2,
+        "securityIssues": 88,
+        "wechatOrders": 642,
+        "wechatP4Orders": 467,
+        "firstLineOrders": 810,
+        "firstLineResolveRate": 0.3642,
+        "firstLineBreakdown": {
+          "csTotal": 748,
+          "csInvalid": 3,
+          "cmsa": 65,
+          "selfResolved": 295
+        },
+        "accumulatedP1": 101
+      },
+      "yoy": {
+        "label": "25年(09.05-09.11)",
+        "p1Orders": 8,
+        "securityIssues": 80,
+        "wechatOrders": 427,
+        "wechatP4Orders": 260,
+        "firstLineOrders": 762,
+        "firstLineResolveRate": 0.3845,
+        "firstLineBreakdown": {
+          "csTotal": 703,
+          "csInvalid": 5,
+          "cmsa": 64,
+          "selfResolved": 293
+        }
+      }
+    },
     {
       "id": "2026-w36",
       "label": "26年(08.28-09.03)",
