@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "售后运营数据周报",
-    "lastUpdated": "2026-10-13T07:16:43.966Z",
+    "lastUpdated": "2026-10-13T07:17:09.712Z",
     "weekDefinition": "周五至下周四",
     "fields": {
       "phoneCalls": "呼入量",
@@ -38,7 +38,7 @@
           "cmsa": 25,
           "selfResolved": 95
         },
-        "accumulatedP1": 105
+        "accumulatedP1": 107
       },
       "yoy": {
         "label": "25年(10.03-10.09)",
@@ -53,6 +53,43 @@
           "csInvalid": 1,
           "cmsa": 23,
           "selfResolved": 109
+        }
+      }
+    },
+    {
+      "id": "2026-w40",
+      "label": "26年(09.25-10.01)",
+      "startDate": "2026-09-25",
+      "endDate": "2026-10-01",
+      "tags": [],
+      "current": {
+        "p1Orders": 2,
+        "securityIssues": 57,
+        "wechatOrders": 295,
+        "wechatP4Orders": 187,
+        "firstLineOrders": 498,
+        "firstLineResolveRate": 0.5261,
+        "firstLineBreakdown": {
+          "csTotal": 462,
+          "csInvalid": 2,
+          "cmsa": 38,
+          "selfResolved": 262
+        },
+        "accumulatedP1": 105
+      },
+      "yoy": {
+        "label": "25年(09.26-10.02)",
+        "p1Orders": 6,
+        "securityIssues": 74,
+        "wechatOrders": 336,
+        "wechatP4Orders": 202,
+        "firstLineOrders": 460,
+        "firstLineResolveRate": 0.4804,
+        "firstLineBreakdown": {
+          "csTotal": 437,
+          "csInvalid": 3,
+          "cmsa": 26,
+          "selfResolved": 221
         }
       }
     },
