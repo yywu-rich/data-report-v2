@@ -92,6 +92,17 @@ GitHub Actions 也会在每次 push 自动校验。
 2. 仓库 Settings → Pages → Source 选 `main` 分支 `/ (root)`
 3. 等 1 分钟，访问 `https://yywu-rich.github.io/data-report-v2/`
 
+## 回退指南
+
+「一线/二线 Jira 指标」如需回退，完整步骤见 [`ROLLBACK.md`](./ROLLBACK.md)。**所有操作都能在 github.com 网页自助完成，不依赖 AI 助手**；合并进 `main` 后书签自动生效，无需重新拖书签。
+
+| 想做的事 | 怎么做（纯 GitHub 网页） |
+|---|---|
+| 撤销整个改动 | 对应 PR 底部点 **Revert** → 合并反向 PR |
+| 只停用二线指标 | 编辑 `assets/collector.js`，注释 `fetchJiraWindow` 里二线那几行 |
+| 改某周数据 | 编辑 `data.json` 对应周字段（率值用小数，如 `0.45`） |
+| 切回一线旧口径 | 改用 Polaris 书签采集（旧代码已保留） |
+
 ## 改进路线图
 
 - [x] 数据/代码分离（`data.json`）
