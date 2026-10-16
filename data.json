@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "售后运营数据周报",
-    "lastUpdated": "2026-10-13T07:29:52.695Z",
+    "lastUpdated": "2026-10-16T05:52:19.124Z",
     "weekDefinition": "周五至下周四",
     "fields": {
       "phoneCalls": "呼入量",
@@ -19,6 +19,18 @@
     }
   },
   "weeks": [
+    {
+      "id": "2026-w42",
+      "label": "26年(10.09-10.15)",
+      "startDate": "2026-10-09",
+      "endDate": "2026-10-15",
+      "tags": [],
+      "current": {
+        "phoneCalls": 357,
+        "phoneConnectRate": 0.85
+      },
+      "yoy": {}
+    },
     {
       "id": "2026-w41",
       "label": "26年(10.02-10.08)",
