@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "售后运营数据周报",
-    "lastUpdated": "2026-10-16T05:52:43.718Z",
+    "lastUpdated": "2026-10-16T07:32:04.358Z",
     "weekDefinition": "周五至下周四",
     "fields": {
       "phoneCalls": "呼入量",
@@ -28,7 +28,9 @@
       "current": {
         "phoneCalls": 357,
         "phoneConnectRate": 0.85,
-        "wechatSessions": 2134
+        "wechatSessions": 2134,
+        "secondLineOrders": 193,
+        "secondLineResolveRate": 0.506
       },
       "yoy": {}
     },
