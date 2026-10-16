@@ -594,10 +594,43 @@
 
 
   // ============== GitHub 读写 ==============
+  async function githubRequest(url, options, action) {
+    const attempts = 2;
+    for (let attempt = 1; attempt <= attempts; attempt++) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 30000);
+      try {
+        const res = await fetch(url, { ...(options || {}), signal: controller.signal });
+        if (res.status === 401) {
+          throw new Error('GitHub Token 已失效或不正确，请在 tools.html 重新配置 Token 并重新拖书签。');
+        }
+        if (res.status === 403) {
+          throw new Error('GitHub Token 没有仓库写入权限，或触发了访问限制。请检查 Contents: Read and write 权限。');
+        }
+        if (res.status === 409) {
+          throw new Error('GitHub 数据刚被其他任务更新，产生写入冲突。请重新点击书签再试一次。');
+        }
+        return res;
+      } catch (err) {
+        const timedOut = err && err.name === 'AbortError';
+        if (attempt < attempts && (timedOut || err instanceof TypeError)) {
+          await sleep(1500);
+          continue;
+        }
+        if (timedOut) {
+          throw new Error(`GitHub ${action}超时（已重试）。请确认当前网络可以访问 api.github.com。`);
+        }
+        throw err;
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+  }
+
   async function readDataJson() {
     const apiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/data.json`;
     const headers = { Authorization: 'token ' + PAT, Accept: 'application/vnd.github+json' };
-    const res = await fetch(apiUrl, { headers });
+    const res = await githubRequest(apiUrl, { headers }, '读取');
     if (!res.ok) throw new Error('GitHub GET ' + res.status + '（PAT 是否正确？）');
     const fileInfo = await res.json();
     const text = decodeURIComponent(escape(atob(fileInfo.content.replace(/\n/g, ''))));
@@ -607,7 +640,7 @@
     const apiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/data.json`;
     const headers = { Authorization: 'token ' + PAT, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' };
     const newText = JSON.stringify(data, null, 2);
-    const res = await fetch(apiUrl, { method: 'PUT', headers, body: JSON.stringify({ message, content: btoa(unescape(encodeURIComponent(newText))), sha }) });
+    const res = await githubRequest(apiUrl, { method: 'PUT', headers, body: JSON.stringify({ message, content: btoa(unescape(encodeURIComponent(newText))), sha }) }, '写入');
     if (!res.ok) throw new Error('GitHub PUT ' + res.status + '：' + (await res.text()).slice(0, 200));
   }
   function mergeWeekEntry(data, weekEntry) {
@@ -710,12 +743,13 @@
       panel.appendDetail(`<div class="week-block"><div class="week-title">${label} vs ${yoyLabel}</div>${rows}</div>`);
       weekEntries.push({ id: `${cur.end.getFullYear()}-w${pad(isoWeek(cur.end))}`, label, startDate: fmtIsoDate(cur.start), endDate: fmtIsoDate(cur.end), tags: [], current: curData, yoy: { label: yoyLabel, ...yoyData } });
     }
-    panel.setStatus('写入 GitHub...', 'info');
+    panel.setStatus('正在读取 GitHub 中的 data.json...', 'info');
     const { data, sha } = await readDataJson();
     weekEntries.forEach(e => mergeWeekEntry(data, e));
     recomputeAccumulatedP1(data, weekEntries.map((e) => (e.startDate || '').slice(0, 4)));
     data.weeks.sort((a, b) => (b.startDate||'').localeCompare(a.startDate||''));
     data.meta.lastUpdated = new Date().toISOString();
+    panel.setStatus('正在提交 Jira 数据到 GitHub...', 'info');
     await writeDataJson(data, sha, `chore: jira ${weekEntries.length} weeks`);
     panel.setStatus(`✅ ${weekEntries.length} 周 Jira 数据已写入！`, 'success');
     panel.appendDetail(`<a class="btn" href="${PAGES_URL}" target="_blank">查看报表</a>`);
