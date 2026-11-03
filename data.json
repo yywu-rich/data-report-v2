@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "售后运营数据周报",
-    "lastUpdated": "2026-11-03T05:55:24.085Z",
+    "lastUpdated": "2026-11-03T05:56:01.392Z",
     "weekDefinition": "周五至下周四",
     "fields": {
       "phoneCalls": "呼入量",
@@ -40,7 +40,8 @@
         },
         "accumulatedP1": 134,
         "secondLineOrders": 448,
-        "secondLineResolveRate": 0.786
+        "secondLineResolveRate": 0.786,
+        "wechatSessions": 1916
       },
       "yoy": {
         "label": "25年(10.24-10.30)",
